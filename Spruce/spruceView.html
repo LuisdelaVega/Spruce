@@ -15,6 +15,17 @@
 				<a>Cart</a>
 				<h1>Spruce</h1>
 			</div>
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<!-- a attribute will no have a link will have a function that fetches
+							the values of bids, selling or history and refreshes the listView-->
+						<li><a  class="ui-btn-active ui-state-persist">Bidding</a></li>
+						<li><a >Selling</a></li>
+						<li><a >History</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
         		<ul data-role="listview" data-theme="a">
 					<li>Home</a></li>  	<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
@@ -32,14 +43,6 @@
         		</ul>
     		</div>
     		<div data-role="content">
-    			<div style="margin:0px" data-role="controlgroup" data-type="horizontal" align="center" >
-					<label for="bidView">Bidding</label>
-					<input type="radio" id="bidView" name="views" value="bid" checked="true">
-					<label for="sellView">Selling</label>
-					<input type="radio" id="sellView" name="views" value="sell">
-					<label for="historyView">History</label>
-					<input type="radio" id="historyView" name="views" value="history">
-				</div>
 				<ul id="myViewList" data-role="listview" data-inset="true">
 					
 					<!---------------------------BIDDING TEMPLATE------------------------------>
@@ -120,3 +123,14 @@
     		</div>
 	</body>
 </html>
+
+<!--
+	<div style="margin:0px" data-role="controlgroup" data-type="horizontal" align="center" >
+					<label for="bidView">Bidding</label>
+					<input type="radio" id="bidView" name="views" value="bid" checked="true">
+					<label for="sellView">Selling</label>
+					<input type="radio" id="sellView" name="views" value="sell">
+					<label for="historyView">History</label>
+					<input type="radio" id="historyView" name="views" value="history">
+				</div>
+-->
