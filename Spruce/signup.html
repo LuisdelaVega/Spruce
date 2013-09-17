@@ -67,8 +67,7 @@
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
-			<div data-role="content" >
-				<div data-role="fieldcontainer">
+			<div data-role="content" >	<div data-role="fieldcontainer">
 					<label for="username">Username:*</label>
 					<input type="text" id="username" name="username">
 				</div>
@@ -107,13 +106,28 @@
 					</div>
 				</fieldset>
 
-				<div data-role="fieldcontainer" style="width: 250px;">
-					<label for="cvv">Upload Profile Picture:</label>
-					<input type="file" id="uploadpicture" name="uploadpicture">
-				</div>
-				<div data-role="fieldcontainer">
-					<input type="button" id="createbutton" name="createbutton" value="Create Account">
-				</div>
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<img src="images/Unknown-person_80x80.gif" />
+					</div>
+					<div class="ui-block-b">
+						<label for="cvv">Upload Picture:</label>
+						<input type="file" id="uploadpicture" name="uploadpicture">
+					</div>
+				</fieldset>
+
+				<fieldset class="ui-grid-a" >
+					<div class="ui-block-a">
+						<button type="submit" data-theme="c">
+							Cancel
+						</button>
+					</div>
+					<div class="ui-block-b">
+						<button type="submit" data-theme="b">
+							Create
+						</button>
+					</div>
+				</fieldset>
 
 			</div>
 		</div>
