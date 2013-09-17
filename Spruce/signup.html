@@ -24,7 +24,7 @@
 
 	<body>
 		<div id="home" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a><a>Cart</a><h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
@@ -67,7 +67,8 @@
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
-			<div data-role="content" >	<div data-role="fieldcontainer">
+			<div data-role="content" >
+				<div data-role="fieldcontainer">
 					<label for="username">Username:*</label>
 					<input type="text" id="username" name="username">
 				</div>
@@ -88,25 +89,25 @@
 					<input type="number" id="accountnumber" name="accountnumber">
 				</div>
 
-				<fieldset class="ui-grid-a">
+				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="expirationdate">Exp Date:*</label>
-						<fieldset class="ui-grid-a">
+						<div class="ui-grid-a">
 							<div class="ui-block-a">
 								<input type="number" id="expirationmonth" name="expirationmonth">
 							</div>
 							<div class="ui-block-b">
 								<input type="number" id="expirationyear" name="expirationyear">
 							</div>
-						</fieldset>
+						</div>
 					</div>
 					<div class="ui-block-b" style="padding-left: 5px">
 						<label for="cvv">CVV:*</label>
 						<input type="number" id="cvv" name="cvv">
 					</div>
-				</fieldset>
+				</div>
 
-				<fieldset class="ui-grid-a">
+				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<img src="images/Unknown-person_80x80.gif" />
 					</div>
@@ -114,9 +115,9 @@
 						<label for="cvv">Upload Picture:</label>
 						<input type="file" id="uploadpicture" name="uploadpicture">
 					</div>
-				</fieldset>
+				</div>
 
-				<fieldset class="ui-grid-a" >
+				<div class="ui-grid-a" >
 					<div class="ui-block-a">
 						<button type="submit" data-theme="c">
 							Cancel
@@ -127,7 +128,7 @@
 							Create
 						</button>
 					</div>
-				</fieldset>
+				</div>
 
 			</div>
 		</div>
