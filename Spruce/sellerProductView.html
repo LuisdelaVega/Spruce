@@ -9,7 +9,9 @@
 		<script src="js/jquery.mobile-1.3.1.js"></script>
 	</head>
 	<body>
-		<div id="buyerProductPage" data-role="page">
+		
+		
+		<div id="sellerProductPage" data-role="page">
 			
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
@@ -38,22 +40,13 @@
     			<div align="center">
     				<img width="200" height="200" src="css/images/thumbnail.png" />
     			</div>
-    			<fieldset class="ui-grid-a">
-						<div class="ui-block-a"><button type="submit" data-theme="a">Add to Cart</button></div>
-						<div class="ui-block-b"><button type="submit" data-theme="b">Buy it Now</button></div>	
-				</fieldset> 
-				<fieldset class="ui-grid-a">
-					<div class="ui-block-a" style="padding-top: 4px">
-						<input type="number" id="bid" name="bidInput">
-					</div>
-					<div class="ui-block-b">
-						<button type="submit" data-theme="c">Bid</button>
-					</div>	
-				</fieldset> 
 				<h2 style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
-    			<h3 style="margin-top: 3px; margin-bottom: 0px;margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
+				<h3 style="margin-top: 3px; margin-bottom: 0px;margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
+				<div align="center">
+    				<a href="#bidHistoryPage" data-role="button" data-theme="b">Bid History</a>	
+    			</div>
     			<h3 style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
-    			<h4 style="margin-bottom: 0px;margin-top: 0px" align="center">Size:  		Item id:</h4>
+    			<h4 style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
     			<p style="padding: 8px;margin: 0px" align="justify">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
     				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
     				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
@@ -63,32 +56,44 @@
     				<h4 style="margin-top: 8px" align="center">Wigberto Maldonado</h5>
     			</div>
     		</div>
-    		
-	</body>
+    	</div>
+    	
+    	
+    	<div id="bidHistoryPage" data-role="page">
+    		<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a>Cart</a>
+				<h1>Spruce</h1>
+			</div>
+    		<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
+        		<ul data-role="listview" data-theme="a">
+					<li><a href="#candy">Home</a></li>  	<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
+					<li><a href="#MySpruce" >My Spruce</a></li>   
+					<li data-role="list-divider" data-theme="c">Categories</li>        		
+					<li><a href="#candy" >Books</a></li>
+					<li><a href="#candy" >Electronics</a></li>
+					<li><a href="#candy" >Computers</a></li>
+					<li><a href="#candy" >Clothing</a></li>   
+					<li><a href="#candy" >Shoes</a></li>   
+					<li><a href="#candy" >Sports</a></li>         
+					<li data-role="list-divider" data-theme="c"></li>	
+					<li><a href="#candy" >My Account Info</a></li>
+					<li><a href="#candy" >Sign Out</a></li>  	<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
+        		</ul>
+    		</div>
+    		<div data-role="content" >
+    				<h1 align="center" >Bid History</h1>
+    				<ul id="bidHistoryList" data-role="listview" data-inset="true">
+    					<li data-icon="false">
+    						<a href="buy.html">
+    							<fieldset class="ui-grid-a">
+									<div class="ui-block-a"><h3>Mandinga</h3></div>
+									<div class="ui-block-b" align="right"><h3>$1.00</h3></div>	
+								</fieldset> 
+    						</a>
+    					</li>
+    				</ul>
+    		</div>
+    	</div>
+    </body>
 </html>
-
-<!-- 
-	<table>
-						<tr>
-							<td style="padding-top: 0px">
-								<div style="padding-top: 0px">
-									<img width="110" height="110" src="css/images/thumbnail.png"/>
-								</div>
-							</td>
-							<td width="1000">
-								<div >
-									<fieldset class="ui-grid-a">
-										<div class="ui-block-a"><button type="submit" data-theme="c">Add to Cart</button></div>
-										<div class="ui-block-b"><button type="submit" data-theme="c">Submit</button></div>	
-									</fieldset> 
-									<fieldset class="ui-grid-a">
-										<div class="ui-block-a" style="padding-top: 4px">
-											<input type="number" id="bid" name="bidInput">
-										</div>
-										<div class="ui-block-b"><button type="submit" data-theme="c">Bid</button></div>	
-									</fieldset>  
-								</div>
-							</td>	
-						</tr>
-				</table>
--->
