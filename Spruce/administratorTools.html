@@ -9,96 +9,126 @@
 		<script src="js/jquery.mobile-1.3.1.js"></script>
 	</head>
 	<body>
-		
+
 		<div id="reportView" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cartView.html">Cart</a>
+				<a href="cart.html">Cart</a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
 				<ul data-role="listview" data-theme="a">
-					<li><a href="#candy">Home</a></li>
+					<li>
+						<a href="#candy">Home</a>
+					</li>
 					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
-					<li><a href="myspruce.html" >My Spruce</a></li>
-					<li data-role="list-divider" data-theme="a">Categories</li>
-					<li><a href="itemsforcategory.html" >Books</a></li>
-					<li><a href="itemsforcategory.html" >Electronics</a></li>
-					<li><a href="itemsforcategory.html" >Computers</a></li>
-					<li><a href="itemsforcategory.html" >Clothing</a></li>
-					<li><a href="itemsforcategory.html" >Shoes</a></li>
-					<li><a href="itemsforcategory.html" >Sports</a></li>
+					<li>
+						<a href="myspruce.html" >My Spruce</a>
+					</li>
+					<li data-role="list-divider" data-theme="a">
+						Categories
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Books</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Electronics</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Computers</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Clothing</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Shoes</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Sports</a>
+					</li>
 					<li data-role="list-divider" data-theme="a"></li>
-					<li><a href="myaccountinfo.html" >My Account Info</a></li>
-					<li><a href="#candy" >Sign Out</a></li>
+					<li>
+						<a href="myaccountinfo.html" >My Account Info</a>
+					</li>
+					<li>
+						<a href="#candy" >Sign Out</a>
+					</li>
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
 			<div data-role="content">
 				<!--Code here!-->
 				<h1>Reports</h1>
-				<p>Total sells: 14,354,654</p>
+				<p>
+					Total sells: 14,354,654
+				</p>
 				<hr />
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<p>Total sells for:</p>
+						<p>
+							Total sells for:
+						</p>
 					</div>
 					<div class="ui-block-b">
-							<select id="category0" name="category0" data-native-menu="false">
-								<option value="1">Category</option>
-								<option value="2">Category 1</option>
-								<option value="3">Category 2</option>
-								<option value="4">Category 3</option>
-								<option value="5">Category 4</option>
-								<option value="6">Category 5</option>
-								<option value="7">Category 6</option>
-							</select>
+						<select id="category0" name="category0" data-native-menu="false">
+							<option value="1">Category</option>
+							<option value="2">Category 1</option>
+							<option value="3">Category 2</option>
+							<option value="4">Category 3</option>
+							<option value="5">Category 4</option>
+							<option value="6">Category 5</option>
+							<option value="7">Category 6</option>
+						</select>
 					</div>
 				</div>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-							<select id="time0" name="time0" data-native-menu="false">
-								<option value="1">Today</option>
-								<option value="2">This week</option>
-								<option value="3">This month</option>
-							</select>
+						<select id="time0" name="time0" data-native-menu="false">
+							<option value="1">Today</option>
+							<option value="2">This week</option>
+							<option value="3">This month</option>
+						</select>
 					</div>
 					<div class="ui-block-b">
-							<p align="right">137,093</p>
+						<p align="right">
+							137,093
+						</p>
 					</div>
 				</div>
 				<hr />
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<p>Total revenue for:</p>
+						<p>
+							Total revenue for:
+						</p>
 					</div>
 					<div class="ui-block-b">
-							<select id="category1" name="category1" data-native-menu="false">
-								<option value="1">Category</option>
-								<option value="2">Category 1</option>
-								<option value="3">Category 2</option>
-								<option value="4">Category 3</option>
-								<option value="5">Category 4</option>
-								<option value="6">Category 5</option>
-								<option value="7">Category 6</option>
-							</select>
+						<select id="category1" name="category1" data-native-menu="false">
+							<option value="1">Category</option>
+							<option value="2">Category 1</option>
+							<option value="3">Category 2</option>
+							<option value="4">Category 3</option>
+							<option value="5">Category 4</option>
+							<option value="6">Category 5</option>
+							<option value="7">Category 6</option>
+						</select>
 					</div>
 				</div>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-							<select id="time1" name="time1" data-native-menu="false">
-								<option value="1">Today</option>
-								<option value="2">This week</option>
-								<option value="3">This month</option>
-							</select>
+						<select id="time1" name="time1" data-native-menu="false">
+							<option value="1">Today</option>
+							<option value="2">This week</option>
+							<option value="3">This month</option>
+						</select>
 					</div>
 					<div class="ui-block-b">
-							<p align="right">25,376</p>
+						<p align="right">
+							25,376
+						</p>
 					</div>
 				</div>
-				
-				
-				
+
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed">
 				<div data-role="navbar">
@@ -110,38 +140,60 @@
 							<a href="#usersPage" data-transition="slide">Users</a>
 						</li>
 						<li>
-							<a >Categories</a>
+							<a href="#categoriesPage" data-transition="slide">Categories</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="usersPage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cartView.html">Cart</a>
+				<a href="cart.html">Cart</a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
 				<ul data-role="listview" data-theme="a">
-					<li><a href="#candy">Home</a></li>
+					<li>
+						<a href="#candy">Home</a>
+					</li>
 					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
-					<li><a href="myspruce.html" >My Spruce</a></li>
-					<li data-role="list-divider" data-theme="a">Categories</li>
-					<li><a href="itemsforcategory.html" >Books</a></li>
-					<li><a href="itemsforcategory.html" >Electronics</a></li>
-					<li><a href="itemsforcategory.html" >Computers</a></li>
-					<li><a href="itemsforcategory.html" >Clothing</a></li>
-					<li><a href="itemsforcategory.html" >Shoes</a></li>
-					<li><a href="itemsforcategory.html" >Sports</a></li>
+					<li>
+						<a href="myspruce.html" >My Spruce</a>
+					</li>
+					<li data-role="list-divider" data-theme="a">
+						Categories
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Books</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Electronics</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Computers</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Clothing</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Shoes</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Sports</a>
+					</li>
 					<li data-role="list-divider" data-theme="a"></li>
-					<li><a href="myaccountinfo.html" >My Account Info</a></li>
-					<li><a href="#candy" >Sign Out</a></li>
+					<li>
+						<a href="myaccountinfo.html" >My Account Info</a>
+					</li>
+					<li>
+						<a href="#candy" >Sign Out</a>
+					</li>
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
-			
+
 			<div data-role="content">
 				<div data-role="fieldcontainer">
 					<a data-role="button">Add User</a>
@@ -159,7 +211,7 @@
 						<li>
 							<a href="#reportView"  data-transition="slide" data-direction="reverse">Reports</a>
 						</li>
-							<li>
+						<li>
 							<a class="ui-btn-active ui-state-persist">Users</a>
 						</li>
 						<li>
@@ -169,33 +221,56 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="categoriesPage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
 				<a href="cartView.html">Cart</a>
 				<h1>Spruce</h1>
+
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
 				<ul data-role="listview" data-theme="a">
-					<li><a href="#candy">Home</a></li>
+					<li>
+						<a href="#candy">Home</a>
+					</li>
 					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
-					<li><a href="myspruce.html" >My Spruce</a></li>
-					<li data-role="list-divider" data-theme="a">Categories</li>
-					<li><a href="itemsforcategory.html" >Books</a></li>
-					<li><a href="itemsforcategory.html" >Electronics</a></li>
-					<li><a href="itemsforcategory.html" >Computers</a></li>
-					<li><a href="itemsforcategory.html" >Clothing</a></li>
-					<li><a href="itemsforcategory.html" >Shoes</a></li>
-					<li><a href="itemsforcategory.html" >Sports</a></li>
+					<li>
+						<a href="myspruce.html" >My Spruce</a>
+					</li>
+					<li data-role="list-divider" data-theme="a">
+						Categories
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Books</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Electronics</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Computers</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Clothing</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Shoes</a>
+					</li>
+					<li>
+						<a href="itemsforcategory.html" >Sports</a>
+					</li>
 					<li data-role="list-divider" data-theme="a"></li>
-					<li><a href="myaccountinfo.html" >My Account Info</a></li>
-					<li><a href="#candy" >Sign Out</a></li>
+					<li>
+						<a href="myaccountinfo.html" >My Account Info</a>
+					</li>
+					<li>
+						<a href="#candy" >Sign Out</a>
+					</li>
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
 			<div data-role="content">
-				
+
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed">
 				<div data-role="navbar">
@@ -203,11 +278,42 @@
 						<li>
 							<a href="#reportView"  data-transition="slide" data-direction="reverse">Reports</a>
 						</li>
-							<li>
+						<li>
 							<a href="#usersPage" data-transition="slide" data-direction="reverse">Users</a>
 						</li>
 						<li>
 							<a class="ui-btn-active ui-state-persist">Categories</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontainer">
+					<a data-role="button">Add Category</a>
+					<ul id="userList" data-role="listview" data-inset="true" data-split-icon="delete">
+						<li data-icon="false">
+							<a>Books</a>
+							<a></a>
+						</li>
+						<li data-icon="false">
+							<a>Electronics</a>
+							<a></a>
+						</li>
+						<li data-icon="false">
+							<a>Computers</a>
+							<a></a>
+						</li>
+						<li data-icon="false">
+							<a>Clothing</a>
+							<a></a>
+						</li>
+						<li data-icon="false">
+							<a>Shoes</a>
+							<a></a>
+						</li>
+						<li data-icon="false">
+							<a>Sports</a>
+							<a></a>
 						</li>
 					</ul>
 				</div>
