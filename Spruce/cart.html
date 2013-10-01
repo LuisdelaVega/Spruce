@@ -10,30 +10,56 @@
 		<script src="js/jquery.cycle2.js"></script>
 		<script src="js/jquery.cycle2.center.js"></script>
 		<script src="js/jquery.rateit.min.js"></script>
+		<script src="appjs/app.js"></script>
+		<script src="js/accounting.js"></script>
 	</head>
 	<body>
 		<div id="mySpruceView" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cartView.html">Cart</a>
+				<a id="cart" title="cart" onclick="GoToView(id, title)">Cart</a>
 				<h1>Spruce</h1>
 			</div>
-			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
-        		<ul data-role="listview" data-theme="a">
-					<li><a href="#candy">Home</a></li>  	<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
-					<li><a href="#MySpruce" >My Spruce</a></li>   
-					<li data-role="list-divider" data-theme="a">Categories</li>        		
-					<li><a href="itemsforcategory.html" >Books</a></li>
-					<li><a href="itemsforcategory.html" >Electronics</a></li>
-					<li><a href="itemsforcategory.html" >Computers</a></li>
-					<li><a href="itemsforcategory.html" >Clothing</a></li>   
-					<li><a href="itemsforcategory.html" >Shoes</a></li>   
-					<li><a href="itemsforcategory.html" >Sports</a></li>         
-					<li data-role="list-divider" data-theme="a"></li>	
-					<li><a href="myaccountinfo.html" >My Account Info</a></li>
-					<li><a href="#candy" >Sign Out</a></li>  	<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
-        		</ul>
-    		</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
+				<ul data-role="listview" data-theme="a">
+					<li>
+						<a id="home" title="home" onclick="GoToView(id, title)">Home</a>
+					</li>
+					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
+					<li>
+						<a id="myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+					</li>
+					<li data-role="list-divider" data-theme="a">
+						Categories
+					</li>
+					<li>
+						<a id="itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+					</li>
+					<li data-role="list-divider" data-theme="a"></li>
+					<li>
+						<a href="myaccountinfo.html" >My Account Info</a>
+					</li>
+					<li>
+						<a href="#candy" >Sign Out</a>
+					</li>
+					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
+				</ul>
+			</div>
     		<div data-role="content">
     			<h1 align="center" style="margin: 0px">Cart</h1>
 				<ul id="myCarList" data-role="listview" data-inset="true" data-split-icon="delete">

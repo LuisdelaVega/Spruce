@@ -10,88 +10,88 @@
 		<script src="js/jquery.cycle2.js"></script>
 		<script src="js/jquery.cycle2.center.js"></script>
 		<script src="js/jquery.rateit.min.js"></script>
+		<script src="appjs/app.js"></script>
+		<script src="js/accounting.js"></script>
 	</head>
 	<body>
 		<div id="buyerProductPage" data-role="page">
 			
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cart.html">Cart</a>
+				<a id="cart" title="cart" onclick="GoToView(id, title)">Cart</a>
 				<h1>Spruce</h1>
 			</div>
 			
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
-        		<ul data-role="listview" data-theme="a">
-					<li><a href="home.html">Home</a></li>  	<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
-					<li><a href="#MySpruce" >My Spruce</a></li>   
-					<li data-role="list-divider" data-theme="a">Categories</li>        		
-					<li><a href="itemsforcategory.html" >Books</a></li>
-					<li><a href="itemsforcategory.html" >Electronics</a></li>
-					<li><a href="itemsforcategory.html" >Computers</a></li>
-					<li><a href="itemsforcategory.html" >Clothing</a></li>   
-					<li><a href="itemsforcategory.html" >Shoes</a></li>   
-					<li><a href="itemsforcategory.html" >Sports</a></li>         
-					<li data-role="list-divider" data-theme="a"></li>	
-					<li><a href="myaccountinfo.html" >My Account Info</a></li>
-					<li><a href="#candy" >Sign Out</a></li>  	<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
-        		</ul>
-    		</div>
+				<ul data-role="listview" data-theme="a">
+					<li>
+						<a id="home" title="home" onclick="GoToView(id, title)">Home</a>
+					</li>
+					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
+					<li>
+						<a id="myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+					</li>
+					<li data-role="list-divider" data-theme="a">
+						Categories
+					</li>
+					<li>
+						<a id="itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+					</li>
+					<li>
+						<a id="itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+					</li>
+					<li data-role="list-divider" data-theme="a"></li>
+					<li>
+						<a href="myaccountinfo.html" >My Account Info</a>
+					</li>
+					<li>
+						<a href="#candy" >Sign Out</a>
+					</li>
+					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
+				</ul>
+			</div>
     		<div data-role="content" style="padding: 5px">
-    			<h1 style="margin: 0px" align="center">Xbox One</h1>
+    			<h1 id="name" style="margin: 0px" align="center">Xbox One</h1>
     			<div align="center">
-    				<img width="200" height="200" src="css/images/thumbnail.png" />
+    				<img id="image" width="200" height="200" src="css/images/thumbnail.png" />
     			</div>
     			<div class="ui-grid-a">
-						<div class="ui-block-a"><button type="submit" data-theme="a">Add to Cart</button></div>
-						<div class="ui-block-b"><button type="submit" data-theme="b">Buy it Now</button></div>	
+						<div id="toCart" class="ui-block-a"><button type="submit" data-theme="a">Add to Cart</button></div>
+						<div id="buyNow" class="ui-block-b"><button type="submit" data-theme="b">Buy it Now</button></div>	
 				</div> 
 				<div class="ui-grid-a">
 					<div class="ui-block-a" style="padding-top: 4px">
-						<input type="number" id="bid" name="bidInput">
+						<input id="bidInput" type="number" name="bidInput">
 					</div>
 					<div class="ui-block-b">
-						<button type="submit" data-theme="c">Bid</button>
+						<button id="bid" type="submit" data-theme="c">Bid</button>
 					</div>	
 				</div> 
-				<h2 style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
-    			<h3 style="margin-top: 3px; margin-bottom: 0px;margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
-    			<h3 style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
-    			<h4 style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
-    			<p style="padding: 8px;margin: 0px" align="justify">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+				<h2 id="buyNowPrice" style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
+    			<h3 id="timeRemaining" style="margin-top: 3px; margin-bottom: 0px; margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
+    			<h3 id="modelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
+    			<h4 id="dimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
+    			<p id="description" style="padding: 8px;margin: 0px" align="justify">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
     				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
     				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
     				in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
     				sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     			<div align="center">
-    				<h4 style="margin-top: 8px" align="center">Wigberto Maldonado</h5>
+    				<h4 id="sellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</h5>
     			</div>
     		</div>
     		
 	</body>
 </html>
-
-<!-- 
-	<table>
-						<tr>
-							<td style="padding-top: 0px">
-								<div style="padding-top: 0px">
-									<img width="110" height="110" src="css/images/thumbnail.png"/>
-								</div>
-							</td>
-							<td width="1000">
-								<div >
-									<div class="ui-grid-a">
-										<div class="ui-block-a"><button type="submit" data-theme="c">Add to Cart</button></div>
-										<div class="ui-block-b"><button type="submit" data-theme="c">Submit</button></div>	
-									</div> 
-									<div class="ui-grid-a">
-										<div class="ui-block-a" style="padding-top: 4px">
-											<input type="number" id="bid" name="bidInput">
-										</div>
-										<div class="ui-block-b"><button type="submit" data-theme="c">Bid</button></div>	
-									</div>  
-								</div>
-							</td>	
-						</tr>
-				</table>
--->

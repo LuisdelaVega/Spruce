@@ -25,50 +25,50 @@
 		<script src="js/jquery.rateit.min.js"></script>
 		<script src="js/jquery.cycle2.js"></script>
 		<script src="js/jquery.cycle2.center.js"></script>
+		<script src="appjs/app.js"></script>
+		<script src="js/accounting.js"></script>
 	</head>
 
 	<body>
 		<div id="accountinfo" data-role="page">
-			<link rel="stylesheet" href="css/rateit.css" />
-			<script src="js/jquery.rateit.min.js"></script>
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cart.html">Cart</a>
+				<a id="cart" title="cart" onclick="GoToView(id, title)">Cart</a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a href="home.html">Home</a>
+						<a id="home" title="home" onclick="GoToView(id, title)">Home</a>
 					</li>
 					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
 					<li>
-						<a href="myspruce.html" >My Spruce</a>
+						<a id="myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Books</a>
+						<a id="itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Electronics</a>
+						<a id="itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Computers</a>
+						<a id="itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Clothing</a>
+						<a id="itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Shoes</a>
+						<a id="itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Sports</a>
+						<a id="itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
-						<a href="" >My Account Info</a>
+						<a href="myaccountinfo.html" >My Account Info</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -110,42 +110,42 @@
 		<div id="accountinfoedit" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a href="cartView.html">Cart</a>
+				<a id="cart" title="cart" onclick="GoToView(id, title)">Cart</a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a href="home.html">Home</a>
+						<a id="home" title="home" onclick="GoToView(id, title)">Home</a>
 					</li>
 					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
 					<li>
-						<a href="myspruce.html" >My Spruce</a>
+						<a id="myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Books</a>
+						<a id="itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Electronics</a>
+						<a id="itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Computers</a>
+						<a id="itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Clothing</a>
+						<a id="itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Shoes</a>
+						<a id="itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
 					</li>
 					<li>
-						<a href="itemsforcategory.html" >Sports</a>
+						<a id="itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
-						<a href="#home" >My Account Info</a>
+						<a href="myaccountinfo.html" >My Account Info</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
