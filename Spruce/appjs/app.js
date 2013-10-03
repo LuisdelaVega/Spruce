@@ -1,4 +1,5 @@
 var objectType = "cars";
+var lastPageId;
 
 $(document).on('pagebeforeshow', "#items", function( event, ui ) {
 	console.log("Jose");
@@ -16,7 +17,7 @@ $(document).on('pagebeforeshow', "#items", function( event, ui ) {
 				object = objectList[i];
 				
 				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
+					'<img style="padding-left:5px; padding-top: 7px" src="css/images/'+object.image+'">'+
 					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
 					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
 					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
@@ -59,10 +60,23 @@ function ConverToJSON(formData){
 }
 
 function GoToView(id, title){
-	
 	objectType = title;
-	$.mobile.loading("show");
-	$.mobile.navigate(id+".html");
+	
+	if(lastPageId == id && id == "itemsforcategory"){
+			$.mobile.loading("show");
+			
+			$.mobile.changePage(id+".html",{
+							allowSamePageTransition: true,
+							reloadPage: true,
+							transition: 'none'
+							});
+	}
+	else{
+		$.mobile.loading("show");
+		$.mobile.changePage(id+".html");
+	}
+	lastPageId = id;
+	
 }
 
 function SaveCar(){
@@ -98,29 +112,33 @@ function GetItem(id){
 	
 	$.mobile.loading("show");
 
+	/*
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/"+brand+"/"+ id,
-		method: 'get',
-		contentType: "application/json",
-		dataType:"json",
-		success : function(data, textStatus, jqXHR){
-			currentItem = data.item;
-			$.mobile.loading("hide");
+			url : "http://localhost:3412/SpruceTestServer/books/"+ id,
+			method: 'get',
+			contentType: "application/json",
+			dataType:"json",
+			success : function(data, textStatus, jqXHR){
+				currentItem = data.item;
+				$.mobile.loading("hide");*/
+	
 
 			$.mobile.navigate("buyerproduct.html");
 		
+		/*
 		},
-				error: function(data, textStatus, jqXHR){
-					console.log("textStatus: " + textStatus);
-					$.mobile.loading("hide");
-					if (data.status == 404){
-						alert("Car not found.");
-					}
-					else {
-						alter("Internal Server Error.");
-					}
-				}
-			});
+						error: function(data, textStatus, jqXHR){
+							console.log("textStatus: " + textStatus);
+							$.mobile.loading("hide");
+							if (data.status == 404){
+								alert("Car not found.");
+							}
+							else {
+								alter("Internal Server Error.");
+							}
+						}
+					});*/
+		
 		
 }
 
