@@ -1,6 +1,11 @@
 var objectType = "cars";
 var lastPageId;
 
+//Before mySpruceView call ajax for bidding
+$(document).on('pagebeforeshow', "#mySpruceView", function( event, ui ) {
+	ajaxMySpruce("bidding");
+});
+
 $(document).on('pagebeforeshow', "#items", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
@@ -77,6 +82,71 @@ function GoToView(id, title){
 	}
 	lastPageId = id;
 	
+}
+
+//Function for the three pages of my Spruce
+function ajaxMySpruce(where){
+	$.ajax({
+		//The server takes care of where to route depending of page (selling,bidding,history)
+		url : "http://localhost:3412/SpruceTestServer/mySpruce/"+where,
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.items;
+			var len = objectList.length;
+			var list = $("#itemsList");
+			list.empty();
+			var object;
+			if(where=='history'){
+				for (var i=0; i < len; ++i){
+				object = objectList[i];
+				if(object.buyer=='Me'){
+					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
+					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
+					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
+					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
+					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
+					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
+					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
+					'</h3><p style="color:green"><b>Won: '+object.dateBought+'</b></p></div></td></tr></table>'+
+					'</a></li>');
+				}
+				else{
+					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
+					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
+					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
+					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
+					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
+					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
+					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
+					'</h3><p style="color:red"><b>Lost: '+object.dateBought+'</b></p></div></td></tr></table>'+
+					'</a></li>');
+				}
+				}
+			}
+			else{
+				for (var i=0; i < len; ++i){
+					object = objectList[i];
+					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
+					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
+					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
+					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
+					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
+					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
+					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
+					'</h3><p><b>'+object.startingDate+'</b></p></div></td></tr></table>'+
+					'</a></li>');
+				}
+			}
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 }
 
 function SaveCar(){

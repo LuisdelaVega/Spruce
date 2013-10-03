@@ -61,78 +61,8 @@
 				</ul>
 			</div>
 			<div data-role="content">
-				<ul id="myViewList" data-role="listview" data-inset="true">
-
-					<!---------------------------BIDDING TEMPLATE------------------------------>
-					<!-------------------------Same as Selling-------------------------------->
-					<li data-icon="false">
-						<a  href="buyerProduct.html"> <!-- No se como se van a guardar las fotos width="80" height="80"--> <img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png"> <h1 style="margin: 0px">Washington</h1>
-						<hr style="margin-bottom: 0px;margin-top: 3px"/>
-						<table>
-							<tr>
-								<td style="padding-top: 0px">
-								<div style="padding-top: 0px">
-									<h2 style="font-size: 13px;margin-top:0px">Modelo</h2>
-									<p>
-										Marca
-									</p>
-								</div></td>
-								<td width="1000">
-								<div style="padding-right: 1px" align="right" >
-									<h3 style="margin-top:0px;padding-top: 0px">$10.00</h3>
-									<p>
-										<b>2h</b>
-									</p>
-								</div></td>
-							</tr>
-						</table> </a>
-					</li>
-					<!---------------------------LOSING BID (Should be first in list or by time*)------------------------------------>
-					<li data-icon="false">
-						<a  href="buyerProduct.html"> <img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnail.png"> <h1 style="margin: 0px">Washington</h1>
-						<hr style="margin-bottom: 0px;margin-top: 3px"/>
-						<table>
-							<tr>
-								<td style="padding-top: 0px">
-								<div style="padding-top: 0px">
-									<h2 style="font-size: 13px;margin-top:0px">Modelo</h2>
-									<p>
-										Marca
-									</p>
-								</div></td>
-								<td width="1000">
-								<div style="padding-right: 1px;color:#F00000 " align="right" >
-									<h3 style="margin-top:0px;padding-top: 0px">$9000.00</h3>
-									<p>
-										<b><1h</b>
-									</p>
-								</div></td>
-							</tr>
-						</table> </a>
-					</li>
-					<!--History (Won, Bought, and Lost!!!!)-->
-					<li data-icon="false">
-						<a  href="buyerProduct.html"> <img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png"> <h1 style="margin: 0px">Washington</h1>
-						<hr style="margin-bottom: 0px;margin-top: 3px"/>
-						<table>
-							<tr>
-								<td style="padding-top: 0px">
-								<div style="padding-top: 0px">
-									<h2 style="font-size: 13px;margin-top:0px">Modelo</h2>
-									<p>
-										Marca
-									</p>
-								</div></td>
-								<td width="1000">
-								<div style="padding-right: 1px" align="right" >
-									<h3 style="margin-top:0px;padding-top: 0px">$9000.00</h3>
-									<p style="color: green">
-										<b>Won 12/03/13</b>
-									</p>
-								</div></td>
-							</tr>
-						</table> </a>
-					</li>
+			<div data-role="content">
+				<ul id="itemsList" data-role="listview" data-inset="true">
 				</ul>
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed">
@@ -141,13 +71,13 @@
 						<!-- a attribute will no have a link will have a function that fetches
 						the values of bids, selling or history and refreshes the listView-->
 						<li>
-							<a  class="ui-btn-active ui-state-persist">Bidding</a>
+							<a  class="ui-btn-active ui-state-persist" onclick="ajaxMySpruce('bidding')">Bidding</a>
 						</li>
 						<li>
-							<a >Selling</a>
+							<a onclick="ajaxMySpruce('selling')">Selling</a>
 						</li>
 						<li>
-							<a >History</a>
+							<a onclick="ajaxMySpruce('history')">History</a>
 						</li>
 					</ul>
 				</div><!-- /navbar -->
@@ -155,14 +85,3 @@
 		</div>
 	</body>
 </html>
-
-<!--
-<div style="margin:0px" data-role="controlgroup" data-type="horizontal" align="center" >
-<label for="bidView">Bidding</label>
-<input type="radio" id="bidView" name="views" value="bid" checked="true">
-<label for="sellView">Selling</label>
-<input type="radio" id="sellView" name="views" value="sell">
-<label for="historyView">History</label>
-<input type="radio" id="historyView" name="views" value="history">
-</div>
--->
