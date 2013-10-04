@@ -21,16 +21,10 @@ $(document).on('pagebeforeshow', "#items", function( event, ui ) {
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px" src="css/images/'+object.image+'">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p><b>'+object.startingDate+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+				list.append('<li data-icon="false"><a  onClick-getItemPage('+object.id+')><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				
 			}
 			list.listview("refresh");	
@@ -183,44 +177,26 @@ function ajaxMySpruce(where){
 				for (var i=0; i < len; ++i){
 				object = objectList[i];
 				if(object.buyer=='Me'){
-					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p style="color:green"><b>Won: '+object.dateBought+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+					list.append('<li data-icon="false"><a  onClick-getItemPage('+object.id+')><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.dateBought+'</b></p></div></div></a></li>');
 				}
 				else{
-					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p style="color:red"><b>Lost: '+object.dateBought+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+					list.append('<li data-icon="false"><a  onClick-getItemPage('+object.id+')><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.dateBought+'</b></p></div></div></a></li>');
 				}
 				}
 			}
 			else{
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnailblack.png">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p><b>'+object.startingDate+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+					list.append('<li data-icon="false"><a  onClick-getItemPage('+object.id+')><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");	
