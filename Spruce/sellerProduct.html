@@ -65,24 +65,24 @@
 				</ul>
 			</div>
     		<div data-role="content" style="padding: 5px">
-    			<h1 style="margin: 0px" align="center">Xbox One</h1>
+    			<h1 id="name" style="margin: 0px" align="center">Xbox One</h1>
     			<div align="center">
-    				<img width="200" height="200" src="css/images/thumbnail.png" />
+    				<img id="image" width="200" height="200" src="css/images/thumbnail.png" />
     			</div>
-				<h2 style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
-				<h3 style="margin-top: 3px; margin-bottom: 0px;margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
-				<div align="center">
+				<h2 id="buyNowPrice" style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
+    			<h3 id="timeRemaining" style="margin-top: 3px; margin-bottom: 0px; margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
+    			<div align="center">
     				<a href="#bidHistoryPage" data-role="button" data-theme="b">Bid History</a>	
     			</div>
-    			<h3 style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
-    			<h4 style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
-    			<p style="padding: 8px;margin: 0px" align="justify">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+    			<h3 id="modelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
+    			<h4 id="dimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
+    			<p id="description" style="padding: 8px;margin: 0px" align="center">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
     				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
     				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
     				in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
     				sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     			<div align="center">
-    				<h4 style="margin-top: 8px" align="center">Wigberto Maldonado</h5>
+    				<a id="sellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
     			</div>
     		</div>
     	</div>
@@ -137,14 +137,6 @@
     		<div data-role="content" >
     				<h1 align="center" >Bid History</h1>
     				<ul id="bidHistoryList" data-role="listview" data-inset="true">
-    					<li data-icon="false">
-    						<a href="buy.html">
-    							<div class="ui-grid-a">
-									<div class="ui-block-a"><h3>Mandinga</h3></div>
-									<div class="ui-block-b" align="right"><h3>$1.00</h3></div>	
-								</div> 
-    						</a>
-    					</li>
     				</ul>
     		</div>
     	</div>

@@ -91,47 +91,81 @@ $(document).on('pagebeforeshow', "#usersPage", function( event, ui ) {
 	});
 });
 
-$(document).on('pagebeforeshow', "#car-view", function( event, ui ) {
-	// currentCar has been set at this point
-	$("#upd-make").val(currentCar.make);
-	$("#upd-model").val(currentCar.model);
-	$("#upd-year").val(currentCar.year);
-	$("#upd-price").val(currentCar.price);
-	$("#upd-description").val(currentCar.description);
-	
+$(document).on('pagebeforeshow', "#bidHistoryPage", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/seller-product/1/2/bids",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.bids;
+			var len = objectList.length;
+			var list = $("#bidHistoryList");
+			list.empty();
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append('<li data-icon="false"><div class="ui-grid-a"><div class="ui-block-a"><h3>'+object.title+'</h3></div><div class="ui-block-b" align="right"><h3>'+accounting.formatMoney(object.price)+'</h3></div>	</div> </li>');
+			}
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 });
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-/// Functions Called Directly from Buttons ///////////////////////
-
-function ConverToJSON(formData){
-	var result = {};
-	$.each(formData, 
-		function(i, o){
-			result[o.name] = o.value;
+$(document).on('pagebeforeshow', "#buyerProductPage", function( event, ui ) {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/product/0/1",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var currentItem = data.product;
+			$('#name').text(currentItem.name); 
+			$('#buyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem.price)+"</br> Bid: "+accounting.formatMoney(currentItem.bid)); 
+			$("#image").attr("src","./images/"+currentItem.name+".jpg");
+			$('#timeRemaining').text("Ending in: 2:12PM 10/6/2013"); 
+			$('#modelAndBrand').text(currentItem.model+", "+currentItem.brand);
+			$('#dimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
+			$('#description').text(currentItem.description);
+			$('#sellerName').text(currentItem.seller);
+			$("#sellerName").attr("href", "userprofile.html");
+			$("#sellerName").attr("data-role", "link");
+			$.mobile.loading("hide");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
 	});
-	return result;
-}
+});
 
-function GoToView(id, title){
-	objectType = title;
-	
-	if(lastPageId == id && id == "itemsforcategory"){
-			$.mobile.loading("show");
-			
-			$.mobile.changePage(id+".html",{
-							allowSamePageTransition: true,
-							reloadPage: true,
-							transition: 'none'
-							});
-	}
-	else{
-		$.mobile.loading("show");
-		$.mobile.changePage(id+".html");
-	}
-	lastPageId = id;
-	
-}
+$(document).on('pagebeforeshow', "#sellerProductPage", function( event, ui ) {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/seller-product/0/1",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var currentItem = data.product;
+			$('#name').text(currentItem.name); 
+			$('#buyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem.price)+"</br> Bid: "+accounting.formatMoney(currentItem.bid)); 
+			$("#image").attr("src","./images/"+currentItem.name+".jpg");
+			$('#timeRemaining').text("Ending in: 2:12PM 10/6/2013"); 
+			$('#modelAndBrand').text(currentItem.model+", "+currentItem.brand);
+			$('#dimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
+			$('#description').text(currentItem.description);
+			$('#sellerName').text(currentItem.seller);
+			$("#sellerName").attr("href", "userprofile.html");
+			$("#sellerName").attr("data-role", "link");
+			$.mobile.loading("hide");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
 
 //Function for the three pages of my Spruce
 function ajaxMySpruce(where){
@@ -142,7 +176,7 @@ function ajaxMySpruce(where){
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#itemsList");
+			var list = $("#mySpruceList");
 			list.empty();
 			var object;
 			if(where=='history'){
@@ -196,6 +230,38 @@ function ajaxMySpruce(where){
 			alert("Data not found!");
 		}
 	});
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Functions Called Directly from Buttons ///////////////////////
+
+function ConverToJSON(formData){
+	var result = {};
+	$.each(formData, 
+		function(i, o){
+			result[o.name] = o.value;
+	});
+	return result;
+}
+
+function GoToView(id, title){
+	objectType = title;
+	
+	if(lastPageId == id && id == "itemsforcategory"){
+			$.mobile.loading("show");
+			
+			$.mobile.changePage(id+".html",{
+							allowSamePageTransition: true,
+							reloadPage: true,
+							transition: 'none'
+							});
+	}
+	else{
+		$.mobile.loading("show");
+		$.mobile.changePage(id+".html");
+	}
+	lastPageId = id;
+	
 }
 
 function SaveCar(){
