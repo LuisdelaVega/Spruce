@@ -21,7 +21,7 @@
 				<a id="cart" title="cart" onclick="GoToView(id, title)">Cart</a>
 				<h1>Spruce</h1>
 			</div>
-			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
 						<a id="home" title="home" onclick="GoToView(id, title)">Home</a>
@@ -137,7 +137,7 @@
 							<a href="#usersPage" data-transition="slide">Users</a>
 						</li>
 						<li>
-							<a >Categories</a>
+							<a href="#categoriesPage" data-transition="slide">Categories</a>
 						</li>
 					</ul>
 				</div>
@@ -194,11 +194,7 @@
 			<div data-role="content">
 				<div data-role="fieldcontainer">
 					<a data-role="button">Add User</a>
-					<ul id="userList" data-role="listview" data-inset="true" data-split-icon="delete">
-						<li data-icon="false">
-							<a>Mandingo</a>
-							<a></a>
-						</li>
+					<ul id="usersList" data-role="listview" data-inset="true" data-split-icon="delete">
 					</ul>
 				</div>
 			</div>
@@ -266,7 +262,11 @@
 				</ul>
 			</div>
 			<div data-role="content">
-				
+				<div data-role="fieldcontainer">
+					<a data-role="button">Add Category</a>
+					<ul id="categoriesList" data-role="listview" data-inset="true" data-split-icon="delete">
+					</ul>
+				</div>
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed">
 				<div data-role="navbar">
@@ -283,36 +283,15 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div id="dialogPage" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Delete</h1>
+			</div>
 			<div data-role="content">
-				<div data-role="fieldcontainer">
-					<a data-role="button">Add Category</a>
-					<ul id="userList" data-role="listview" data-inset="true" data-split-icon="delete">
-						<li data-icon="false">
-							<a>Books</a>
-							<a></a>
-						</li>
-						<li data-icon="false">
-							<a>Electronics</a>
-							<a></a>
-						</li>
-						<li data-icon="false">
-							<a>Computers</a>
-							<a></a>
-						</li>
-						<li data-icon="false">
-							<a>Clothing</a>
-							<a></a>
-						</li>
-						<li data-icon="false">
-							<a>Shoes</a>
-							<a></a>
-						</li>
-						<li data-icon="false">
-							<a>Sports</a>
-							<a></a>
-						</li>
-					</ul>
-				</div>
+				<h3 style="text-align: center">Are you sure you want to delete</h3>
+				<a data-role="button" data-theme="b">Sounds Good</a>
+				<a data-role="button" href="#categoriesPage">Cancel</a>
 			</div>
 		</div>
 	</body>

@@ -42,6 +42,55 @@ $(document).on('pagebeforeshow', "#items", function( event, ui ) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#categoriesPage", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/myadmintools/category",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.category;
+			var len = objectList.length;
+			var list = $("#categoriesList");
+			list.empty();
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append('<li data-icon="false"><a>'+object.title+'</a><a href="#dialogPage"  data-rel="dialog"></a></li>');
+				
+			}
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#usersPage", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/myadmintools/users",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.users;
+			var len = objectList.length;
+			var list = $("#usersList");
+			list.empty();
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append('<li data-icon="false"><a href="userprofile.html">'+object.user+'</a><a></a></li>');
+			}
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#car-view", function( event, ui ) {
 	// currentCar has been set at this point
 	$("#upd-make").val(currentCar.make);
