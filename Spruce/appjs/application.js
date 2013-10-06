@@ -160,6 +160,35 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/user/cart",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.cart;
+			var len = objectList.length;
+			var list = $("#lrd-myCartList");
+			list.empty();
+			var total=0;
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img src="images/itshappening.gif" style="resize:both; overflow:scroll; width:80px; height:80px">'+
+				'<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">'+object.name+'</h1><p style="font-size: 13px;margin-top:0px"><b>'+object.model+'</b></p><p>'+object.brand+'</p>'+
+				'</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >'+accounting.formatMoney(object.price)+'</h1><p>Amount:'+object.amount+'</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
+				total+=object.price*object.amount;
+			}
+			list.listview("refresh");	
+			$("#checkoutButton .ui-btn-text").text("Checkout ("+accounting.formatMoney(total)+")");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
@@ -170,7 +199,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 			$('#lrd-buyerproductName').text(currentItem.name);
 			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem.price)+"</br> Bid: "+accounting.formatMoney(currentItem.bid)); 
 			$("#lrd-buyerproductImage").attr("src","images/"+currentItem.image);
-			$('#lrd-buyerproductTimeRemaining').text("Ending in: 2:12PM 10/6/2013"); 
+			$('#lrd-buyerproductTimeRemaining').html("Quantity: "+currentItem.amount+"</br>Ending in: "+currentItem.startingDate); 
 			$('#lrd-buyerproductModelAndBrand').text(currentItem.model+", "+currentItem.brand);
 			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
 			$('#lrd-buyerproductDescription').text(currentItem.description);
@@ -196,7 +225,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 			$('#lrd-sellerproductName').text(currentItem.name); 
 			$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem.price)+"</br> Bid: "+accounting.formatMoney(currentItem.bid)); 
 			$("#lrd-sellerproductImage").attr("src","images/"+currentItem.image);
-			$('#lrd-sellerproductTimeRemaining').text("Ending in: 2:12PM 10/6/2013"); 
+			$('#lrd-sellerproductTimeRemaining').html("Quantity: "+currentItem.amount+"</br>Ending in: "+currentItem.startingDate); 
 			$('#lrd-sellerproductModelAndBrand').text(currentItem.model+", "+currentItem.brand);
 			$('#lrd-sellerproductDimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
 			$('#lrd-sellerproductDescription').text(currentItem.description);

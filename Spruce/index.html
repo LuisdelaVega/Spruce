@@ -268,41 +268,24 @@
     		<div data-role="content">
     			<h1 align="center" style="margin: 0px">Cart</h1>
 				<ul id="lrd-myCartList" data-role="listview" data-inset="true" data-split-icon="delete">
-					<li data-icon="false">
-						<a onclick="GoToView('lrd-buyerproduct')">
-						<img src="images/itshappening.gif" style="resize:both; overflow:scroll; width:80px; height:80px">
-						<div class="ui-grid-a">
-							<div class="ui-block-a">
-								<h1 style="margin: 0px">Washington</h1>
-								<p style="font-size: 13px;margin-top:0px"><b>Modelo</b></p>
-								<p>Marca</p>
-							</div>
-							<div class="ui-block-b" align="right">
-								<h1 style="font-size: 16px" >$9000.00</h1>
-							</div>	
-						</div>
-						<a href="remove"></a>
-					</li>
-					<li data-icon="false">
-						<a onclick="GoToView('lrd-buyerproduct', 'title')">
-						<img src="images/itshappening.gif" style="resize:both; overflow:scroll; width:80px; height:80px">
-						<div class="ui-grid-a">
-							<div class="ui-block-a">
-								<h1 style="margin: 0px">Washington</h1>
-								<p style="font-size: 13px;margin-top:0px"><b>Modelo</b></p>
-								<p>Marca</p>
-							</div>
-							<div class="ui-block-b" align="right">
-								<h1 style="font-size: 16px" >$9000.00</h1>
-							</div>	
-						</div>
-						<a href="remove"></a>
-					</li>
 				</ul>
-				<a onclick="GoToView('lrd-checkout')" data-role="button" data-theme="b">Checkout</a>
+				<a id="checkoutButton" onclick="GoToView('lrd-checkout')" data-role="button" data-theme="b">Checkout</a>
     		</div>
     	</div>
     	
+    	<!--------------------Dialog for deleting items in cart----------------->
+    	
+    	<div id="rpa-deleteItemCart" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Delete</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Are you sure you want to delete this item?</h3>
+				<a data-role="button" data-theme="b" href="#lrd-cart">Sounds Good</a>
+				<a data-role="button" href="#lrd-cart">Cancel</a>
+			</div>
+		</div>
+		
     	<!------------ End of Cart view ------------>
     	
     	<!------------ Buyer Product view ------------>
@@ -359,28 +342,70 @@
     				<img id="lrd-buyerproductImage" width="200" height="200" src="css/images/thumbnail.png" />
     			</div>
     			<div class="ui-grid-a">
-					<div id="lrd-buyerproductToCart" class="ui-block-a"><a type="button" href="#dialogPage" data-rel="dialog" data-theme="a">Add to Cart</a></div>
-					<div id="lrd-buyerproductBuyNow" class="ui-block-b"><a type="button" href="#dialogPage" data-rel="dialog" data-theme="b">Buy it Now</a></div>		
+					<div id="lrd-buyerproductToCart" class="ui-block-a"><a type="button" href="#rpa-quantityDialog" data-rel="dialog" data-theme="a">Add to Cart</a></div>
+					<div id="lrd-buyerproductBuyNow" class="ui-block-b"><a type="button" href="#rpa-quantityBuyItDialog" data-rel="dialog" data-theme="b">Buy it Now</a></div>		
 				</div> 
-				<a data-role="button" href="#bidDialogPage" data-rel="dialog">Bid</a>
+				<a data-role="button" href="#rpa-bidDialog" data-rel="dialog">Bid</a>
 				
 				<ul data-role="listview" data-theme="a" data-inset="true">
 					<li>
-						<h2 style="text-align: center" id="lrd-buyerproductBuyNowPrice" >Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
-    					<h3 style="text-align: center" id="lrd-buyerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBuyNowPrice" >Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
 					</li>
 					<li>
+						<h3 style="text-align: center" id="lrd-buyerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
 						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
     					<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
     					<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px" align="center"></p>
-    					<div align="center">
+						<div align="center">
     						<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
     					</div>
+    					<div align="center" style="padding-top: 5px">
+    						<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+    					</div>
 					</li>
+					
 				</ul>
 				
     		</div>
     	</div>
+    	
+    	<!-- Dialogs for buyer product buttons Buy it now, bid, and add to cart-->
+    	
+    	<div id="rpa-quantityBuyItDialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Quantity</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Select Quantity</h3>
+				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
+				<a data-role="button" data-theme="b" href="#lrd-cart">Buy it</a>
+				<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
+			</div>
+		</div>
+		<div id="rpa-quantityDialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Quantity</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Select Quantity</h3>
+				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
+				<a data-role="button" data-theme="b" href="#lrd-buyerproduct">Add to cart</a>
+				<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
+			</div>
+		</div>
+		<div id="rpa-bidDialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Bid</h1>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain" align="center">
+					<label for="bidAmount">Bid Amount:</label>
+					<input type="number" id="bidAmount" name="bidAmount">
+					<a href="#lrd-myspruce" data-role="button" data-theme="b">Ok</a>
+					<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
+				</div>
+			</div>
+		</div>
     	
     	<!------------ End of Buyer Product view ------------>
     	
@@ -437,23 +462,43 @@
     			<div align="center">
     				<img id="lrd-sellerproductImage" width="200" height="200" src="css/images/thumbnail.png" />
     			</div>
-				<h2 id="lrd-sellerproductBuyNowPrice" style="margin-top: 3px; margin-bottom: 0px" align="center">Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
-    			<h3 id="lrd-sellerproductTimeRemaining" style="margin-top: 3px; margin-bottom: 0px; margin-top: 0px" align="center">Time Remaining: 1d 3h 50m</h3>
-    			<div align="center">
-    				<a onclick="GoToView('lrd-bidhistory')" data-role="button" data-theme="b">Bid History</a>	
-    			</div>
-    			<h3 id="lrd-sellerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h1>
-    			<h4 id="lrd-sellerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
-    			<p id="lrd-sellerproductDescription" style="padding: 8px;margin: 0px" align="center">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-    				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-    				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
-    				in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
-    				sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    			<div align="center">
-    				<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
-    			</div>
+    			<div class="ui-grid-a">
+						<div class="ui-block-a"><a type="button" href="#restockPage" data-rel="dialog" data-theme="a">Restock</a></div>
+						<div class="ui-block-b"><a onclick="GoToView('lrd-bidhistory')" data-role="button" data-theme="b">Bid History</a>	</div>	
+				</div>
+				<ul data-role="listview" data-theme="a" data-inset="true">
+					<li>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-sellerproductBuyNowPrice" >Buy it Now : $2000.00 <br /> Bid: $23.00</h2>
+					</li>
+					<li>
+						<h3 style="text-align: center" id="lrd-sellerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
+						<h4 id="lrd-sellerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
+    					<h4 id="lrd-sellerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size id</h4>
+    					<p id="lrd-sellerproductDescription" style="padding: 8px;margin: 0px" align="center"></p>
+						<div align="center">
+    						<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
+    					</div>
+    					<div align="center" style="padding-top: 5px">
+    						<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+    					</div>
+					</li>
+				</ul>
     		</div>
     	</div>
+    	
+    	<!-----Restock dialog for seller product-------->
+    	
+    	<div id="restockPage" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Restock</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Restock Quantity</h3>
+				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
+				<a data-role="button" data-theme="b" href="#lrd-sellerproduct">Restock</a>
+				<a data-role="button" href="#lrd-sellerproduct">Cancel</a>
+			</div>
+		</div>
     	
     	<!------------ End of Seller Product view ------------>
     	
