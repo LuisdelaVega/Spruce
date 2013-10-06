@@ -701,20 +701,20 @@
 				</ul>
 			</div>
 			<div data-role="content">
-				<input type="search" name="search" id="search-basic" value="" />
+				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
 				<div data-role="controlgroup" data-type="horizontal" align="center">
-					<a href="index.html" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
+					<a onclick="GoToView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
 					<br />
 					Account</a>
-					<a href="index.html" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
+					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
 					<br />
 					Categories</a>
-					<a href="index.html" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
+					<a onclick="GoToView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
 					<br />
 					My Spruce</a>
 				</div>
 				<br />
-					<ul id="popularcontent" data-role="listview">
+					<ul id="lrd-homePopularContent" data-role="listview">
 						<li>
 							<h3 align="center">Popular Now</h3>
 						</li>
@@ -1055,8 +1055,6 @@
 			<div data-role="footer" data-id="foo1" data-position="fixed">
 				<div data-role="navbar">
 					<ul>
-						<!-- a attribute will no have a link will have a function that fetches
-						the values of bids, selling or history and refreshes the listView-->
 						<li>
 							<a  class="ui-btn-active ui-state-persist" onclick="ajaxMySpruce('bidding')">Bidding</a>
 						</li>

@@ -1,5 +1,6 @@
-var objectType = "cars";
+var objectType = "books";
 var lastPageId;
+var whatever = "lrd-itemsforcategory";
 
 
 $(document).ready(function(){
@@ -27,7 +28,9 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 		url : "http://localhost:3412/SpruceTestServer/Spruce/home/",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var list = $("#popularcontent");
+			var list = $("#lrd-homePopularContent");
+			list.empty();
+			list.append('<li><a onclick="GoToView(lrd-itemsforcategory, books)"><h3 align="center">Popular Now</h3></a></li>');
 			var images = data.images;
 			var len = images.length;
 			
@@ -83,6 +86,51 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 		}
 	});
 });
+
+
+$(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/getSubCategories/sub",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			
+			var objectList = data.subcategories;
+			var len = objectList.length;
+			var list = $("#lrd-categoryList");
+			var listSub = "";
+			list.empty();
+			var object;
+			var ojectSub;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				
+				if(!object.subcategory){
+					list.append('<li data-role="list-divider" data-theme="b">'+
+					'<li>'+
+						'<div>'+
+						'<h2>'+ object.title +':</h2>'+
+						'</div></li>');
+				}
+				
+				else{
+					list.append('<li>'+
+						'<div>'+
+						'<a href="#lrd-itemsforcategory"><h4>'+ object.title +'</h4></a>'+
+						'</div></li>');
+				}
+				
+			}
+			
+			list.listview("refresh");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui ) {
 	console.log("Jose");
@@ -323,7 +371,7 @@ function GoToView(id, title){
 	$.mobile.loading("show");
 	$.mobile.changePage("#"+id,{
 		allowSamePageTransition: true
-		});
+	});
 }
 
 function SaveCar(){
@@ -370,9 +418,9 @@ function GetItem(id){
 				$.mobile.loading("hide");*/
 	
 
-			$.mobile.changePage("#lrd-buyerproduct",{
+	$.mobile.changePage("#lrd-buyerproduct",{
 		allowSamePageTransition: true
-		});
+	});
 		
 		/*
 		},
@@ -388,6 +436,15 @@ function GetItem(id){
 						}
 					});*/
 		
+		
+}
+
+function GetItem(id, title){
+	$.mobile.loading("show");
+	objectType = title;
+	$.mobile.changePage("#"+id,{
+		allowSamePageTransition: true
+	});		
 		
 }
 
