@@ -73,26 +73,24 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content" >
 				<h1 style="text-align: center">Spruce</h1>
-				<div data-role="fieldcontainer">
+				
 					<label for="lrd-username">Username:</label>
 					<input type="text" id="lrd-username" name="username">
-				</div>
-				<div data-role="fieldcontainer">
 					<label for="lrd-password">Password:</label>
 					<input type="password" id="lrd-password" name="password">
-				</div>
-				<div data-role="fieldcontainer">
-					<a id="lrd-home" title="login" onclick="GoToView(id, title)" type="button">log in</a>
-				</div>
-				<a id="lrd-forgotpasswordlink" href="" data-role="link">Forgot your password?</a>
-				<br />
-				<a id="lrd-signuplink" onclick="GoToView('lrd-signup')" data-role="link">Sign up</a>
+				
+					<a id="lrd-home" title="login" onclick="GoToView(id, title)" type="button" data-theme="b">Log In</a>
+					<a id="lrd-signuplink" onclick="GoToView('lrd-signup')" data-role="button">Sign up</a>
+				
 			</div>
 		</div>
 		
@@ -140,79 +138,79 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content" >
-				<div data-role="fieldcontainer">
-					<div class="ui-grid-c">
-						<div class="ui-block-a">
-							<select id="category" name="category" data-native-menu="false">
-								<option value="1">Category</option>
-								<option value="2">Category 1</option>
-								<option value="3">Category 2</option>
-								<option value="4">Category 3</option>
-								<option value="5">Category 4</option>
-								<option value="6">Category 5</option>
-								<option value="7">Category 6</option>
-							</select>
-						</div>
-						<div class="ui-block-b">
-							<select id="price" name="price" data-native-menu="false">
-								<option value="1">Price</option>
-								<option value="2">Under 30</option>
-								<option value="3">Under 40</option>
-								<option value="3">Under 50</option>
-								<option value="3">Under 60</option>
-							</select>
-						</div>
-						<div class="ui-block-c">
-							<select id="name" name="name" data-native-menu="false">
-								<option value="1">Name</option>
-								<option value="2">A-Z</option>
-								<option value="3">Z-A</option>
-							</select>
-						</div>
-						<div class="ui-block-d">
-							<select id="lrd-brand" name="brand" data-native-menu="false">
-								<option value="1">Brand</option>
-								<option value="2">Brand 1</option>
-								<option value="3">Brand 2</option>
-								<option value="4">Brand 3</option>
-								<option value="5">Brand 4</option>
-								<option value="6">Brand 5</option>
-								<option value="7">Brand 6</option>
-							</select>
-						</div>
-					</div>
+				<div data-role="fieldcontain">
+					<ul id="lrd-itemsList" data-role="listview" data-inset="true" data-filter="true">
+					</ul>
 				</div>
-				<div data-role="fieldcontainer">
-					<input type="search" id="lrd-search" name="search" placeholder="Search:">
-				</div>
-				<div data-role="fieldcontainer">
-					<ul id="lrd-itemsList" data-role="listview" data-inset="true">
-						<li data-icon="false">
-							<a href="buyerproduct.html">
-								<img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png"> <h1 style="margin: 0px">Washington</h1>
-								<hr style="margin-bottom: 0px;margin-top: 3px"/>
-								<div class="ui-grid-a">
-									<div class="ui-block-a" align="left" style="">
-										<h2 style="font-size: 13px;margin-top:0px">Modelo</h2>
-										<p>
-											Marca
-										</p>
-									</div>
-									<div class="ui-block-b" align="right">
-										<h3 style="margin-top:0px;padding-top: 0px">$10.00</h3>
-										<p>
-											<b>2h</b>
-										</p>
-									</div>
-								</div>
-							</a>
+			</div>
+			<div data-role="footer" data-id="foo1" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li>
+							<a href="#rpa-subCategoryPage"  data-rel="dialog">Subcategory</a>
+						</li>
+						<li>
+							<a href="#rpa-refinePage" data-rel="dialog">Refine</a>
 						</li>
 					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+		
+		
+		<!---Dialogs for sub category and refine------>
+		
+		<div id="rpa-subCategoryPage" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Subcategory</h1>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-inset="true">
+						<li><a>Fiction</a></li>
+						<li><a>Kids</a></li>
+						<li><a>Horror</a></li>
+						<li><a>Drama</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="rpa-refinePage" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Sort by</h1>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain">
+    			<label for="priceSelect">Price:</label>
+    				<select name="priceSelect" id="priceSelect" data-native-menu="false">
+        				<option></option>
+            			<option value="1">Lowest</option>
+				        <option value="2">Highest</option>
+     				</select>
+				</div>
+				<div data-role="fieldcontain">
+    			<label for="brandSelect">Brand:</label>
+    			<select name="brandSelect" id="brandSelect" data-native-menu="false">
+        				<option></option>
+            			<option value="1">Lenovo</option>
+				        <option value="2">Apple</option>
+				        <option value="2">Sony</option>
+				        <option value="2">Toshiba</option>
+     				</select>
+				</div>
+				<div data-role="fieldcontain">
+    			<label for="nameSelect">Name:</label>
+    			<select name="nameSelect" id="nameSelect" data-native-menu="false">
+        				<option></option>
+            			<option value="1">A-Z</option>
+				        <option value="2">Z-A</option>
+     				</select>
 				</div>
 			</div>
 		</div>
@@ -259,6 +257,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -330,6 +331,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -453,6 +457,9 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
@@ -544,6 +551,9 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
@@ -597,6 +607,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -696,13 +709,16 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content">
 				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
-				<div data-role="controlgroup" data-type="horizontal" align="center">
+				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
 					<a onclick="GoToView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
 					<br />
 					Account</a>
@@ -715,7 +731,7 @@
 					
 				</div>
 				<br />
-					<ul id="lrd-homePopularContent" data-role="listview">
+					<ul id="lrd-homePopularContent" data-role="listview" data-inset="true" style="margin-top: 0px">
 						<li>
 							<h3 align="center">Popular Now</h3>
 						</li>
@@ -767,6 +783,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -875,34 +894,31 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role = "content">
-				
-				<img src="images/itshappening.gif"/>
-				<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-				
-				<div id="star"></div>
-				<h3 align="center" style="margin-top: 3px; margin-bottom: 0px">Ron Paul</h3>
-				<p align="center" style="margin-top: 3px;">
-					ron.paul@upr.edu
-				<p>
-				<p align="center" style="margin-top: 4px;">
-					475 Carr 8860 Box 2194
-					<br />
-					Trujillo Alto, PR 00976
-				</p>
-				<p align="center" style="margin-top: 4px;">
-					Home:
-					<br />
-					(787)777-7777
-					<br />
-					Office:
-					<br />
-					(787)888-8888
-				</p>
+				<div align="center">
+					<img id="userMyAccountImage" src="images/Unknown-person_80x80.gif" />
+				</div>	
+				<dir data-role="fieldcontain" align="center">
+					<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+					
+				</dir>
+				<ul data-role="listview" data-inset="true" >
+					<li >
+						<div align="center">
+							<h1 id="userMyAccountName" style="font-size: 24px;margin-bottom: 10px">Tito Razcabichos</h1>
+							<p id="userMyAccountEmail" style="padding-top: 0px;font-size: 16px">pinga.mandinga@upr.edu<p>
+							<p id="addressMyAccountName">475 Carr 8860 Box 2194<br />Trujillo Alto, PR 00976</p>
+							<p id="userMyAccountPhone">(787)777-7777</p>	
+						</div>
+					</li>
+				</ul>
 				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button"> Edit </a>
 			</div>
 		</div>
@@ -949,6 +965,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -1047,6 +1066,9 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
@@ -1114,6 +1136,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -1236,39 +1261,43 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content" >
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupUsername">Username:*</label>
 					<input type="text" id="lrd-signupUsername" name="username">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupName">Name:*</label>
 					<input type="text" id="lrd-signupName" name="name">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupLastname">Last Name:*</label>
 					<input type="text" id="lrd-signupLastname" name="lastname">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupEmail">Email:*</label>
 					<input type="email" id="lrd-signupEmail" name="email">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupPassword">Password:*</label>
 					<input type="password" id="lrd-signupPassword" name="password">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupRetypepassword">Re-type Password:*</label>
 					<input type="password" id="lrd-signupRetypepassword" name="retypepassword">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupPhone">Phone Number:*</label>
 					<input type="number" id="lrd-signupPhone" name="phone">
 				</div>
+				<div data-role="fieldcontain">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<img src="images/Unknown-person_80x80.gif" />
@@ -1277,6 +1306,7 @@
 						<label for="lrd-signupUploadPicture">Upload Picture:</label>
 						<input type="file" id="lrd-signupUploadPicture" name="uploadpicture">
 					</div>
+				</div>
 				</div>
 				<a data-role="button" data-theme="b" onclick="GoToView('lrd-signupshipping')">Next</a>
 			</div>
@@ -1326,29 +1356,32 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content">
 				<h1 style="text-align: center">Shipping Address</h1>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupshippingAddress">Address Line:*</label>
 					<input type="text" id="lrd-signupshippingAddress" name="address">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupshippingCity">City:*</label>
 					<input type="text" id="lrd-signupshippingCity" name="city">
 				</div>					
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupshippingState">State/Province/Region:*</label>
 					<input type="text" id="lrd-signupshippingState" name="state">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupshippingZip">Zip Code:*</label>
 					<input type="number" id="lrd-signupshippingZip" name="zip">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupshippingCountry">Select Country*</label>
 					<select id="country" name="lrd-signupshippingCountry" data-native-menu="false">
 	<option></option>
@@ -1655,29 +1688,32 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content">
 				<h1 style="text-align: center">Billing Address</h1>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupbillingAddressBilling">Address Line:*</label>
 					<input type="text" id="lrd-signupbillingAddressBilling" name="addressBilling">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupbillingCityBilling">City:*</label>
 					<input type="text" id="lrd-signupbillingCityBilling" name="cityBilling">
 				</div>					
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupbillingStateBilling">State/Province/Region:*</label>
 					<input type="text" id="lrd-signupbillingStateBilling" name="stateBilling">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupbillingZipBilling">Zip Code:*</label>
 					<input type="number" id="lrd-signupbillingZipBilling" name="zipBilling">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupbillingCountryBilling">Select Country*</label>
 					<select id="lrd-signupbillingCountryBilling" name="countryBilling" data-native-menu="false">
 	<option></option>
@@ -1980,17 +2016,20 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
 			</div>
 			<div data-role="content" >
 				<h1 style="text-align: center">Credit</h1>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupcreditCardholder">Cardholder Name:*</label>
 					<input type="text" id="lrd-signupcreditCardholder" name="cardholder">
 				</div>
-				<div data-role="fieldcontainer" align="center">
+				<div data-role="fieldcontain" align="center">
    			 		<fieldset data-role="controlgroup" data-type="horizontal" > 
  							<input type="radio" name="q2" id="lrd-signupcreditVisa" value="0" checked="checked" />
 				            <label for="lrd-signupcreditVisa">Visa</label>
@@ -2000,19 +2039,21 @@
             				<label for="lrd-signupcreditAmericanExpress">AmEx</label>
     				</fieldset>	
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-signupcreditNumberCard">Number:*</label>
 					<input type="text" id="lrd-signupcreditNumberCard" name="numberCard">
 				</div>
+				<div data-role="fieldcontain">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="lrd-signupcreditExpDate">Expiration Date*:</label>
 	         			<input type="month" name="expDate" id="lrd-signupcreditExpDate" value="" />
 					</div>
-					<div class="ui-block-b" style="padding-left: 5px">
+					<div class="ui-block-b" >
 						<label for="lrd-signupcreditCsc">CSC:*</label>
 						<input type="number" id="lrd-signupcreditCsc" name="csc">
 					</div>
+				</div>
 				</div>
 				<a data-role="button" data-theme="b" onclick="GoToView('lrd-home')">Sign Up!</a>
 			</div>
@@ -2063,6 +2104,9 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
@@ -2074,15 +2118,14 @@
 				</div>	
 				<dir data-role="fieldcontain" align="center">
 					<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-					
 				</dir>
 				<ul data-role="listview" data-inset="true" >
 					<li >
 						<div align="center">
-							<h1 style="font-size: 24px;margin-bottom: 10px">Ron Paul</h1>
-							<p style="padding-top: 0px;font-size: 16px">ron.paul@upr.edu<p>
-							<p >475 Carr 8860 Box 2194<br />Trujillo Alto, PR 00976</p>
-							<p>Phone Number:<br />(787)777-7777</p>	
+							<h1 id="userProfileName" style="font-size: 24px;margin-bottom: 10px">Tito Razcabichos</h1>
+							<p id="userProfileEmail" style="padding-top: 0px;font-size: 16px">pinga.mandinga@upr.edu<p>
+							<p id="addressProfileName">475 Carr 8860 Box 2194<br />Trujillo Alto, PR 00976</p>
+							<p id="userProfilePhone">(787)777-7777</p>	
 						</div>
 					</li>
 				</ul>
@@ -2132,6 +2175,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -2186,6 +2232,9 @@
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
@@ -2318,6 +2367,9 @@
 						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
 					</li>
 					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
+					</li>
+					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
 				</ul>
@@ -2325,7 +2377,7 @@
 			
 			<div data-role="content">
 				<div data-role="fieldcontainer">
-					<a data-role="button">Add User</a>
+					<a data-role="button" href="#lrd-signup">Add User</a>
 					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete">
 					</ul>
 				</div>
@@ -2344,6 +2396,19 @@
 						</li>
 					</ul>
 				</div>
+			</div>
+		</div>
+		
+		<!---------Dialog for deleting user--------->
+		
+		<div id="lrd-adminremoveuserdialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Delete</h1>
+			</div>
+			<div data-role="content">
+				<h3 style="text-align: center">Are you sure you want to delete this user?</h3>
+				<a data-role="button" data-theme="b" href="#lrd-adminuserspage">Sounds Good</a>
+				<a data-role="button" href="#lrd-adminuserspage">Cancel</a>
 			</div>
 		</div>
 		
@@ -2397,7 +2462,7 @@
 			</div>
 			<div data-role="content">
 				<div data-role="fieldcontainer">
-					<a data-role="button">Add Category</a>
+					<a data-role="button" href="#rpa-adminaddcatdialog" data-rel="dialog">Add Category</a>
 					<ul id="lrd-admincategoriespageCategoriesList" data-role="listview" data-inset="true" data-split-icon="delete">
 					</ul>
 				</div>
@@ -2423,18 +2488,27 @@
 		
 		<!-- Admin Dialog Page view -->
 		
-		<div id="lrd-admindialogpage" data-role="page">
+		<div id="rpa-adminaddcatdialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Add category</h1>
+			</div>
+			<div data-role="content">
+				<label for="addCategory">Category Name:</label>
+				<input type="text" id="addCategory" name="addCategory">
+				<a data-role="button" data-theme="b"  href="#lrd-admincategoriespage">Sounds Good</a>
+				<a data-role="button"  href="#lrd-admincategoriespage">Cancel</a>
+			</div>
+		</div>
+		
+		<div id="lrd-adminremovecatdialog" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<h1>Delete</h1>
 			</div>
 			<div data-role="content">
-				<h3 style="text-align: center">Are you sure you want to delete</h3>
-				<a data-role="button" data-theme="b">Sounds Good</a>
-				<a data-role="button" href="#categoriesPage">Cancel</a>
+				<h3 style="text-align: center">Are you sure you want to delete this category?</h3>
+				<a data-role="button" data-theme="b" href="#lrd-admincategoriespage">Sounds Good</a>
+				<a data-role="button" href="#lrd-admincategoriespage">Cancel</a>
 			</div>
 		</div>
-		
-		<!-- End of User Store view -->
-
 	</body>
 </html>

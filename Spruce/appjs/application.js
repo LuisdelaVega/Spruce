@@ -66,16 +66,10 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p><b>'+object.startingDate+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+				list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				
 			}
 			list.listview("refresh");	
@@ -145,7 +139,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui
 			var object;
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
-				list.append("<li data-icon='false'><a>"+object.title+"</a><a href='#lrd-admindialogpage' data-rel='dialog'></a></li>");
+				list.append("<li data-icon='false'><a>"+object.title+"</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
 				
 			}
 			list.listview("refresh");	
@@ -170,7 +164,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
 			var object;
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
-				list.append('<li data-icon="false"><a href="#lrd-userprofile">'+object.user+'</a><a href="#lrd-admindialogpage"></a></li>');
+				list.append('<li data-icon="false"><a href="#lrd-myaccountinfoedit">'+object.user+'</a><a href="#lrd-adminremoveuserdialog" data-rel="dialog"></a></li>');
 			}
 			list.listview("refresh");	
 		},
@@ -289,6 +283,79 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	});
 });
 
+////////////////////////////////////USER PROFILE////////////////////////////////////////
+$(document).on('pagebeforeshow', "#lrd-userprofile", function( event, ui ) {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/user/profile",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var currentUser = data.user;
+			$('#userProfileName').text(currentUser.userName); 
+			$('#userProfileEmail').text(currentUser.email); 
+			//$("#userProfileImage").attr("src","./images/"+currentUser.name+".jpg");
+			$('#addressProfileName').html(currentUser.address+"</br>"+currentUser.city+", "+currentUser.state+" "+currentUser.zip); 
+			$('#userProfilePhone').text(currentUser.phone);
+			$.mobile.loading("hide");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
+/////////////////////////ACCOUNT INFO/////////////////////////
+$(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/user/profile",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var currentUser = data.user;
+			$('#userMyAccountName').text(currentUser.userName); 
+			$('#userMyAccountEmail').text(currentUser.email); 
+			//$("#userProfileImage").attr("src","./images/"+currentUser.name+".jpg");
+			$('#addressMyAccountName').html(currentUser.address+"</br>"+currentUser.city+", "+currentUser.state+" "+currentUser.zip); 
+			$('#userMyAccountPhone').text(currentUser.phone);
+			$.mobile.loading("hide");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
+//////////////////////////SELLER STORE//////////////////////////////////
+$(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
+	console.log("Jose");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/user/store",
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.items;
+			var len = objectList.length;
+			var list = $("#lrd-userstoreSellerItems");
+			list.empty();
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
+				
+			}
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 //Function for the three pages of my Spruce
 function ajaxMySpruce(where){
 	$.ajax({
@@ -305,44 +372,35 @@ function ajaxMySpruce(where){
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
 					if(object.buyer=='Me'){
-						list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-						'<img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+
-						'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-						'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-						'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-						'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-						'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-						'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-						'</h3><p style="color:green"><b>Won: '+object.dateBought+'</b></p></div></td></tr></table>'+
-						'</a></li>');
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:green"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
 					}
 					else{
-						list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-						'<img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+
-						'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-						'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-						'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-						'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-						'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-						'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-						'</h3><p style="color:red"><b>Lost: '+object.dateBought+'</b></p></div></td></tr></table>'+
-						'</a></li>');
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:red"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
 					}
+				}
+			}
+			else if(where=='bidding'){
+				for (var i=0; i < len; ++i){
+					object = objectList[i];
+					list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				}
 			}
 			else{
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')">' + 
-					'<img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+
-					'<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px" />' +
-					'<table><tr><td style="padding-top: 0px" ><div style="padding-top: 0px">'+
-					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2>'+ 
-					'<p><strong> Brand: ' + object.brand + '</strong></p>'+
-					'</div></td><td width="1000"><div style="padding-right: 1px" align="right" >'+ 
-					'<h3 style="margin-top:0px;padding-top: 0px">$'+object.price+
-					'</h3><p><b>'+object.startingDate+'</b></p></div></td></tr></table>'+
-					'</a></li>');
+					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");	
