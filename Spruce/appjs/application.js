@@ -36,7 +36,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 			
 			for (var i = 0; i < 3; ++i) {
 				var image = images[i];
-				list.append('<li data-icon="false"><a  onclick=GetItem('+image.id+')><img height="80px" width="80px" style="padding-left:5px; padding-top: 6px"src="images/'+image.url+'">'+ 
+				list.append('<li data-icon="false"><a onclick="GetItem('+image.id+')"><img height="80px" width="80px" style="padding-left:5px; padding-top: 6px"src="images/'+image.url+'">'+ 
 			'<h1 style="margin: 0px">'+image.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.startingDate+'</b></p></div></div></a></li>');
@@ -436,15 +436,6 @@ function GetItem(id){
 						}
 					});*/
 		
-		
-}
-
-function GetItem(id, title){
-	$.mobile.loading("show");
-	objectType = title;
-	$.mobile.changePage("#"+id,{
-		allowSamePageTransition: true
-	});		
 		
 }
 
