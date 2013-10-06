@@ -61,6 +61,33 @@ $(document).on('pagebeforeshow', "#categoriesPage", function( event, ui ) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:3412/SpruceTestServer/home/",
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var list = $("#popularcontent");
+			var images = data.images;
+			var len = images.length;
+			
+			for (var i = 0; i < 3; ++i) {
+				var image = images[i];
+				list.append('<li data-icon="false"><a  onClick-getItemPage('+image.id+')><img height="80px" width="80px" style="padding-left:5px; padding-top: 6px"src="images/'+image.url+'">'+ 
+			'<h1 style="margin: 0px">'+image.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+			'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
+			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.startingDate+'</b></p></div></div></a></li>');
+			}
+			list.listview('refresh');
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#usersPage", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
