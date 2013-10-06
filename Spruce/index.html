@@ -985,28 +985,52 @@
 				</div>
 				<div data-role="fieldcontainer">
 					<label for="lrd-myaccountinfoeditName" style="margin-top: 3px;">Name:</label>
-					<input type="text" id="lrd-myaccountinfoeditName" name="name" placeholder="Ron Paul">
+					<input type="text" id="lrd-myaccountinfoeditName" name="name" value="Ron Paul">
 				</div>
 				<div data-role="fieldcontainer">
 					<label for="lrd-myaccountinfoeditEmail" style="margin-top: 3px;">Email:</label>
-					<input type="email" id="lrd-myaccountinfoeditEmail" name="emial" placeholder="ron.paul@upr.com">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine1" style="margin-top: 3px;">Address Line 1:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine1" name="addressLine1" placeholder="475 Carr 8860 Box 2194">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine2" style="margin-top: 3px;">Adress Line 2:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" placeholder="Trujillo Alto, PR 00976">
+					<input type="email" id="lrd-myaccountinfoeditEmail" name="emial" value="ron.paul@upr.com">
 				</div>
 				<div data-role="fieldcontainer">
 					<label for="lrd-myaccountinfoeditPrimaryPhone" style="margin-top: 3px;">Primary Phone #:</label>
-					<input type="text" id="lrd-myaccountinfoeditPrimaryPhone" name="primaryPhone" placeholder="(787)777-7777">
+					<input type="text" id="lrd-myaccountinfoeditPrimaryPhone" name="primaryPhone" value="(787)777-7777">
 				</div>
 				<div data-role="fieldcontainer">
 					<label for="lrd-myaccountinfoeditOtherPhone" style="margin-top: 3px;">Other Phone #:</label>
-					<input type="text" id="lrd-myaccountinfoeditOtherPhone" name="otherPhone" placeholder="(787)888-8888">
+					<input type="text" id="lrd-myaccountinfoeditOtherPhone" name="otherPhone" value="(787)888-8888">
 				</div>
+				
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="standard">Select Address</option>
+					<option value="rush">Address 1</option>
+					<option value="express">Address 2</option>
+					<option value="overnight">Address 3</option>
+				</select>
+				<div data-role="fieldcontainer">
+					<label for="lrd-myaccountinfoeditAddressLine1" style="margin-top: 3px;">Address Line 1:</label>
+					<input type="text" id="lrd-myaccountinfoeditAddressLine1" name="addressLine1" value="475 Carr 8860 Box 2194">
+				</div>
+				<div data-role="fieldcontainer">
+					<label for="lrd-myaccountinfoeditAddressLine2" style="margin-top: 3px;">Adress Line 2:</label>
+					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" value="Trujillo Alto, PR 00976">
+				</div>
+				
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="standard">Credit Card</option>
+					<option value="rush">Visa ************4737</option>
+					<option value="express">Visa ************1237</option>
+					<option value="overnight">MasterCard ************7834</option>
+				</select>
+				
+				<div data-role="fieldcontainer">
+					<label for="lrd-myaccountinfoeditAddressLine1" style="margin-top: 3px;">Billing Address 1:</label>
+					<input type="text" id="lrd-myaccountinfoeditAddressLine1" name="addressLine1" value="475 Carr 8860 Box 2194">
+				</div>
+				<div data-role="fieldcontainer">
+					<label for="lrd-myaccountinfoeditAddressLine2" style="margin-top: 3px;">Billing Address 2:</label>
+					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" value="Trujillo Alto, PR 00976">
+				</div>
+				
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<button onclick="GoToView('lrd-myaccountinfo')" type="button" data-theme="c">
