@@ -1,5 +1,5 @@
-var objectType = "books";
-var lastPageId;
+var objectType;
+var itemId;
 var whatever = "lrd-itemsforcategory";
 
 
@@ -51,10 +51,13 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	});
 });
 
+
+
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/"+objectType,
+		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+objectType,
+		method: 'get',
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			
@@ -66,7 +69,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
 			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
@@ -85,7 +88,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/getSubCategories/sub",
+		url : "http://localhost:3412/SpruceServer/getSubCategories",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			
@@ -100,18 +103,18 @@ $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
 				object = objectList[i];
 				
 				if(!object.subcategory){
+					objectSub = object;
 					list.append('<li data-role="list-divider" data-theme="b">'+
 					'<li>'+
 						'<div>'+
-						'<h2>'+ object.title +':</h2>'+
+						"<h2 style='text-align: center''>"+ object.title +':</h2>'+
 						'</div></li>');
 				}
 				
 				else{
-					list.append('<li>'+
-						'<div>'+
-						'<a href="#lrd-itemsforcategory"><h4>'+ object.title +'</h4></a>'+
-						'</div></li>');
+					list.append("<li data-role='button'>"+
+						"<a onclick=GetItemsForCategory('"+objectSub.title+"')><h4>"+ object.title +'</h4></a>'+
+						'</li>');
 				}
 				
 			}
@@ -234,7 +237,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/product/0/1",
+		url : "http://localhost:3412/SpruceServer/getProduct/"+objectType+"/"+itemId,
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
@@ -260,7 +263,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/seller-product/0/1",
+		url : "http://localhost:3412/SpruceServer/seller-product/0/1",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
@@ -360,7 +363,7 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
 function ajaxMySpruce(where){
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://localhost:3412/SpruceTestServer/mySpruce/"+where,
+		url : "http://localhost:3412/SpruceServer/mySpruce/"+where,
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.items;
@@ -372,13 +375,13 @@ function ajaxMySpruce(where){
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
 					if(object.buyer=='Me'){
-						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="images/'+object.image+'">'+ 
 			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:green"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
 					}
 					else{
-						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="images/'+object.image+'>'+ 
 			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:red"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
@@ -388,7 +391,7 @@ function ajaxMySpruce(where){
 			else if(where=='bidding'){
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+					list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnail.png">'+ 
 			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
@@ -397,7 +400,7 @@ function ajaxMySpruce(where){
 			else{
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">'+ 
+					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnail.png">'+ 
 			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
@@ -424,10 +427,17 @@ function ConverToJSON(formData){
 	return result;
 }
 
-function GoToView(id, title){
-	objectType = title;
+function GoToView(viewName){
 	$.mobile.loading("show");
-	$.mobile.changePage("#"+id,{
+	$.mobile.changePage("#"+viewName,{
+		allowSamePageTransition: true
+	});
+}
+
+function GetItemsForCategory(category){
+	objectType = category;
+	$.mobile.loading("show");
+	$.mobile.changePage("#lrd-itemsforcategory",{
 		allowSamePageTransition: true
 	});
 }
@@ -462,7 +472,7 @@ function SaveCar(){
 var currentCar = {};
 
 function GetItem(id){
-	
+	itemId = id;
 	$.mobile.loading("show");
 
 	/*

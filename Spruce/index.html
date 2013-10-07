@@ -11,12 +11,13 @@
 		<meta name="description" content="">
 		<meta name="author" content="Luis de la Vega, Rafael Pol, Sam De La Torre">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
 
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+		<link rel="stylesheet" href="css/rateit.css" />
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery.mobile-1.3.1.js"></script>
 		<script src="js/jquery.cycle2.js"></script>
@@ -32,39 +33,39 @@
 		<!------------ Log in view ------------>
 
 		<div id="lrd-login" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -97,39 +98,39 @@
 		<!------------ Items for Category view ------------>
 
 		<div id="lrd-itemsforcategory" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -226,37 +227,37 @@
 		<div id="lrd-cart" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -298,38 +299,37 @@
 
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
-
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -428,38 +428,37 @@
 
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
-
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -529,37 +528,37 @@
 		<div id="lrd-bidhistory" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -584,39 +583,39 @@
 		<!------------ Checkout view ------------>
 
 		<div id="lrd-checkout" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -683,40 +682,39 @@
 		<!------------ Home view ------------>
 
 		<div id="lrd-home" data-role="page">
-			<meta name="viewport" content="width=device-width; initial-scale=1.0">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -761,39 +759,39 @@
 		<!-- Category view -->
 
 		<div id="lrd-category" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -808,11 +806,11 @@
 				</ul>
 			</div>
 			<div data-role="content" >
-				<ul id="lrd-categoryList" data-role="listview" data-inset="true" data-split-icon="delete">
+				<ul id="lrd-categoryList" data-role="listview" data-inset="true" style="margin-top: 0px">
 					<li>
 						<div data-role="collapsible" data-collapsed="true">
 							<h2>Books:</h2>
-							<ul id="lrd-categoryBookSubList" data-role="listview" data-inset="true" data-split-icon="delete">
+							<ul id="lrd-categoryBookSubList" data-role="listview" data-inset="true">
 								<li>
 									<a>Children</a>
 								</li>
@@ -870,39 +868,39 @@
 		<!-- My Account Info view -->
 
 		<div id="lrd-myaccountinfo" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -949,39 +947,39 @@
 		<!-- Account Info Edit view -->
 
 		<div id="lrd-myaccountinfoedit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -1072,37 +1070,37 @@
 		<div id="lrd-myspruce" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -1141,39 +1139,39 @@
 		<!-- Sell Item view -->
 
 		<div id="lrd-sellitem" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -1256,6 +1254,7 @@
 					<label for="lrd-sellitemDescription">Description:</label>
 					<textarea name="description" id="lrd-sellitemDescription"></textarea>
 				</div>
+				<br />
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<img src="images/Unknown-person_80x80.gif" />
@@ -1263,6 +1262,16 @@
 					<div class="ui-block-b">
 						<label for="lrd-sellitemUploadPicture">Upload Picture:</label>
 						<input type="file" id="lrd-sellitemUploadPicture" name="uploadpicture">
+					</div>
+				</div>
+				
+				<div class="ui-grid-a" >
+					<div class="ui-block-a">
+						<input id="lrd-sellitemAmount" type="number" placeholder="Amount:" />
+					</div>
+					<div class="ui-block-b">
+						<label for="lrd-sellitemRestock">Restock:</label>
+						<input id="lrd-sellitemRestock" type="checkbox" />
 					</div>
 				</div>
 
@@ -1273,7 +1282,7 @@
 						</button>
 					</div>
 					<div class="ui-block-b">
-						<button type="submit" data-theme="b">
+						<button type="submit" data-theme="b" onclick="GoToView('lrd-home')">
 							Sell
 						</button>
 					</div>
@@ -1287,39 +1296,39 @@
 		<!-- Sign Up view -->
 
 		<div id="lrd-signup" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -1382,39 +1391,39 @@
 		<!-- Sign Up Shipping view -->
 
 		<div id="lrd-signupshipping" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -1714,39 +1723,39 @@
 		<!-- Sign Up Billing view-->
 
 		<div id="lrd-signupbilling" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2042,39 +2051,39 @@
 		<!-- Sign Up Credit view -->
 
 		<div id="lrd-signupcredit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2129,40 +2138,39 @@
 		<!-- User Profile view -->
 
 		<div id="lrd-userprofile" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
-					<!-- NO HAY LINK DE HOME SI ESTAS EN EL HOME !-->
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2174,7 +2182,6 @@
 					<li>
 						<a href="#candy" >Sign Out</a>
 					</li>
-					<!-- NO HAY LINK DE SIGN OUT SI NO ESTAS SIGN IN DUHH! !-->
 				</ul>
 			</div>
 			<div data-role = "content">
@@ -2208,39 +2215,39 @@
 		<!-- User Store view -->
 
 		<div id="lrd-userstore" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2266,37 +2273,37 @@
 		<div id="lrd-adminreportspage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2407,37 +2414,37 @@
 		<div id="lrd-adminuserspage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
@@ -2495,41 +2502,44 @@
 		<div id="lrd-admincategoriespage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a id="lrd-cart" title="cart" onclick="GoToView(id, title)"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal">
 				<ul data-role="listview" data-theme="a">
 					<li>
-						<a id="lrd-home" title="home" onclick="GoToView(id, title)">Home</a>
+						<a onclick="GoToView('lrd-home')">Home</a>
 					</li>
 					<li>
-						<a id="lrd-myspruce" title="myspruce" onclick="GoToView(id, title)" >My Spruce</a>
+						<a  onclick="GoToView('lrd-myspruce')" >My Spruce</a>
 					</li>
 					<li data-role="list-divider" data-theme="a">
 						Categories
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="books" onclick="GoToView(id, title)" >Books</a>
+						<a onclick="GetItemsForCategory('Books')" >Books</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="electronics" onclick="GoToView(id, title)" >Electronics</a>
+						<a onclick="GetItemsForCategory('Electronics')" >Electronics</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="computers" onclick="GoToView(id, title)" >Computers</a>
+						<a onclick="GetItemsForCategory('Computers')" >Computers</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="clothing" onclick="GoToView(id, title)" >Clothing</a>
+						<a onclick="GetItemsForCategory('Clothing')" >Clothing</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="shoes" onclick="GoToView(id, title)" >Shoes</a>
+						<a onclick="GetItemsForCategory('Shoes')" >Shoes</a>
 					</li>
 					<li>
-						<a id="lrd-itemsforcategory" title="sports" onclick="GoToView(id, title)" >Sports</a>
+						<a onclick="GetItemsForCategory('Sports')" >Sports</a>
 					</li>
 					<li data-role="list-divider" data-theme="a"></li>
 					<li>
-						<a onclick="GoToView('lrd-myaccouninfo')" >My Account Info</a>
+						<a onclick="GoToView('lrd-myaccountinfo')" >My Account Info</a>
+					</li>
+					<li>
+						<a onclick="GoToView('lrd-adminreportspage')" >Admin Tools</a>
 					</li>
 					<li>
 						<a href="#candy" >Sign Out</a>
