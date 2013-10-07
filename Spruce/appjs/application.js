@@ -1,4 +1,4 @@
-var objectType;
+var itemCategory;
 var itemId;
 var whatever = "lrd-itemsforcategory";
 
@@ -30,16 +30,16 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var list = $("#lrd-homePopularContent");
 			list.empty();
-			list.append('<li><a onclick="GoToView(lrd-itemsforcategory, books)"><h3 align="center">Popular Now</h3></a></li>');
+			list.append("<li><a onclick=GetItemsForCategory('Books')><h3 align='center'>Popular Now</h3></a></li>");
 			var images = data.images;
 			var len = images.length;
 			
 			for (var i = 0; i < 3; ++i) {
 				var image = images[i];
-				list.append('<li data-icon="false"><a onclick="GetItem('+image.id+')"><img height="80px" width="80px" style="padding-left:5px; padding-top: 6px"src="images/'+image.url+'">'+ 
-			'<h1 style="margin: 0px">'+image.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.startingDate+'</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem("+image.id+")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src='images/"+image.url+"'>"+
+					"<h1 style='margin: 0px'>"+image.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
+					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.startingDate+'</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");
@@ -51,12 +51,10 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	});
 });
 
-
-
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+objectType,
+		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+itemCategory,
 		method: 'get',
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
@@ -69,10 +67,10 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
-			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem("+object.id+")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='images/"+object.image+"'>"+
+					'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				
 			}
 			list.listview("refresh");	
@@ -219,7 +217,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 			var object;
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
-				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img src="images/itshappening.gif" style="resize:both; overflow:scroll; width:80px; height:80px">'+
+				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img src="images/'+object.image+'" style="resize:both; overflow:scroll; width:80px; height:80px">'+
 				'<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">'+object.name+'</h1><p style="font-size: 13px;margin-top:0px"><b>'+object.model+'</b></p><p>'+object.brand+'</p>'+
 				'</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >'+accounting.formatMoney(object.price)+'</h1><p>Amount:'+object.amount+'</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
 				total+=object.price*object.amount;
@@ -237,7 +235,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getProduct/"+objectType+"/"+itemId,
+		url : "http://localhost:3412/SpruceServer/getProduct/"+itemCategory+"/"+itemId,
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
@@ -263,7 +261,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/seller-product/0/1",
+		url : "http://localhost:3412/SpruceServer/getSellerProduct/0/1",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
@@ -375,35 +373,35 @@ function ajaxMySpruce(where){
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
 					if(object.buyer=='Me'){
-						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="images/'+object.image+'">'+ 
-			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:green"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
+							'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+							'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+							'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:green"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
 					}
 					else{
-						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="images/'+object.image+'>'+ 
-			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:red"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
+						list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
+							'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+							'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+							'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p style="color:red"><b>Lost: '+object.startingDate+'</b></p></div></div></a></li>');
 					}
 				}
 			}
 			else if(where=='bidding'){
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnail.png">'+ 
-			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  onclick="GetItem('+object.id+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
+						'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+						'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+						'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				}
 			}
 			else{
 				for (var i=0; i < len; ++i){
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px" src="css/images/thumbnail.png">'+ 
-			'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
-			'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-			'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/'+object.image+'">'+ 
+						'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+						'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
+						'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");	
@@ -435,131 +433,17 @@ function GoToView(viewName){
 }
 
 function GetItemsForCategory(category){
-	objectType = category;
+	itemCategory = category;
 	$.mobile.loading("show");
 	$.mobile.changePage("#lrd-itemsforcategory",{
 		allowSamePageTransition: true
 	});
 }
 
-function SaveCar(){
-	$.mobile.loading("show");
-	var form = $("#car-form");
-	var formData = form.serializeArray();
-	console.log("form Data: " + formData);
-	var newCar = ConverToJSON(formData);
-	console.log("New Car: " + JSON.stringify(newCar));
-	var newCarJSON = JSON.stringify(newCar);
-	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/cars",
-		method: 'post',
-		data : newCarJSON,
-		contentType: "application/json",
-		dataType:"json",
-		success : function(data, textStatus, jqXHR){
-			$.mobile.loading("hide");
-			$.mobile.navigate("#cars");
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			$.mobile.loading("hide");
-			alert("Data could not be added!");
-		}
-	});
-
-}
-
-var currentCar = {};
-
 function GetItem(id){
 	itemId = id;
 	$.mobile.loading("show");
-
-	/*
-	$.ajax({
-			url : "http://localhost:3412/SpruceTestServer/books/"+ id,
-			method: 'get',
-			contentType: "application/json",
-			dataType:"json",
-			success : function(data, textStatus, jqXHR){
-				currentItem = data.item;
-				$.mobile.loading("hide");*/
-	
-
 	$.mobile.changePage("#lrd-buyerproduct",{
 		allowSamePageTransition: true
-	});
-		
-		/*
-		},
-						error: function(data, textStatus, jqXHR){
-							console.log("textStatus: " + textStatus);
-							$.mobile.loading("hide");
-							if (data.status == 404){
-								alert("Car not found.");
-							}
-							else {
-								alter("Internal Server Error.");
-							}
-						}
-					});*/
-		
-		
-}
-
-function UpdateCar(){
-	$.mobile.loading("show");
-	var form = $("#car-view-form");
-	var formData = form.serializeArray();
-	console.log("form Data: " + formData);
-	var updCar = ConverToJSON(formData);
-	updCar.id = currentCar.id;
-	console.log("Updated Car: " + JSON.stringify(updCar));
-	var updCarJSON = JSON.stringify(updCar);
-	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/cars/" + updCar.id,
-		method: 'put',
-		data : updCarJSON,
-		contentType: "application/json",
-		dataType:"json",
-		success : function(data, textStatus, jqXHR){
-			$.mobile.loading("hide");
-			$.mobile.navigate("#cars");
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			$.mobile.loading("hide");
-			if (data.status == 404){
-				alert("Data could not be updated!");
-			}
-			else {
-				alert("Internal Error.");		
-			}
-		}
-	});
-}
-
-function DeleteCar(){
-	$.mobile.loading("show");
-	var id = currentCar.id;
-	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/cars/" + id,
-		method: 'delete',
-		contentType: "application/json",
-		dataType:"json",
-		success : function(data, textStatus, jqXHR){
-			$.mobile.loading("hide");
-			$.mobile.navigate("#cars");
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			$.mobile.loading("hide");
-			if (data.status == 404){
-				alert("Car not found.");
-			}
-			else {
-				alter("Internal Server Error.");
-			}
-		}
 	});
 }
