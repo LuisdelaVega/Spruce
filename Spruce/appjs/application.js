@@ -217,9 +217,9 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 			var object;
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
-				list.append('<li data-icon="false"><a onclick="GetItem('+object.id+')"><img src="images/'+object.image+'" style="resize:both; overflow:scroll; width:80px; height:80px">'+
-				'<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">'+object.name+'</h1><p style="font-size: 13px;margin-top:0px"><b>'+object.model+'</b></p><p>'+object.brand+'</p>'+
-				'</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >'+accounting.formatMoney(object.price)+'</h1><p>Amount:'+object.amount+'</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
+				list.append("<li data-icon='false'><a onclick=GetItem("+object.id+") ><img src='images/"+object.image+"' style='resize:both; overflow:scroll; width:80px; height:80px'>"+
+					'<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">'+object.name+'</h1><p style="font-size: 13px;margin-top:0px"><b>'+object.model+'</b></p><p>'+object.brand+'</p>'+
+					'</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >'+accounting.formatMoney(object.price)+'</h1><p>Amount:'+object.amount+'</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
 				total+=object.price*object.amount;
 			}
 			list.listview("refresh");	
