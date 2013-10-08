@@ -15,6 +15,19 @@ $(document).ready(function(){
     		change=true;
     	}
 	 });
+	 
+	var accept=true;
+    $("#lrd-checkoutAccept").click(function(){
+    	if(accept){
+    		$("#lrd-checkoutPayUp").attr("onclick", "GoToView('lrd-home')");
+    		accept=false;
+		}
+    	else{
+    		$("#lrd-checkoutPayUp").attr("onclick", "GoToView('lrd-checkout')");
+    		accept=true;
+    	}
+	 });
+	 
 });
 
 //Before mySpruceView call ajax for bidding

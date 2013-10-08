@@ -645,6 +645,21 @@
 						</select>
 					</div>
 				</div>
+				
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<p>
+							Choose shipping address:
+						</p>
+					</div>
+					<div class="ui-block-b">
+						<select id="lrd-checkoutShippingAddress" name="accountnumber" data-native-menu="false">
+							<option value="1">20 La Serrania, Caguas P.R. 00725</option>
+							<option value="2">475 Carr 8860 Box 2194</option>
+						</select>
+					</div>
+				</div>
+				
 				<!-- This defines the whole collapsible set (accordion) -->
 				<div data-role="collapsible-set">
 					<div data-role="collapsible" data-collapsed="true">
@@ -658,19 +673,18 @@
 					</div>
 				</div>
 				<!-- end of collapsible set (accordion) -->
-				<label for="accept">I accept terms and conditions</label>
-				<input type="checkbox" id="accept" name="accept" value="yes">
+				<input type="checkbox" name="acceptCheck" id="lrd-checkoutAccept"/>
+				<label for="lrd-checkoutAccept">I accept terms and conditions</label>
+				
 				<p>
 					<b>Total: $21,567</b>
 				</p>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<a onclick="GoToView('lrd-cart')" type="button" data-theme="c"> Cancel </button></a>
+						<a onclick="GoToView('lrd-cart')" type="button" data-theme="c"> Cancel</a>
 					</div>
 					<div class="ui-block-b">
-						<button type="submit" data-theme="b">
-							Pay up!
-						</button>
+						<a id="lrd-checkoutPayUp" data-role="button" unselectable="on" onclick="GoToView('lrd-checkout')" data-theme="b">Pay Up!</a>					
 					</div>
 				</div>
 
@@ -1032,7 +1046,7 @@
 					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" value="Trujillo Alto, PR 00976">
 				</div>
 
-				<select name="select-choice-0" id="select-choice-1"  data-native-menu="false">
+				<select name="select-choice-0" id="select-choice-2"  data-native-menu="false">
 					<option value="standard">Credit Card</option>
 					<option value="rush">Visa ************4737</option>
 					<option value="express">Visa ************1237</option>
@@ -1718,7 +1732,7 @@
 			</div>
 		</div>
 
-		<!-- Sign Up Shipping view -->
+		<!-- End of Sign Up Shipping view -->
 
 		<!-- Sign Up Billing view-->
 
