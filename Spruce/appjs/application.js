@@ -80,10 +80,10 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append("<li data-icon='false'><a onclick=GetItem("+object.id+")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='images/"+object.image+"'>"+
-					'<h1 style="margin: 0px">'+object.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
+				list.append("<li data-icon='false'><a onclick=GetItem("+object.itemid+")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='images/"+object.photo+"'>"+
+					'<h1 style="margin: 0px">'+object.itemname+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
-					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.startingDate+'</b></p></div></div></a></li>');
+					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.itemdate+'</b></p></div></div></a></li>');
 				
 			}
 			list.listview("refresh");	
