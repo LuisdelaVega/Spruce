@@ -37,7 +37,7 @@ $(document).on('pagebeforeshow', "#lrd-myspruce", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/Spruce/home/",
+		url : "http://localhost:3412/SpruceServer/Spruce/home/",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var list = $("#lrd-homePopularContent");
@@ -142,7 +142,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/myadmintools/category",
+		url : "http://localhost:3412/SpruceServer/myadmintools/category",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.category;
@@ -167,7 +167,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/myadmintools/users",
+		url : "http://localhost:3412/SpruceServer/myadmintools/users",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.users;
@@ -191,7 +191,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/seller-product/1/2/bids",
+		url : "http://localhost:3412/SpruceServer/seller-product/1/2/bids",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.bids;
@@ -218,7 +218,7 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/user/cart",
+		url : "http://localhost:3412/SpruceServer/user/cart",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.cart;
@@ -303,7 +303,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-userprofile", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/user/profile",
+		url : "http://localhost:3412/SpruceServer/user/profile",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentUser = data.user;
@@ -325,7 +325,7 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/user/profile",
+		url : "http://localhost:3412/SpruceServer/user/profile",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentUser = data.user;
@@ -347,7 +347,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceTestServer/user/store",
+		url : "http://localhost:3412/SpruceServer/user/store",
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var objectList = data.items;
