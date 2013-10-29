@@ -32,6 +32,57 @@ $(document).on('pagebeforeshow', "#lrd-myspruce", function( event, ui ) {
 	ajaxMySpruce("bidding");
 });
 
+$(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
+	$.mobile.loading("show");	
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
+		method: 'get',
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.categories;
+			var len = objectList.length;
+			var list = $("#sdlt-popularNowViewSidePanel");
+			list.empty();
+			var object;
+			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
+			}
+			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/Spruce/PopularNow/",
+		method: 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var list = $("#popularnowlist");
+			list.empty();
+			var images = data.items;
+			var len = images.length;
+			for (var i = 0; i < len ; ++i) {
+				var image = images[i];
+				list.append("<li data-icon='false'><a onclick=GetItem("+image.itemid+")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src="+image.photo+">"+
+					"<h1 style='margin: 0px'>"+image.itemname+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">'+
+					'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
+					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.itemdate+'</b></p></div></div></a></li>');
+			}
+			list.listview('refresh');
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
 	$.ajax({
@@ -57,22 +108,24 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 			alert("Data not found!");
 		}
 	});
+	$.mobile.loading("show");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/Spruce/home/",
+		method: 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var list = $("#lrd-homePopularContent");
 			list.empty();
-			list.append("<li><a onclick=GetItemsForCategory('Books')><h3 align='center'>Popular Now</h3></a></li>");
-			var images = data.images;
+			list.append("<li><a onclick=GoToView('sdlt-popularNowView')><h3 align='center'>Popular Now</h3></a></li>");
+			var images = data.items;
 			var len = images.length;
 			
-			for (var i = 0; i < 3; ++i) {
+			for (var i = 0; i < 3 ; ++i) {
 				var image = images[i];
-				list.append("<li data-icon='false'><a onclick=GetItem("+image.id+")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src='images/"+image.url+"'>"+
-					"<h1 style='margin: 0px'>"+image.name+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">'+
+				list.append("<li data-icon='false'><a onclick=GetItem("+image.itemid+")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src="+image.photo+">"+
+					"<h1 style='margin: 0px'>"+image.itemname+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">'+
 					'<h2 style="font-size: 13px;margin-top:0px">'+image.model+'</h2><p>'+image.brand+'</p></div><div class="ui-block-b" align="right">'+
-					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.startingDate+'</b></p></div></div></a></li>');
+					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(image.price)+'</h3><p><b>'+image.itemdate+'</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");

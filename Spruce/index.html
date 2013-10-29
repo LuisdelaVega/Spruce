@@ -56,6 +56,25 @@
 		</div>
 
 		<!------------ End of Log in view ------------>
+		
+		<!------------ Popular shit niggas ------->
+		
+		<div id="sdlt-popularNowView" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sdlt-popularNowViewSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content" >
+				<div data-role="fieldcontain">
+					<ul id="popularnowlist" data-role="listview" data-inset="true" data-filter="true"></ul>
+				</div>
+			</div>
+		</div>
+		<!----- End of Popular Now View ---->
 
 		<!------------ Items for Category view ------------>
 
