@@ -1,4 +1,3 @@
-var itemCategory;
 var itemId;
 var whatever = "lrd-itemsforcategory";
 
@@ -67,7 +66,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
 	console.log("Jose");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+itemCategory,
+		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+sessionStorage.category,
 		method: 'get',
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
@@ -248,7 +247,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getProduct/"+itemCategory+"/"+itemId,
+		url : "http://localhost:3412/SpruceServer/getProduct/removethis/"+itemId,
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
@@ -449,7 +448,13 @@ function GoToView(viewName){
 }
 
 function GetItemsForCategory(category){
-	itemCategory = category;
+	var itemCategory = category;
+	if(typeof(Storage)!=="undefined"){
+  		sessionStorage.category=category;
+  	}
+	else{
+  		console.log("Web storage not supported");
+  	}
 	$.mobile.loading("show");
 	$.mobile.changePage("#lrd-itemsforcategory",{
 		allowSamePageTransition: true
