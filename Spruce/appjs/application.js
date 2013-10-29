@@ -258,7 +258,8 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 			$("#lrd-buyerproductImage").attr("src",""+currentItem[0].photo);
 			$('#lrd-buyerproductTimeRemaining').html("Quantity: "+currentItem[0].amount+"</br>Ending in: "+currentItem[0].itemdate); 
 			$('#lrd-buyerproductModelAndBrand').text(currentItem[0].model+", "+currentItem[0].brand);
-			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem[0].dimensions+" Id: "+currentItem[0].itemid);
+			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem[0].dimensions);
+			$('#lrd-buyerproductId').text("Id: "+currentItem[0].itemid);
 			$('#lrd-buyerproductDescription').text(currentItem[0].description);
 			$('#lrd-buyerproductSellerName').text("need to implement");//currentItem.seller);
 			$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
@@ -284,7 +285,8 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 			$("#lrd-sellerproductImage").attr("src","images/"+currentItem.image);
 			$('#lrd-sellerproductTimeRemaining').html("Quantity: "+currentItem.amount+"</br>Ending in: "+currentItem.startingDate); 
 			$('#lrd-sellerproductModelAndBrand').text(currentItem.model+", "+currentItem.brand);
-			$('#lrd-sellerproductDimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
+			$('#lrd-sellerproductDimensions').text("Dimensions: "+currentItem.dimensions);
+			$('#lrd-buyerproductId').text("Id: "+currentItem[0].itemid);
 			$('#lrd-sellerproductDescription').text(currentItem.description);
 			$('#lrd-sellerproductSellerName').text(currentItem.seller);
 			$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-userprofile')");
