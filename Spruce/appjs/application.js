@@ -1,6 +1,4 @@
 var itemId;
-var whatever = "lrd-itemsforcategory";
-
 
 $(document).ready(function(){
 	var change=true;
@@ -64,7 +62,6 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+sessionStorage.category,
 		method: 'get',
@@ -94,9 +91,34 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 	});
 });
 
+$(document).on('pagebeforeshow', "#lrd-login", function( event, ui ) {
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
+		method: 'get',
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			
+			var objectList = data.categories;
+			var len = objectList.length;
+			var list = $("#sidePanel");
+			list.empty();
+			var object;
+			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
+			}
+			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
 
 $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getSubCategories",
 		contentType: "application/json",
@@ -140,7 +162,6 @@ $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
 
 
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/myadmintools/category",
 		contentType: "application/json",
@@ -165,7 +186,6 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/myadmintools/users",
 		contentType: "application/json",
@@ -189,7 +209,6 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/seller-product/1/2/bids",
 		contentType: "application/json",
@@ -216,7 +235,6 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/cart",
 		contentType: "application/json",
@@ -345,7 +363,6 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
 
 //////////////////////////SELLER STORE//////////////////////////////////
 $(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
-	console.log("Jose");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/store",
 		contentType: "application/json",
