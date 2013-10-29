@@ -80,7 +80,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 			for (var i=0; i < len; ++i){
 				object = objectList[i];
 				
-				list.append("<li data-icon='false'><a onclick=GetItem("+object.itemid+")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='images/"+object.photo+"'>"+
+				list.append("<li data-icon='false'><a onclick=GetItem("+object.itemid+")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='"+object.photo+"'>"+
 					'<h1 style="margin: 0px">'+object.itemname+'</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">'+
 					'<h2 style="font-size: 13px;margin-top:0px">'+object.model+'</h2><p>'+object.brand+'</p></div><div class="ui-block-b" align="right">'+
 					'<h3 style="margin-top:0px;padding-top: 0px">'+accounting.formatMoney(object.price)+'</h3><p><b>'+object.itemdate+'</b></p></div></div></a></li>');
@@ -252,14 +252,15 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
 			var currentItem = data.product;
-			$('#lrd-buyerproductName').text(currentItem.name);
-			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem.price)+"</br> Bid: "+accounting.formatMoney(currentItem.bid)); 
-			$("#lrd-buyerproductImage").attr("src","images/"+currentItem.image);
-			$('#lrd-buyerproductTimeRemaining').html("Quantity: "+currentItem.amount+"</br>Ending in: "+currentItem.startingDate); 
-			$('#lrd-buyerproductModelAndBrand').text(currentItem.model+", "+currentItem.brand);
-			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem.dimensions+" Id: "+currentItem.id);
-			$('#lrd-buyerproductDescription').text(currentItem.description);
-			$('#lrd-buyerproductSellerName').text(currentItem.seller);
+			// console.log("currentItem= "+currentItem[0]);
+			$('#lrd-buyerproductName').text(currentItem[0].itemname);
+			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem[0].price)+"</br> Bid: need to implement");//+accounting.formatMoney(currentItem.bid)); 
+			$("#lrd-buyerproductImage").attr("src",""+currentItem[0].photo);
+			$('#lrd-buyerproductTimeRemaining').html("Quantity: "+currentItem[0].amount+"</br>Ending in: "+currentItem[0].itemdate); 
+			$('#lrd-buyerproductModelAndBrand').text(currentItem[0].model+", "+currentItem[0].brand);
+			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem[0].dimensions+" Id: "+currentItem[0].itemid);
+			$('#lrd-buyerproductDescription').text(currentItem[0].description);
+			$('#lrd-buyerproductSellerName').text("need to implement");//currentItem.seller);
 			$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
 			$("#lrd-buyerproductSellerName").attr("data-role", "link");
 			$.mobile.loading("hide");
