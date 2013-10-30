@@ -96,7 +96,7 @@
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a href="#rpa-subCategoryPage"  data-rel="dialog">Subcategory</a>
+							<a href="#rpa-subCategoryPopup"  data-rel="dialog">Subcategory</a>
 						</li>
 						<li>
 							<a href="#rpa-refinePage" data-rel="dialog">Refine</a>
@@ -108,12 +108,12 @@
 
 		<!---Dialogs for sub category and refine------>
 
-		<div id="rpa-subCategoryPage" data-role="page">
+		<div id="rpa-subCategoryPopup" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<h1>Subcategory</h1>
 			</div>
 			<div data-role="content">
-				<ul data-role="listview" data-inset="true">
+				<ul id="rpa-subCategoryListPopup" data-role="listview" data-inset="true">
 					<li>
 						<a>Fiction</a>
 					</li>
@@ -129,37 +129,23 @@
 				</ul>
 			</div>
 		</div>
+		
 		<div id="rpa-refinePage" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<h1>Sort by</h1>
 			</div>
 			<div data-role="content">
-				<div data-role="fieldcontain">
-					<label for="priceSelect">Price:</label>
-					<select name="priceSelect" id="priceSelect" data-native-menu="false">
-						<option></option>
-						<option value="1">Lowest</option>
-						<option value="2">Highest</option>
-					</select>
-				</div>
-				<div data-role="fieldcontain">
-					<label for="brandSelect">Brand:</label>
-					<select name="brandSelect" id="brandSelect" data-native-menu="false">
-						<option></option>
-						<option value="1">Lenovo</option>
-						<option value="2">Apple</option>
-						<option value="2">Sony</option>
-						<option value="2">Toshiba</option>
-					</select>
-				</div>
-				<div data-role="fieldcontain">
-					<label for="nameSelect">Name:</label>
-					<select name="nameSelect" id="nameSelect" data-native-menu="false">
-						<option></option>
-						<option value="1">A-Z</option>
-						<option value="2">Z-A</option>
-					</select>
-				</div>
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider" >Price</li>
+					<li><a>Highest</a></li>
+					<li><a>Lowest</a></li>
+					<li data-role="list-divider" >Brand</li>
+					<li><a>A-Z</a></li>
+					<li><a>Z-A</a></li>
+					<li data-role="list-divider" >Name</li>
+					<li><a>A-Z</a></li>
+					<li><a>Z-A</a></li>
+				</ul>
 			</div>
 		</div>
 
@@ -236,7 +222,9 @@
 						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
 						<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
 						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">id</h4>
-						<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="center"></p>
+						<div align="center" style="margin: 0 auto;width: 500px">
+							<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
+						</div>
 						<div align="center">
 							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
 						</div>
@@ -326,7 +314,7 @@
 						<h4 id="lrd-sellerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
 						<h4 id="lrd-sellerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
 						<h4 id="lrd-sellerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">Id</h4>
-						<p id="lrd-sellerproductDescription" style="padding: 8px;margin: 0px,white-space:normal" align="center"></p>
+						<p id="lrd-sellerproductDescription" style="padding: 8px;margin: 0px,white-space:normal" align="justify"></p>
 						<div align="center">
 							<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
 						</div>

@@ -190,6 +190,32 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) 
 	});
 });
 
+$(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function( event, ui ) {
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/getSubCategoryListPopup/"+sessionStorage.category,
+		method: 'get',
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.categories;
+			var len = objectList.length;
+			var list = $("#rpa-subCategoryListPopup");
+			list.empty();
+			var object;
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				
+				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
+				
+			}
+			list.listview("refresh");
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#lrd-login", function( event, ui ) {
 	  $.ajax({
 		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
