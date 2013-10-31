@@ -34,29 +34,7 @@ $(document).on('pagebeforeshow', "#lrd-myspruce", function( event, ui ) {
 
 $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 	$.mobile.loading("show");	
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#sdlt-popularNowViewSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("sdlt-popularNowView");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/Spruce/PopularNow/",
 		method: 'get',
@@ -85,29 +63,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-homeSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-home");
 	$.mobile.loading("show");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/Spruce/home/",
@@ -138,29 +94,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-itemsforcategorySidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-itemsforcategory");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+sessionStorage.category,
 		method: 'get',
@@ -217,107 +151,19 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function( event, ui ) 
 });
 
 $(document).on('pagebeforeshow', "#lrd-login", function( event, ui ) {
-	  $.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-loginSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	  populatePanel("lrd-login");
 });
 
 $(document).on('pagebeforeshow', "#lrd-checkout", function( event, ui ) {
-	  $.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-checkoutSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	  populatePanel("lrd-checkout");
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminreportspage", function( event, ui ) {
-	  $.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-adminreportspageSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	  populatePanel("lrd-adminreportspage");
 });
 
 $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-categorySidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-category");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getSubCategories",
 		contentType: "application/json",
@@ -361,29 +207,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function( event, ui ) {
 
 
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-admincategoriespageSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-admincategoriespage");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/myadmintools/category",
 		contentType: "application/json",
@@ -408,29 +232,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function( event, ui
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-adminuserspageSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-adminuserspage");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/myadmintools/users",
 		contentType: "application/json",
@@ -454,29 +256,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function( event, ui ) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-bidhistorySidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-bidhistory");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/seller-product/1/2/bids",
 		contentType: "application/json",
@@ -503,29 +283,7 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function( event, ui ) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-cartSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-cart");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/cart",
 		contentType: "application/json",
@@ -555,29 +313,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 	$.mobile.loading("show");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-buyerproductSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-buyerproduct");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getProduct/removethis/"+itemId,
 		contentType: "application/json",
@@ -606,29 +342,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
 
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$.mobile.loading("show");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-sellerproductSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-sellerproduct");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/getSellerProduct/0/1",
 		contentType: "application/json",
@@ -657,29 +371,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 ////////////////////////////////////USER PROFILE////////////////////////////////////////
 $(document).on('pagebeforeshow', "#lrd-userprofile", function( event, ui ) {
 	$.mobile.loading("show");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-userprofileSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-userprofile");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/profile",
 		contentType: "application/json",
@@ -702,29 +394,7 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function( event, ui ) {
 /////////////////////////ACCOUNT INFO/////////////////////////
 $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
 	$.mobile.loading("show");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-myaccountinfoSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-myaccountinfo");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/profile",
 		contentType: "application/json",
@@ -745,56 +415,12 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function( event, ui ) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function( event, ui ) {
-	  $.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-myaccountinfoeditSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	  populatePanel("lrd-myaccountinfoedit");
 });
 
 //////////////////////////SELLER STORE//////////////////////////////////
 $(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
-		method: 'get',
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
-			var objectList = data.categories;
-			var len = objectList.length;
-			var list = $("#lrd-userstoreSidePanel");
-			list.empty();
-			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
-			for (var i=0; i < len; ++i){
-				object = objectList[i];
-				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
-			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
-			list.listview("refresh");	
-		},
-		error: function(data, textStatus, jqXHR){
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	populatePanel("lrd-userstore");
 	$.ajax({
 		url : "http://localhost:3412/SpruceServer/user/store",
 		contentType: "application/json",
@@ -820,6 +446,32 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function( event, ui ) {
 		}
 	});
 });
+
+function populatePanel(view){
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
+		method: 'get',
+		contentType: "application/json",
+		success : function(data, textStatus, jqXHR){
+			var objectList = data.categories;
+			var len = objectList.length;
+			var list = $("#"+view+"SidePanel");
+			list.empty();
+			var object;
+			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
+			for (var i=0; i < len; ++i){
+				object = objectList[i];
+				list.append("<li><a onclick=GetItemsForCategory("+object.catid+")>"+object.catname+"</a></li>");
+			}
+			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
+			list.listview("refresh");	
+		},
+		error: function(data, textStatus, jqXHR){
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+}
 
 //Function for the three pages of my Spruce
 function ajaxMySpruce(where){
