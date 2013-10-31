@@ -30,6 +30,45 @@
 
 	<body>
 
+		<!------------ Home view ------------>
+
+		<div id="lrd-home" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-homeSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
+				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
+					<a onclick="GoToView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
+					<br />
+					Account</a>
+					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
+					<br />
+					Categories</a>
+					<a onclick="GoToView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
+					<br />
+					My Spruce</a>
+
+				</div>
+				<br />
+				<ul id="lrd-homePopularContent" data-role="listview" data-inset="true" style="margin-top: 0px">
+					<li>
+						<h3 align="center">Popular Now</h3>
+					</li>
+				</ul>
+				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px">
+				<br />
+				Sell Item </a>
+			</div>
+		</div>
+
+		<!-- End of Home view -->
+
 		<!------------ Log in view ------------>
 
 		<div id="lrd-login" data-role="page">
@@ -435,45 +474,6 @@
 		</div>
 
 		<!------------ End of Checkout view ------------>
-
-		<!------------ Home view ------------>
-
-		<div id="lrd-home" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
-				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
-				<h1>Spruce</h1>
-			</div>
-			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
-				<ul id="lrd-homeSidePanel" data-role="listview" data-theme="a"></ul>
-			</div>
-			<div data-role="content">
-				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
-				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
-					<a onclick="GoToView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
-					<br />
-					Account</a>
-					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
-					<br />
-					Categories</a>
-					<a onclick="GoToView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
-					<br />
-					My Spruce</a>
-
-				</div>
-				<br />
-				<ul id="lrd-homePopularContent" data-role="listview" data-inset="true" style="margin-top: 0px">
-					<li>
-						<h3 align="center">Popular Now</h3>
-					</li>
-				</ul>
-				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px">
-				<br />
-				Sell Item </a>
-			</div>
-		</div>
-
-		<!-- End of Home view -->
 
 		<!-- Category view -->
 
