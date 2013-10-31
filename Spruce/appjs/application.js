@@ -1,4 +1,7 @@
 var itemId;
+var offset=0;
+var order="none";
+var by="none";
 
 $(document).ready(function(){
 	var change=true;
@@ -96,7 +99,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function( event, ui ) {
 	populatePanel("lrd-itemsforcategory");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+sessionStorage.category,
+		url : "http://localhost:3412/SpruceServer/getItemsForCategory/"+sessionStorage.category+"/"+by+"-"+order+"/"+offset,
 		method: 'get',
 		contentType: "application/json",
 		success : function(data, textStatus, jqXHR){
@@ -591,4 +594,16 @@ function GetItem(id){
 	$.mobile.changePage("#lrd-buyerproduct",{
 		allowSamePageTransition: true
 	});
+}
+function refineQuery(paramby,paramorder){
+	by=paramby;
+	order=paramorder;
+	console.log(by+" "+order);
+	GoToView('lrd-itemsforcategory');
+	$('#rpa-refinePage').dialog('close');
+}
+function resetQuery(){
+	order="none";
+	by="none";
+	$('#rpa-refinePage').dialog('close');
 }

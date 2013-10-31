@@ -176,15 +176,16 @@
 			<div data-role="content">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="list-divider" >Price</li>
-					<li><a>Highest</a></li>
-					<li><a>Lowest</a></li>
+					<li><a onclick="refineQuery('price','desc')">Highest</a></li>
+					<li><a onclick="refineQuery('price','asc')">Lowest</a></li>
 					<li data-role="list-divider" >Brand</li>
-					<li><a>A-Z</a></li>
-					<li><a>Z-A</a></li>
+					<li><a onclick="refineQuery('brand','asc')">A-Z</a></li>
+					<li><a onclick="refineQuery('brand','desc')">Z-A</a></li>
 					<li data-role="list-divider" >Name</li>
-					<li><a>A-Z</a></li>
-					<li><a>Z-A</a></li>
+					<li><a onclick="refineQuery('itemname','asc')">A-Z</a></li>
+					<li><a onclick="refineQuery('itemname','desc')">Z-A</a></li>
 				</ul>
+				<a data-role="button" onclick="resetQuery()">Cancel</a>
 			</div>
 		</div>
 
@@ -261,9 +262,7 @@
 						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
 						<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
 						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">id</h4>
-						<div align="center" style="margin: 0 auto;width: 500px">
-							<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
-						</div>
+						<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
 						<div align="center">
 							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
 						</div>
