@@ -314,33 +314,47 @@ $(document).on('pagebeforeshow', "#lrd-cart", function( event, ui ) {
 	});
 });
 
-$(document).on('pagebeforeshow', "#lrd-buyerproduct", function( event, ui ) {
+$(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-buyerproduct");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getProduct/removethis/"+itemId,
-		contentType: "application/json",
-		success : function(data, textStatus, jqXHR){
+		url : "http://localhost:3412/SpruceServer/getProduct/removethis/" + itemId,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
 			var currentItem = data.product;
-			// console.log("currentItem= "+currentItem[0]);
 			$('#lrd-buyerproductName').text(currentItem[0].itemname);
-			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: "+accounting.formatMoney(currentItem[0].price)+"</br> Bid: need to implement");//+accounting.formatMoney(currentItem.bid)); 
-			$("#lrd-buyerproductImage").attr("src",""+currentItem[0].photo);
-			$('#lrd-buyerproductTimeRemaining').html("Quantity: "+currentItem[0].amount+"</br>Ending in: "+currentItem[0].itemdate); 
-			$('#lrd-buyerproductModelAndBrand').text(currentItem[0].model+", "+currentItem[0].brand);
-			$('#lrd-buyerproductDimensions').text("Dimensions: "+currentItem[0].dimensions);
-			$('#lrd-buyerproductId').text("Id: "+currentItem[0].itemid);
+			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem[0].price));
+			$('#lrd-buyerproductBidPrice').html("Bid: "+accounting.formatMoney(currentItem[0].currentbidprice));
+			$("#lrd-buyerproductImage").attr("src", "" + currentItem[0].photo);
+			$('#lrd-buyerproductQuantity').html("Quantity: " + currentItem[0].amount);
+			$('#lrd-buyerproductTimeRemaining').html("Ending in: " + currentItem[0].bideventdate);
+			$('#lrd-buyerproductModelAndBrand').text(currentItem[0].model + ", " + currentItem[0].brand);
+			$('#lrd-buyerproductDimensions').text("Dimensions: " + currentItem[0].dimensions);
+			$('#lrd-buyerproductId').text("Id: " + currentItem[0].itemid);
 			$('#lrd-buyerproductDescription').text(currentItem[0].description);
-			$('#lrd-buyerproductSellerName').text("need to implement");//currentItem.seller);
+			$('#lrd-buyerproductSellerName').text("need to implement");
+			//currentItem.seller);
 			$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
 			$("#lrd-buyerproductSellerName").attr("data-role", "link");
 			$.mobile.loading("hide");
 		},
-		error: function(data, textStatus, jqXHR){
+		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
 			alert("Data not found!");
 		}
 	});
+});
+
+$(document).on('pagebeforeshow', "#rpa-quantityBuyItDialog", function(event, ui) {
+	$("#quantityBuyItSlider").attr("max", parseInt($('#lrd-buyerproductQuantity').text().split(" ")[1]));
+});
+
+$(document).on('pagebeforeshow', "#rpa-quantityAddCartDialog", function(event, ui) {
+	$("#quantityAddCartSlider").attr("max", parseInt($('#lrd-buyerproductQuantity').text().split(" ")[1]));
+});
+
+$(document).on('pagebeforeshow', "#rpa-bidDialog", function(event, ui) {
+	$("#currentBidDialog").text("Current Bid: "+accounting.formatMoney($('#lrd-buyerproductBidPrice').text().split(" $")[1]));
 });
 
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {

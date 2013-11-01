@@ -243,7 +243,7 @@
 				</div>
 				<div class="ui-grid-a">
 					<div id="lrd-buyerproductToCart" class="ui-block-a">
-						<a type="button" href="#rpa-quantityDialog" data-rel="dialog" data-theme="a">Add to Cart</a>
+						<a type="button" href="#rpa-quantityAddCartDialog" data-rel="dialog" data-theme="a">Add to Cart</a>
 					</div>
 					<div id="lrd-buyerproductBuyNow" class="ui-block-b">
 						<a type="button" href="#rpa-quantityBuyItDialog" data-rel="dialog" data-theme="b">Buy it Now</a>
@@ -253,12 +253,12 @@
 
 				<ul data-role="listview" data-theme="a" data-inset="true">
 					<li>
-						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBuyNowPrice" >Buy it Now : $2000.00
-						<br />
-						Bid: $23.00</h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBuyNowPrice" >Buy it Now : $2000.00</h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBidPrice">Bid:200</h2>
 					</li>
 					<li>
 						<h3 style="text-align: center" id="lrd-buyerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
+						<h3 style="text-align: center" id="lrd-buyerproductQuantity">Quantity: 9999</h3>
 						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
 						<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
 						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">id</h4>
@@ -284,18 +284,18 @@
 			</div>
 			<div data-role="content">
 				<h3 style="text-align: center">Select Quantity</h3>
-				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
+				<input type="range" name="quantitySlider" id="quantityBuyItSlider" value="1" min="1" max="100" />
 				<a data-role="button" data-theme="b" href="#lrd-cart">Buy it</a>
 				<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
 			</div>
 		</div>
-		<div id="rpa-quantityDialog" data-role="page">
+		<div id="rpa-quantityAddCartDialog" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<h1>Quantity</h1>
 			</div>
 			<div data-role="content">
 				<h3 style="text-align: center">Select Quantity</h3>
-				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
+				<input type="range" name="quantitySlider" id="quantityAddCartSlider" value="1" min="1" max="100" />
 				<a data-role="button" data-theme="b" href="#lrd-buyerproduct">Add to cart</a>
 				<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
 			</div>
@@ -306,6 +306,7 @@
 			</div>
 			<div data-role="content">
 				<div data-role="fieldcontain" align="center">
+					<h1 id="currentBidDialog"></h1>
 					<label for="bidAmount">Bid Amount:</label>
 					<input type="number" id="bidAmount" name="bidAmount">
 					<a href="#lrd-myspruce" data-role="button" data-theme="b">Ok</a>
