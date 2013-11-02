@@ -145,6 +145,23 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#lrd-signup", function(event, ui) {
+	populatePanel("lrd-signup");
+});
+
+$(document).on('pagebeforeshow', "#lrd-signupshipping", function(event, ui) {
+	populatePanel("lrd-signupshipping");
+});
+
+$(document).on('pagebeforeshow', "#lrd-signupbilling", function(event, ui) {
+	populatePanel("lrd-signupbilling");
+});
+
+$(document).on('pagebeforeshow', "#lrd-signupcredit", function(event, ui) {
+	populatePanel("lrd-signupcredit");
+});
+
+
 $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 	populatePanel("lrd-login");
 });
