@@ -419,16 +419,32 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-myaccountinfo");
+	
+	var password = sessionStorage.acc;
+	console.log(password);
+
+	var account = new Object();
+	account.password = password;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/user/profile",
+		url : "http://localhost:3412/SpruceServer/userProfile",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var currentUser = data.user;
-			$('#userMyAccountName').text(currentUser.userName);
-			$('#userMyAccountEmail').text(currentUser.email);
-			//$("#userProfileImage").attr("src","./images/"+currentUser.name+".jpg");
-			$('#addressMyAccountName').html(currentUser.address + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
-			$('#userMyAccountPhone').text(currentUser.phone);
+			$('#userMyAccountName').text(currentUser[0].accusername);
+			$('#userMyAccountEmail').text(currentUser[0].accemail);
+			$("#userMyAccountImage").attr("src",""+currentUser[0].accphoto);
+			$('#addressMyAccountName').html(currentUser[0].street + "</br>" + currentUser[0].city + ", " + currentUser[0].state + " " + currentUser[0].zip);
+			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
+			$('#sdlt-myAccountRating').attr("data-rateit-value",""+currentUser[0].accrating);
 			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
