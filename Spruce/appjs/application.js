@@ -451,6 +451,78 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 	});
 });
 
+function signup(){
+	var username = document.all["lrd-signupUsername"].value;
+	console.log(username);
+	var fname = document.all["lrd-signupName"].value;
+	console.log(fname);
+	var lname = document.all["lrd-signupLastname"].value;
+	console.log(lname);
+	var email = document.all["lrd-signupEmail"].value;
+	console.log(email);
+	var password = document.all["lrd-signupPassword"].value;
+	console.log(password);
+	var rpassword = document.all["lrd-signupRetypepassword"].value;
+	console.log(rpassword);
+	var phone = document.all["lrd-signupPhone"].value;
+	console.log(phone);
+	var photo = document.all["lrd-signupUploadPicture"].value;
+	console.log(photo);
+	var slt = Math.random();
+	console.log(slt);
+	var rating = 0;
+	
+	if(password == rpassword){
+		var account = new Object();
+		account.username = username;
+		account.fname = fname;
+		account.lname = lname;
+		account.email = email;
+		var shaObj = new jsSHA(slt + password, "TEXT");
+		var hash = shaObj.getHash("SHA-512", "HEX");
+		var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
+		account.password = hash;
+		account.phone = phone;
+		account.rating = rating;
+		account.slt = slt;
+		account.photo = photo;
+		
+		var accountfilter = new Array();
+		accountfilter[0] = "username";
+		accountfilter[1] = "fname";
+		accountfilter[2] = "lname";
+		accountfilter[3] = "email";
+		accountfilter[4] = "password";
+		accountfilter[5] = "phone";
+		accountfilter[6] = "rating";
+		accountfilter[7] = "slt";
+		accountfilter[8] = "photo";
+		
+		var jsonText = JSON.stringify(account, accountfilter, "\t");
+		
+		$.ajax({
+			url : "http://localhost:3412/SpruceServer/signup",
+			method : 'put',
+			crossDomain : true,
+			withCredentials : true,
+			data : jsonText,
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				// data.signup;
+				GoToView('lrd-login');
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+				alert("Data not found! Signup");
+				GoToView('lrd-login');
+			}
+		});
+	}
+	else{
+		GoToView("lrd-signup");
+	}
+}
+
 function login() {
 	var username = document.all["lrd-username"].value;
 	var password = document.all["lrd-password"].value;
