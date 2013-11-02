@@ -25,6 +25,7 @@
 		<script src="js/jquery.rateit.min.js"></script>
 		<script src="appjs/application.js"></script>
 		<script src="js/accounting.js"></script>
+		<script type="text/javascript" src="js/sha.js"></script>
 
 	</head>
 
@@ -61,9 +62,8 @@
 						<h3 align="center">Popular Now</h3>
 					</li>
 				</ul>
-				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px">
-				<br />
-				Sell Item </a>
+				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px"><br />Sell Item </a>
+				<a onclick="GoToView('lrd-login')" data-role="button" data-theme="b" data-mini="true">Log In</a>
 			</div>
 		</div>
 
@@ -88,7 +88,7 @@
 				<label for="lrd-password">Password:</label>
 				<input type="password" id="lrd-password" name="password">
 
-				<a id="lrd-home" title="login" onclick="GoToView(id, title)" type="button" data-theme="b">Log In</a>
+				<a id="lrd-home" title="login" onclick="login()" type="button" data-theme="b">Log In</a>
 				<a id="lrd-signuplink" onclick="GoToView('lrd-signup')" data-role="button">Sign up</a>
 
 			</div>
