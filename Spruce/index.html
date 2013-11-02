@@ -239,7 +239,7 @@
 			<div data-role="content" style="padding: 5px">
 				<h1 id="lrd-buyerproductName" style="margin: 0px" align="center">Xbox One</h1>
 				<div align="center">
-					<img id="lrd-buyerproductImage" width="200" height="200" src="css/images/thumbnail.png" />
+					<a href="#placeholder" data-rel="popup" data-position-to="window" data-transition="fade"> <img id="lrd-buyerproductImage" width="200" height="200" src="css/images/thumbnail.png" /> </a>
 				</div>
 				<div class="ui-grid-a">
 					<div id="lrd-buyerproductToCart" class="ui-block-a">
@@ -274,6 +274,10 @@
 				</ul>
 
 			</div>
+		<div data-role="popup" id="placeholder" data-theme="d"  data-overlay-theme="a">
+			<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<img id="popupimage" src="" />
+		</div>
 		</div>
 
 		<!-- Dialogs for buyer product buttons Buy it now, bid, and add to cart-->
@@ -332,7 +336,7 @@
 			<div data-role="content" style="padding: 5px">
 				<h1 id="lrd-sellerproductName" style="margin: 0px" align="center">Xbox One</h1>
 				<div align="center">
-					<img id="lrd-sellerproductImage" width="200" height="200" src="css/images/thumbnail.png" />
+					<a href="#placeholderseller" data-rel="popup" data-position-to="window" data-transition="fade"> <img id="lrd-sellerproductImage" width="200" height="200" src="css/images/thumbnail.png" /> </a>
 				</div>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
@@ -363,6 +367,10 @@
 					</li>
 				</ul>
 			</div>
+			<div data-role="popup" id="placeholderseller" data-theme="d"  data-overlay-theme="a">
+			<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<img id="popupimageseller" src="" />
+		</div>
 		</div>
 
 		<!-----Restock dialog for seller product-------->

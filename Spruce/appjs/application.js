@@ -1,7 +1,8 @@
 var itemId;
-var offset=0;
-var order="none";
-var by="none";
+var currentItem;
+var offset = 0;
+var order = "none";
+var by = "none";
 
 $(document).ready(function() {
 	var change = true;
@@ -261,7 +262,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 	populatePanel("lrd-bidhistory");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/seller-product/1/2/bids",
+		url : "http://localhost:3412/SpruceServer/seller-product-bids/"+currentItem.itemid,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.bids;
@@ -271,7 +272,7 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false">' + '<div class="ui-grid-a"><div class="ui-block-a"><h3>' + object.title + '</h3></div>' + '<div class="ui-block-b" align="right">' + '<h3>' + accounting.formatMoney(object.price) + '</h3></div></div></li>');
+				list.append('<li data-icon="false">' + '<div class="ui-grid-a"><div class="ui-block-a"><h3>' + object.accusername + '</h3></div>' + '<div class="ui-block-b" align="right">' + '<h3>' + accounting.formatMoney(object.bidprice) + '</h3></div></div></li>');
 			}
 			list.listview("refresh");
 		},
@@ -308,8 +309,8 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.amount + '</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
-				total += object.price;
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
+				total += object.price*object.quantity;
 			}
 			list.listview("refresh");
 			$("#checkoutButton .ui-btn-text").text("Checkout (" + accounting.formatMoney(total) + ")");
@@ -324,32 +325,21 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-buyerproduct");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getProduct/removethis/" + itemId,
-		contentType : "application/json",
-		success : function(data, textStatus, jqXHR) {
-			var currentItem = data.product;
-			$('#lrd-buyerproductName').text(currentItem[0].itemname);
-			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem[0].price));
-			$('#lrd-buyerproductBidPrice').html("Bid: "+accounting.formatMoney(currentItem[0].currentbidprice));
-			$("#lrd-buyerproductImage").attr("src", "" + currentItem[0].photo);
-			$('#lrd-buyerproductQuantity').html("Quantity: " + currentItem[0].amount);
-			$('#lrd-buyerproductTimeRemaining').html("Ending in: " + currentItem[0].bideventdate);
-			$('#lrd-buyerproductModelAndBrand').text(currentItem[0].model + ", " + currentItem[0].brand);
-			$('#lrd-buyerproductDimensions').text("Dimensions: " + currentItem[0].dimensions);
-			$('#lrd-buyerproductId').text("Id: " + currentItem[0].itemid);
-			$('#lrd-buyerproductDescription').text(currentItem[0].description);
-			$('#lrd-buyerproductSellerName').text("need to implement");
-			//currentItem.seller);
-			$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
-			$("#lrd-buyerproductSellerName").attr("data-role", "link");
-			$.mobile.loading("hide");
-		},
-		error : function(data, textStatus, jqXHR) {
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	$('#lrd-buyerproductName').text(currentItem.itemname);
+	$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price));
+	$('#lrd-buyerproductBidPrice').html("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
+	$("#lrd-buyerproductImage").attr("src", "" + currentItem.photo);
+	$('#lrd-buyerproductQuantity').html("Quantity: " + currentItem.amount);
+	$('#lrd-buyerproductTimeRemaining').html("Ending in: " + currentItem.bideventdate);
+	$('#lrd-buyerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
+	$('#lrd-buyerproductDimensions').text("Dimensions: " + currentItem.dimensions);
+	$('#lrd-buyerproductId').text("Id: " + currentItem.itemid);
+	$('#lrd-buyerproductDescription').text(currentItem.description);
+	$('#lrd-buyerproductSellerName').text(currentItem.accusername);
+	$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
+	$("#lrd-buyerproductSellerName").attr("data-role", "link");
+	$("#popupimage").attr("src", ""+currentItem.photo);
+	$.mobile.loading("hide");
 });
 
 $(document).on('pagebeforeshow', "#rpa-quantityBuyItDialog", function(event, ui) {
@@ -367,29 +357,19 @@ $(document).on('pagebeforeshow', "#rpa-bidDialog", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	populatePanel("lrd-sellerproduct");
-	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getSellerProduct/0/1",
-		contentType : "application/json",
-		success : function(data, textStatus, jqXHR) {
-			var currentItem = data.product;
-			$('#lrd-sellerproductName').text(currentItem.name);
-			$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.bid));
-			$("#lrd-sellerproductImage").attr("src", "images/" + currentItem.image);
-			$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + currentItem.startingDate);
-			$('#lrd-sellerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
-			$('#lrd-sellerproductDimensions').text("Dimensions: " + currentItem.dimensions);
-			$('#lrd-buyerproductId').text("Id: " + currentItem[0].itemid);
-			$('#lrd-sellerproductDescription').text(currentItem.description);
-			$('#lrd-sellerproductSellerName').text(currentItem.seller);
-			$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-userprofile')");
-			$("#lrd-sellerproductSellerName").attr("data-role", "link");
-			$.mobile.loading("hide");
-		},
-		error : function(data, textStatus, jqXHR) {
-			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
-		}
-	});
+	$('#lrd-sellerproductName').text(currentItem.itemname);
+	$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.currentbidprice));
+	$("#lrd-sellerproductImage").attr("src", "" + currentItem.photo);
+	$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + currentItem.bideventdate);
+	$('#lrd-sellerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
+	$('#lrd-sellerproductDimensions').text("Dimensions: " + currentItem.dimensions);
+	$('#lrd-sellerproductId').text("Id: " + currentItem.itemid);
+	$('#lrd-sellerproductDescription').text(currentItem.description);
+	$('#lrd-sellerproductSellerName').text(currentItem.accusername);
+	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-userprofile')");
+	$("#lrd-sellerproductSellerName").attr("data-role", "link");
+	$("#popupimageseller").attr("src", ""+currentItem.photo);
+	$.mobile.loading("hide");
 });
 
 ////////////////////////////////////USER PROFILE////////////////////////////////////////
@@ -717,8 +697,32 @@ function GetItemsForCategory(category) {
 function GetItem(id) {
 	itemId = id;
 	$.mobile.loading("show");
-	$.mobile.changePage("#lrd-buyerproduct", {
-		allowSamePageTransition : true
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/getProduct/" + itemId,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			currentItem = data.product[0];
+			if ( typeof (Storage) !== "undefined") {
+				if (currentItem.accpassword == sessionStorage.acc) {
+					$.mobile.changePage("#lrd-sellerproduct", {
+						allowSamePageTransition : true
+					});
+				} else {
+					$.mobile.changePage("#lrd-buyerproduct", {
+						allowSamePageTransition : true
+					});
+				}
+			} else {
+				$.mobile.changePage("#lrd-buyerproduct", {
+					allowSamePageTransition : true
+				});
+			}
+
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
 	});
 }
 function refineQuery(paramby,paramorder){
