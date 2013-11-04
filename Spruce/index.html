@@ -11,8 +11,6 @@
 		<meta name="description" content="">
 		<meta name="author" content="Luis de la Vega, Rafael Pol, Sam De La Torre">
 
-		
-
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -274,9 +272,10 @@
 				</ul>
 
 			</div>
-		<div data-role="popup" id="placeholder" data-theme="d"  data-overlay-theme="a">
-			<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<img id="popupimage" src="" />
+			<div data-role="popup" id="placeholder" data-theme="d"  data-overlay-theme="a">
+				<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<img id="popupimage" src="" />
+			</div>
 		</div>
 		</div>
 
@@ -368,9 +367,9 @@
 				</ul>
 			</div>
 			<div data-role="popup" id="placeholderseller" data-theme="d"  data-overlay-theme="a">
-			<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			<img id="popupimageseller" src="" />
-		</div>
+				<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<img id="popupimageseller" src="" />
+			</div>
 		</div>
 
 		<!-----Restock dialog for seller product-------->
@@ -578,13 +577,8 @@
 						<div align="center">
 							<h1 id="userMyAccountName" style="font-size: 24px;margin-bottom: 10px"></h1>
 							<p id="userMyAccountEmail" style="padding-top: 0px;font-size: 16px"><p>
-							<p id="addressMyAccountName">
-								
-								
-							</p>
-							<p id="userMyAccountPhone">
-								
-							</p>
+							<p id="addressMyAccountName"></p>
+							<p id="userMyAccountPhone"></p>
 						</div>
 					</li>
 				</ul>
@@ -606,28 +600,289 @@
 				<ul id="lrd-myaccountinfoeditSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
-				<div align="center">
-					<img style="resize:both; overflow:scroll; width:100px; height:100px" src="images/itshappening.gif" />
-				</div>
-				<div align="center">
-					<div style="margin-top: 30px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditName" style="margin-top: 3px;">Name:</label>
-					<input type="text" id="lrd-myaccountinfoeditName" name="name" value="Ron Paul">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditEmail" style="margin-top: 3px;">Email:</label>
-					<input type="email" id="lrd-myaccountinfoeditEmail" name="emial" value="ron.paul@upr.com">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditPrimaryPhone" style="margin-top: 3px;">Primary Phone #:</label>
-					<input type="text" id="lrd-myaccountinfoeditPrimaryPhone" name="primaryPhone" value="(787)777-7777">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditOtherPhone" style="margin-top: 3px;">Other Phone #:</label>
-					<input type="text" id="lrd-myaccountinfoeditOtherPhone" name="otherPhone" value="(787)888-8888">
-				</div>
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">
+						User Info
+					</li>
+					<li>
+						<a onclick="GoToView('rpa-usernameandpassword')">Username & Password</a>
+					</li>
+					<li>
+						<a onclick="GoToView('rpa-accphoto')">Photo</a>
+					</li>
+					<li>
+						<a onclick="GoToView('rpa-generalinfo')">General</a>
+					</li>
+					<li data-role="list-divider">
+						Account Info
+					</li>
+					<li>
+						<a onclick="GoToView('rpa-creditcard')">Credit Card</a>
+					</li>
+					<li>
+						<a onclick="GoToView('rpa-shipping')">Shipping Address</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="rpa-usernameandpassword" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-usernameandpasswordSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Username</h1>
+							<input type="text" id="rpa-username" value="Rapol"  />
+							<a data-role="button">Change</a>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Password</h1>
+							<input type="text" id="rpa-password"/>
+							<a data-role="button">Change</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="rpa-accphoto" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-accphotoSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<img align="center" src="/images/Unknown-person_80x80.gif"/>
+							<a data-role="button" >Change</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="rpa-generalinfo" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-generalinfoSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>First Name</h1>
+							<input type="text" id="rpa-firstname" value="Luis"  />
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Last Name</h1>
+							<input type="text" id="rpa-lastname" value="de la"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Email</h1>
+							<input type="email" id="rpa-email" value="luis@vega.com"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Phone Number</h1>
+							<input type="tel" id="rpa-phone" value="787-555-0854"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button">Change</a>
+			</div>
+		</div>
+		<div id="rpa-creditcard" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-creditcardSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<a onclick="GoToView('rpa-creditcardedit')"> <h1>Number: 982734921763</h1>
+						<p>
+							Holder Name: Rafael Pol
+						</p>
+						<p>
+							Type: American Express
+						</p>
+						<p>
+							Expiration Date: 04/17
+						</p>
+						<p>
+							CSC: 067
+						</p>
+						<p>
+							Bills To: Ciudad Jardin 2
+						</p> </a>
+						<a></a>
+					</li>
+				</ul>
+				<a data-role="button">Add</a>
+			</div>
+		</div>
+		<div id="rpa-creditcardedit" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-creditcardeditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Holder Name</h1>
+							<input type="text" id="rpa-holdername" value="Rafa"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Expiration Date</h1>
+							<input type="month" id="rpa-creditexpiration"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="rpa-creditstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="rpa-creditcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="rpa-creditstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="rpa-creditcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="rpa-creditcity"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button">Change</a>
+			</div>
+		</div>
+		<div id="rpa-shipping" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-shippingSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="delete">
+						<a onclick="GoToView('rpa-shippingedit')"> <h1>Street: Buganvilia 123</h1>
+						<p>
+							City: Bayamon
+						</p>
+						<p>
+							State: Puerto Rico
+						</p>
+						<p>
+							Country: United States
+						</p>
+						<p>
+							Zip: 00953
+						</p> </a>
+						<a></a>
+					</li>
+					<li data-icon="delete">
+						<a > <h1>Street: Buganvilia 123</h1>
+						<p>
+							City: Bayamon
+						</p>
+						<p>
+							State: Puerto Rico
+						</p>
+						<p>
+							Country: United States
+						</p>
+						<p>
+							Zip: 00953
+						</p> </a>
+						<a></a>
+					</li>
+				</ul>
+				<a data-role="button">Add</a>
+			</div>
+		</div>
+		<div id="rpa-shippingedit" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-shippingeditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="rpa-shippingstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="rpa-shippingcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="rpa-shippingstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="rpa-shippingcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="shippingcity"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button">Change</a>
+			</div>
+		</div>
+		<!-- <div data-role="fieldcontainer">
+		<label for="lrd-myaccountinfoeditName" style="margin-top: 3px;">Name:</label>
+		<input type="text" id="lrd-myaccountinfoeditName" name="name" value="Ron Paul">
+		</div>
+		<div data-role="fieldcontainer">
+		<label for="lrd-myaccountinfoeditEmail" style="margin-top: 3px;">Email:</label>
+		<input type="email" id="lrd-myaccountinfoeditEmail" name="emial" value="ron.paul@upr.com">
+		</div>
+		<div data-role="fieldcontainer">
+		<label for="lrd-myaccountinfoeditPrimaryPhone" style="margin-top: 3px;">Primary Phone #:</label>
+		<input type="text" id="lrd-myaccountinfoeditPrimaryPhone" name="primaryPhone" value="(787)777-7777">
+		</div>
+		<div data-role="fieldcontainer">
+		<label for="lrd-myaccountinfoeditOtherPhone" style="margin-top: 3px;">Other Phone #:</label>
+		<input type="text" id="lrd-myaccountinfoeditOtherPhone" name="otherPhone" value="(787)888-8888">
+		</div>
 
 				<select name="select-choice-0" id="select-choice-1"  data-native-menu="false">
 					<option value="standard">Select Address</option>
@@ -841,6 +1096,7 @@
 				<ul id="lrd-signupSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content" >
+				<h1 style="text-align: center">User Info</h1>
 				<div data-role="fieldcontain">
 					<label for="lrd-signupUsername">Username:*</label>
 					<input type="text" id="lrd-signupUsername" name="username">
@@ -915,10 +1171,9 @@
 					<label for="lrd-signupshippingZip">Zip Code:*</label>
 					<input type="number" id="lrd-signupshippingZip" name="zip">
 				</div>
-				<div data-role="fieldcontain">
-					<label for="lrd-signupshippingCountry">Select Country*</label>
+				<div data-role="fieldcontain" align="right">
 					<select id="country" name="lrd-signupshippingCountry" data-native-menu="false">
-						<option></option>
+						<option>Country</option>
 						<option value="Afghanistan" title="Afghanistan">Afghanistan</option>
 						<option value="Åland Islands" title="Åland Islands">Åland Islands</option>
 						<option value="Albania" title="Albania">Albania</option>
@@ -1170,10 +1425,10 @@
 						<option value="Zimbabwe" title="Zimbabwe">Zimbabwe</option>
 					</select>
 				</div>
-				<fieldset data-role="controlgroup" style="">
+				<div data-role="controlgroup">
 					<input type="checkbox" name="addressCheck" id="lrd-signupshippingAddressCheck"/>
 					<label for="lrd-signupshippingAddressCheck">Billing address different from shipping address?</label>
-				</fieldset>
+				</div>
 				<a id="lrd-signupshippingShippingButton" data-role="button" onclick="GoToView('lrd-signupcredit')" data-theme="b">Next</a>
 			</div>
 		</div>
@@ -1209,10 +1464,9 @@
 					<label for="lrd-signupbillingZipBilling">Zip Code:*</label>
 					<input type="number" id="lrd-signupbillingZipBilling" name="zipBilling">
 				</div>
-				<div data-role="fieldcontain">
-					<label for="lrd-signupbillingCountryBilling">Select Country*</label>
+				<div data-role="fieldcontain" align="right">
 					<select id="lrd-signupbillingCountryBilling" name="countryBilling" data-native-menu="false">
-						<option></option>
+						<option>Country</option>
 						<option value="Afghanistan" title="Afghanistan">Afghanistan</option>
 						<option value="Åland Islands" title="Åland Islands">Åland Islands</option>
 						<option value="Albania" title="Albania">Albania</option>
@@ -1487,31 +1741,25 @@
 					<label for="lrd-signupcreditCardholder">Cardholder Name:*</label>
 					<input type="text" id="lrd-signupcreditCardholder" name="cardholder">
 				</div>
-				<div data-role="fieldcontain" align="center">
-					<fieldset data-role="controlgroup" data-type="horizontal" >
-						<input type="radio" name="q2" id="lrd-signupcreditVisa" value="0" checked="checked" />
-						<label for="lrd-signupcreditVisa">Visa</label>
-						<input type="radio" name="q2" id="lrd-signupcreditMasterCard" value="1" />
-						<label for="lrd-signupcreditMasterCard">Master Card</label>
-						<input type="radio" name="q2" id="lrd-signupcreditAmericanExpress" value="2" />
-						<label for="lrd-signupcreditAmericanExpress">AmEx</label>
-					</fieldset>
-				</div>
+				<fieldset data-role="controlgroup" data-type="horizontal" align="center">
+					<input type="radio" name="q2" id="lrd-signupcreditVisa" value="0" checked="checked" />
+					<label for="lrd-signupcreditVisa">Visa</label>
+					<input type="radio" name="q2" id="lrd-signupcreditMasterCard" value="1" />
+					<label for="lrd-signupcreditMasterCard">Master Card</label>
+					<input type="radio" name="q2" id="lrd-signupcreditAmericanExpress" value="2" />
+					<label for="lrd-signupcreditAmericanExpress">AmEx</label>
+				</fieldset>
 				<div data-role="fieldcontain">
 					<label for="lrd-signupcreditNumberCard">Number:*</label>
 					<input type="text" id="lrd-signupcreditNumberCard" name="numberCard">
 				</div>
 				<div data-role="fieldcontain">
-					<div class="ui-grid-a">
-						<div class="ui-block-a">
-							<label for="lrd-signupcreditExpDate">Expiration Date*:</label>
-							<input type="month" name="expDate" id="lrd-signupcreditExpDate" value="" />
-						</div>
-						<div class="ui-block-b" >
-							<label for="lrd-signupcreditCsc">CSC:*</label>
-							<input type="number" id="lrd-signupcreditCsc" name="csc">
-						</div>
-					</div>
+					<label for="lrd-signupcreditExpDate">Expiration Date*:</label>
+					<input type="month" name="expDate" id="lrd-signupcreditExpDate" value="" />
+				</div>
+				<div data-role="fieldcontain">
+					<label for="lrd-signupcreditCsc">CSC:*</label>
+					<input type="number" id="lrd-signupcreditCsc" name="csc">
 				</div>
 				<a data-role="button" data-theme="b" onclick="signup()">Sign Up!</a>
 			</div>
