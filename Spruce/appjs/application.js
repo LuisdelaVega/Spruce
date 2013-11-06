@@ -175,6 +175,36 @@ $(document).on('pagebeforeshow', "#lrd-adminreportspage", function(event, ui) {
 	populatePanel("lrd-adminreportspage");
 });
 
+$(document).on('pagebeforeshow', "#rpa-usernameandpassword", function(event, ui) {
+	$("#rpa-username").attr("value", $('#userMyAccountName').text());
+	populatePanel("rpa-usernameandpassword");
+});
+
+$(document).on('pagebeforeshow', "#rpa-accphoto", function(event, ui) {
+	$("#rpa-accphotoimg").attr("src", $('#userMyAccountImage').attr('src'));
+	populatePanel("rpa-accphoto");
+});
+
+$(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
+	populatePanel("rpa-generalinfo");
+});
+
+$(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
+	populatePanel("rpa-creditcard");
+});
+
+$(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
+	populatePanel("rpa-creditcardedit");
+});
+
+$(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
+	populatePanel("rpa-shipping");
+});
+
+$(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
+	populatePanel("rpa-shippingedit");
+});
+
 $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 	populatePanel("lrd-category");
 	$.ajax({
