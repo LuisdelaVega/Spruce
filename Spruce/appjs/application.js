@@ -694,7 +694,7 @@ function checkOut(acc){
 	
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://sprucemarket.herokuapp.com/generateInvoice",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/generateInvoice",
 		crossDomain : true,
 		withCredentials : true,
 		method : 'put',
