@@ -3,7 +3,7 @@ var currentItem;
 var offset = 0;
 var order = "none";
 var by = "none";
-sessionStorage.user="guest";
+var total;
 
 $(document).ready(function() {
 	var change = true;
@@ -20,7 +20,7 @@ $(document).ready(function() {
 	var accept = true;
 	$("#lrd-checkoutAccept").click(function() {
 		if (accept) {
-			$("#lrd-checkoutPayUp").attr("onclick", "GoToView('lrd-home')");
+			$("#lrd-checkoutPayUp").attr("onclick", "checkOut('"+sessionStorage.acc+"')");
 			accept = false;
 		} else {
 			$("#lrd-checkoutPayUp").attr("onclick", "GoToView('lrd-checkout')");
@@ -169,6 +169,10 @@ $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 	populatePanel("lrd-checkout");
+});
+
+$(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
+	populatePanel("lrd-invoice");
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminreportspage", function(event, ui) {
@@ -476,7 +480,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 			var len = objectList.length;
 			var list = $("#lrd-myCartList");
 			list.empty();
-			var total = 0;
+			total = 0;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -608,6 +612,46 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("lrd-purchaseHistory");
+	
+	var password = sessionStorage.acc;
+	console.log(password);
+
+	var account = new Object();
+	account.password = password;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.support.cors = true;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseHistory",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var currentUser = data.user;
+			$('#sdlt-thisshitbetterworknow').empty();
+			$('#userMyAccountName').text(currentUser[0].accusername);
+			$('#userMyAccountEmail').text(currentUser[0].accemail);
+			$("#userMyAccountImage").attr("src",""+currentUser[0].accphoto);
+			$('#addressMyAccountName').html(currentUser[0].street + "</br>" + currentUser[0].city + ", " + currentUser[0].state + " " + currentUser[0].zip);
+			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
+			$('#sdlt-thisshitbetterworknow').append('<li><div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div></li>');
+			$('.rateit').rateit();
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function(event, ui) {
 	populatePanel("lrd-myaccountinfoedit");
 });
@@ -637,6 +681,35 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 		}
 	});
 });
+
+function checkOut(acc){
+	var account = new Object();
+	account.acc = acc;
+	account.total = total;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "acc";
+	accountfilter[1] = "total";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	
+	$.ajax({
+		//The server takes care of where to route depending of page (selling,bidding,history)
+		url : "http://sprucemarket.herokuapp.com/generateInvoice",
+		crossDomain : true,
+		withCredentials : true,
+		method : 'put',
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			GoToView('lrd-invoice');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found! checkOut");
+			GoToView('lrd-checkout');
+		}
+	});
+}
 
 function signup(){
 	var username = document.all["lrd-signupUsername"].value;

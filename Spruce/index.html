@@ -481,6 +481,27 @@
 		</div>
 
 		<!------------ End of Checkout view ------------>
+		
+		<!------------ Invoice view ------------>
+
+		<div id="lrd-invoice" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-invoiceSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content" >
+				<h1>Purchase Sumary:</h1>
+				<ul id="lrd-invoiceList" data-role="listview" data-inset="true" >
+					
+				</ul>
+			</div>
+		</div>
+
+		<!------------ End of Invoice view ------------>
 
 		<!-- Category view -->
 
@@ -582,10 +603,29 @@
 					</li>
 				</ul>
 				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button" data-theme="b"> Edit </a>
+				<a onclick="GoToView('lrd-purchaseHistory')" data-role="button" data-theme="a"> Purchase History </a>
 			</div>
 		</div>
 
 		<!-- End of My Account Info view -->
+
+		<!-- Purchase History view -->
+		
+		<div id="lrd-purchaseHistory" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-purchaseHistorySidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				
+			</div>
+		</div>
+		
+		<!--  End of Purchase History view -->
 
 		<!-- Account Info Edit view -->
 
