@@ -39,7 +39,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("sdlt-popularNowView");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/Spruce/PopularNow/",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/Spruce/PopularNow/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -64,9 +64,8 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-home");
-	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/home/",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/home/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -93,7 +92,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 	populatePanel("lrd-itemsforcategory");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getItemsForCategory/" + sessionStorage.category+"/"+by+"-"+order+"/"+offset,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getItemsForCategory/" + sessionStorage.category+"/"+by+"-"+order+"/"+offset,
 		method : 'get',
 		crossDomain : true,
 		withCredentials : true,
@@ -122,7 +121,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category,
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -186,29 +185,170 @@ $(document).on('pagebeforeshow', "#rpa-accphoto", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
-	populatePanel("rpa-generalinfo");
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usergeneralinfo",
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var userdata = data.user[0];
+			$("#rpa-firstname").attr("value", userdata.accfname);
+			$("#rpa-lastname").attr("value", userdata.acclname);
+			$("#rpa-email").attr("value", userdata.accemail);
+			$("#rpa-lastname").attr("value", userdata.acclname);
+			$("#rpa-phone").attr("value", userdata.accphonenum);
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+	populatePanel("lrd-generalinfo");
 });
 
 $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usercreditcardinfo",
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var creditList = data.creditcard;
+			var len = creditList.length;
+			var list = $("#creditcardlist");
+			list.empty();
+			for (var i = 0; i < len; ++i) {
+				var card = creditList[i];
+				list.append("<li data-icon='delete'><a onclick=GoToEditView("+card.cid+",'rpa-creditcardedit')> <h1>Number: "+card.number+"</h1><p>Holder Name: "+card.name+"</br>Type: "+card.type+"</br>Expiration Date: "+card.month+"/"+card.year+"</br>CSC: "+card.csc+"</br>Bills To: "+card.street+"</p> </a><a></a></li>");
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 	populatePanel("rpa-creditcard");
 });
 
-$(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
-	populatePanel("rpa-creditcardedit");
-});
-
 $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usershippinginfo",
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var addressList = data.address;
+			var len = addressList.length;
+			var list = $("#shippingList");
+			list.empty();
+			for (var i = 0; i < len; ++i) {
+				var address = addressList[i];
+				list.append("<li data-icon='delete'><a onclick=GoToEditView("+address.sid+",'rpa-shippingedit')> <h1>Street: "+address.street+"</h1><p>City: "+address.city+"</br>State: "+address.state+"</br>Country: "+address.country+"</br>Zip: "+address.zip+"</p> </a><a></a></li>");
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 	populatePanel("rpa-shipping");
 });
 
+$(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {	
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditcreditcard/"+sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var address = data.address[0];
+			$("#rpa-creditstreet").attr("value", address.street);
+			$("#rpa-creditcity").attr("value", address.city);
+			$("#rpa-creditstate").attr("value", address.state);
+			$("#rpa-creditcountry").attr("value", address.country);
+			$("#rpa-creditzip").attr("value", address.zip);
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});		
+	populatePanel("rpa-creditcardedit");
+});
+
 $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditshipping/"+sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var address = data.address[0];
+			$("#rpa-shippingstreet").attr("value", address.street);
+			$("#rpa-shippingcity").attr("value", address.city);
+			$("#rpa-shippingstate").attr("value", address.state);
+			$("#rpa-shippingcountry").attr("value", address.country);
+			$("#rpa-shippingzip").attr("value", address.zip);
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});	
 	populatePanel("rpa-shippingedit");
 });
 
 $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 	populatePanel("lrd-category");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getSubCategories",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 
@@ -226,7 +366,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 					objectSub = object;
 					list.append('<li data-role="list-divider" data-theme="b">' + '<li>' + '<div>' + "<h2 style='text-align: center''>" + object.title + ':</h2>' + '</div></li>');
 				} else {
-					list.append("<li data-role='button'>" + "<a onclick=GetItemsForCategory('" + objectSub.title + "')><h4>" + object.title + '</h4></a>' + '</li>');
+					list.append("<li data-role='button'>" + "<a onclick=GetItemsForCategory('" + object.catid + "')><h4>" + object.title + '</h4></a>' + '</li>');
 				}
 
 			}
@@ -243,7 +383,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui) {
 	populatePanel("lrd-admincategoriespage");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/myadmintools/category",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/category",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.category;
@@ -268,7 +408,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 	populatePanel("lrd-adminuserspage");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/myadmintools/users",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/users",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.users;
@@ -292,7 +432,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 	populatePanel("lrd-bidhistory");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/seller-product-bids/"+currentItem.itemid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/seller-product-bids/"+currentItem.itemid,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.bids;
@@ -324,7 +464,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 
 	populatePanel("lrd-cart");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/mycart",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/mycart",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -407,7 +547,7 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-userprofile");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/user/profile",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/profile",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var currentUser = data.user;
@@ -441,7 +581,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/userProfile",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/userProfile",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -472,7 +612,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 	populatePanel("lrd-userstore");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/user/store",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/store",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
@@ -544,7 +684,7 @@ function signup(){
 		var jsonText = JSON.stringify(account, accountfilter, "\t");
 		
 		$.ajax({
-			url : "http://localhost:3412/SpruceServer/signup",
+			url : "http://sprucemarket.herokuapp.com/SpruceServer/signup",
 			method : 'put',
 			crossDomain : true,
 			withCredentials : true,
@@ -580,7 +720,7 @@ function login() {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/authenticate1",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate1",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -600,7 +740,7 @@ function login() {
 			var jsonText1 = JSON.stringify(account, accountfilter, "\t");
 
 			$.ajax({
-				url : "http://localhost:3412/SpruceServer/authenticate2",
+				url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate2",
 				method : 'put',
 				crossDomain : true,
 				withCredentials : true,
@@ -627,7 +767,7 @@ function login() {
 
 function populatePanel(view) {
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getCategoriesForSidePanel",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -656,7 +796,7 @@ function ajaxMySpruce(where) {
 	populatePanel("lrd-myspruce");
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://localhost:3412/SpruceServer/mySpruce/" + where,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/mySpruce/" + where,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
@@ -728,7 +868,7 @@ function GetItem(id) {
 	itemId = id;
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/getProduct/" + itemId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getProduct/" + itemId,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			currentItem = data.product[0];
@@ -766,4 +906,12 @@ function resetQuery(){
 	order="none";
 	by="none";
 	$('#rpa-refinePage').dialog('close');
+}
+
+function GoToEditView(id,view){
+	sessionStorage.editId=id;
+	$.mobile.loading("show");
+	$.mobile.changePage("#"+view, {
+		allowSamePageTransition : true
+	});	
 }

@@ -566,7 +566,7 @@
 			</div>
 			<div data-role = "content">
 				<div align="center">
-					<img id="userMyAccountImage"/>
+					<img id="userMyAccountImage" style="max-width: 300px;max-height: 300px;"/>
 				</div>
 				<div data-role="fieldcontain" align="center">
 					<div style="margin-top: 0px" id="sdlt-myAccountRating" class="rateit" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
@@ -582,7 +582,7 @@
 						</div>
 					</li>
 				</ul>
-				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button"> Edit </a>
+				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button" data-theme="b"> Edit </a>
 			</div>
 		</div>
 
@@ -645,7 +645,9 @@
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Password</h1>
 							<input type="text" id="rpa-password"/>
-							<a data-role="button">Change</a>
+							<h1>Confirm Password</h1>
+							<input type="text" id="rpa-confirmpassword"/>
+							<a data-role="button" data-theme"b">Change</a>
 						</div>
 					</li>
 				</ul>
@@ -664,8 +666,10 @@
 				<ul data-role="listview" data-inset="true">
 					<li>
 						<div data-role="fieldcontain" class="ui-hide-label" align="center">
-							<img id="rpa-accphotoimg" src="/images/Unknown-person_80x80.gif"/>
-							<a data-role="button" >Change</a>
+							<img id="rpa-accphotoimg" style="max-width: 300px;max-height: 300px;" src="/images/Unknown-person_80x80.gif"/>
+							<label for="lrd-signupUploadPicture">Upload Picture:</label>
+							<input type="file" id="lrd-signupUploadPicture" name="uploadpicture">
+							<a data-role="button" data-theme="b">Change</a>
 						</div>
 					</li>
 				</ul>
@@ -701,7 +705,7 @@
 						</div>
 					</li>
 				</ul>
-				<a data-role="button">Change</a>
+				<a data-role="button" data-theme="b">Change</a>
 			</div>
 		</div>
 		<div id="rpa-creditcard" data-role="page">
@@ -714,7 +718,8 @@
 				<ul id="rpa-creditcardSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
-				<ul data-role="listview" data-inset="true">
+				<h1 align="center">Credit Cards</h1>
+				<ul id="creditcardlist" data-role="listview" data-inset="true">
 					<li  data-icon="delete">
 						<a onclick="GoToView('rpa-creditcardedit')"> <h1>Number: 982734921763</h1>
 						<p>
@@ -735,7 +740,7 @@
 						<a></a>
 					</li>
 				</ul>
-				<a data-role="button">Add</a>
+				<a data-role="button" data-theme="b">Add</a>
 			</div>
 		</div>
 		<div id="rpa-creditcardedit" data-role="page">
@@ -748,16 +753,9 @@
 				<ul id="rpa-creditcardeditSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
+				<h1 align="center">Edit Billing Address</h1>
 				<ul data-role="listview" data-inset="true">
 					<li  data-icon="delete">
-						<div data-role="fieldcontain" class="ui-hide-label">
-							<h1>Holder Name</h1>
-							<input type="text" id="rpa-holdername" value="Rafa"/>
-						</div>
-						<div data-role="fieldcontain" class="ui-hide-label">
-							<h1>Expiration Date</h1>
-							<input type="month" id="rpa-creditexpiration"/>
-						</div>
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Street</h1>
 							<input type="text" id="rpa-creditstreet"/>
@@ -776,11 +774,11 @@
 						</div>
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Zip</h1>
-							<input type="number" id="rpa-creditcity"/>
+							<input type="number" id="rpa-creditzip"/>
 						</div>
 					</li>
 				</ul>
-				<a data-role="button">Change</a>
+				<a data-role="button" data-theme="b">Change</a>
 			</div>
 		</div>
 		<div id="rpa-shipping" data-role="page">
@@ -793,7 +791,8 @@
 				<ul id="rpa-shippingSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
-				<ul data-role="listview" data-inset="true">
+				<h1 align="center">Address Book</h1>
+				<ul id="shippingList" data-role="listview" data-inset="true">
 					<li data-icon="delete">
 						<a onclick="GoToView('rpa-shippingedit')"> <h1>Street: Buganvilia 123</h1>
 						<p>
@@ -827,7 +826,7 @@
 						<a></a>
 					</li>
 				</ul>
-				<a data-role="button">Add</a>
+				<a data-role="button" data-theme="b">Add</a>
 			</div>
 		</div>
 		<div id="rpa-shippingedit" data-role="page">
@@ -840,6 +839,7 @@
 				<ul id="rpa-shippingeditSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
+				<h1 align="center">Edit Address</h1>
 				<ul data-role="listview" data-inset="true">
 					<li  data-icon="delete">
 						<div data-role="fieldcontain" class="ui-hide-label">
@@ -860,73 +860,11 @@
 						</div>
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Zip</h1>
-							<input type="number" id="shippingcity"/>
+							<input type="number" id="rpa-shippingzip"/>
 						</div>
 					</li>
 				</ul>
-				<a data-role="button">Change</a>
-			</div>
-		</div>
-		<!-- <div data-role="fieldcontainer">
-		<label for="lrd-myaccountinfoeditName" style="margin-top: 3px;">Name:</label>
-		<input type="text" id="lrd-myaccountinfoeditName" name="name" value="Ron Paul">
-		</div>
-		<div data-role="fieldcontainer">
-		<label for="lrd-myaccountinfoeditEmail" style="margin-top: 3px;">Email:</label>
-		<input type="email" id="lrd-myaccountinfoeditEmail" name="emial" value="ron.paul@upr.com">
-		</div>
-		<div data-role="fieldcontainer">
-		<label for="lrd-myaccountinfoeditPrimaryPhone" style="margin-top: 3px;">Primary Phone #:</label>
-		<input type="text" id="lrd-myaccountinfoeditPrimaryPhone" name="primaryPhone" value="(787)777-7777">
-		</div>
-		<div data-role="fieldcontainer">
-		<label for="lrd-myaccountinfoeditOtherPhone" style="margin-top: 3px;">Other Phone #:</label>
-		<input type="text" id="lrd-myaccountinfoeditOtherPhone" name="otherPhone" value="(787)888-8888">
-		</div>
-
-				<select name="select-choice-0" id="select-choice-1"  data-native-menu="false">
-					<option value="standard">Select Address</option>
-					<option value="rush">Address 1</option>
-					<option value="express">Address 2</option>
-					<option value="overnight">Address 3</option>
-				</select>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine1" style="margin-top: 3px;">Address Line 1:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine1" name="addressLine1" value="475 Carr 8860 Box 2194">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine2" style="margin-top: 3px;">Adress Line 2:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" value="Trujillo Alto, PR 00976">
-				</div>
-
-				<select name="select-choice-0" id="select-choice-2"  data-native-menu="false">
-					<option value="standard">Credit Card</option>
-					<option value="rush">Visa ************4737</option>
-					<option value="express">Visa ************1237</option>
-					<option value="overnight">MasterCard ************7834</option>
-				</select>
-
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine1" style="margin-top: 3px;">Billing Address 1:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine1" name="addressLine1" value="475 Carr 8860 Box 2194">
-				</div>
-				<div data-role="fieldcontainer">
-					<label for="lrd-myaccountinfoeditAddressLine2" style="margin-top: 3px;">Billing Address 2:</label>
-					<input type="text" id="lrd-myaccountinfoeditAddressLine2" name="addressLine2" value="Trujillo Alto, PR 00976">
-				</div>
-
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<button onclick="GoToView('lrd-myaccountinfo')" type="button" data-theme="c">
-							Cancel
-						</button>
-					</div>
-					<div class="ui-block-b">
-						<button onclick="GoToView('lrd-myaccountinfo')" type="submit" data-theme="b">
-							Save
-						</button>
-					</div>
-				</div>
+				<a data-role="button" data-theme="b">Change</a>
 			</div>
 		</div>
 
