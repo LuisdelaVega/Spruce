@@ -3,6 +3,7 @@ var currentItem;
 var offset = 0;
 var order = "none";
 var by = "none";
+sessionStorage.user="guest";
 
 $(document).ready(function() {
 	var change = true;
@@ -730,39 +731,49 @@ function login() {
 		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			sessionStorage.acc = data.acc[0].accslt;
+			if (data.success) {
+				sessionStorage.acc = data.acc[0].accslt;
+				var shaObj = new jsSHA(sessionStorage.acc + password, "TEXT");
+				var hash = shaObj.getHash("SHA-512", "HEX");
+				console.log(hash);
+				var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
+				console.log(hmac);
 
-			var shaObj = new jsSHA(sessionStorage.acc + password, "TEXT");
-			var hash = shaObj.getHash("SHA-512", "HEX");
-			console.log(hash);
-			var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
-			console.log(hmac);
+				account.hash = hash;
+				accountfilter[1] = "hash";
+				var jsonText1 = JSON.stringify(account, accountfilter, "\t");
 
-			account.hash = hash;
-			accountfilter[1] = "hash";
-			var jsonText1 = JSON.stringify(account, accountfilter, "\t");
-
-			$.ajax({
-				url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate2",
-				method : 'put',
-				crossDomain : true,
-				withCredentials : true,
-				data : jsonText1,
-				contentType : "application/json",
-				success : function(data, textStatus, jqXHR) {
-					sessionStorage.acc = data.acc[0].accpassword;
-					GoToView('lrd-home');
-				},
-				error : function(data, textStatus, jqXHR) {
-					console.log("textStatus: " + textStatus);
-					alert("Data not found! Authenticate2");
-					GoToView('lrd-login');
-				}
-			});
+				$.ajax({
+					url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate2",
+					method : 'put',
+					crossDomain : true,
+					withCredentials : true,
+					data : jsonText1,
+					contentType : "application/json",
+					success : function(data, textStatus, jqXHR) {
+						if (data.success) {
+							sessionStorage.acc = data.acc[0].accpassword;
+							sessionStorage.user=data.user;
+							GoToView('lrd-home');
+						} else {
+							sessionStorage.user="guest";
+							alert("Username and password does not exist");
+						}
+					},
+					error : function(data, textStatus, jqXHR) {
+						console.log("textStatus: " + textStatus);
+						alert("Data not found");
+						GoToView('lrd-login');
+						//pa q?
+					}
+				});
+			} else {
+				alert("Username not found");
+			}
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found! Authenticate1");
+			alert("Data not found");
 			GoToView('lrd-login');
 		}
 	});
@@ -779,12 +790,27 @@ function populatePanel(view) {
 			var list = $("#" + view + "SidePanel");
 			list.empty();
 			var object;
-			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li><li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li><li data-role=list-divider data-theme=a>Categories</li>");
+			console.log(sessionStorage.user);
+			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li>");
+			if (sessionStorage.user == 'user') {
+				list.append("<li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li>");
+			}
+			list.append("<li data-role=list-divider data-theme=a>Categories</li>");
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 				list.append("<li><a onclick=GetItemsForCategory(" + object.catid + ")>" + object.catname + "</a></li>");
 			}
-			list.append("<li data-role=list-divider data-theme=a></li><li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li><li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li><li><a href=#candy >Sign Out</a></li>");
+			list.append("<li data-role=list-divider data-theme=a></li>");
+			if (sessionStorage.user == 'user') {
+				list.append("<li><a onclick=GoToView('lrd-myaccountinfo') >My Account Info</a></li>");
+			} else if (sessionStorage.user == 'admin') {
+				list.append("<li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li>");
+			}
+			if (sessionStorage.user == 'guest') {
+				list.append("<li><a onclick=GoToView('lrd-login')>Sign In</a></li>");
+			} else {
+				list.append("<li><a onclick=signOut()>Sign Out</a></li>");
+			}
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -923,5 +949,11 @@ function GoToEditView(id,view){
 	$.mobile.loading("show");
 	$.mobile.changePage("#"+view, {
 		allowSamePageTransition : true
-	});	
+	});
+}
+
+function signOut() {
+	sessionStorage.acc = "";
+	sessionStorage.user="guest";
+	GoToView('lrd-login');
 }
