@@ -794,9 +794,20 @@ function populatePanel(view) {
 //Function for the three pages of my Spruce
 function ajaxMySpruce(where) {
 	populatePanel("lrd-myspruce");
+	var account = new Object();
+	account.acc = sessionStorage.acc;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "acc";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/mySpruce/" + where,
+		crossDomain : true,
+		withCredentials : true,
+		method : 'put',
+		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
@@ -804,24 +815,20 @@ function ajaxMySpruce(where) {
 			var list = $("#lrd-myspruceMySpruceList");
 			list.empty();
 			var object;
-			if (where == 'history') {
+			if (where == 'sold') {
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					if (object.buyer == 'Me') {
-						list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/' + object.image + '">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p style="color:green"><b>Lost: ' + object.startingDate + '</b></p></div></div></a></li>');
-					} else {
-						list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/' + object.image + '">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p style="color:red"><b>Lost: ' + object.startingDate + '</b></p></div></div></a></li>');
-					}
+					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.solddate + '</b></p></div></div></a></li>');
 				}
 			} else if (where == 'bidding') {
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/' + object.image + '">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.startingDate + '</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.date + '</b></p></div></div></a></li>');
 				}
 			} else {
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="images/' + object.image + '">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.startingDate + '</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  href="#lrd-sellerproduct"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.itemdate + '</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");
