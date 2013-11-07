@@ -556,6 +556,7 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 			//$("#userProfileImage").attr("src","./images/"+currentUser.name+".jpg");
 			$('#addressProfileName').html(currentUser.address + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
 			$('#userProfilePhone').text(currentUser.phone);
+			
 			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -589,12 +590,14 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var currentUser = data.user;
+			$('#sdlt-thisshitbetterworknow').empty();
 			$('#userMyAccountName').text(currentUser[0].accusername);
 			$('#userMyAccountEmail').text(currentUser[0].accemail);
 			$("#userMyAccountImage").attr("src",""+currentUser[0].accphoto);
 			$('#addressMyAccountName').html(currentUser[0].street + "</br>" + currentUser[0].city + ", " + currentUser[0].state + " " + currentUser[0].zip);
 			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
-			$('#sdlt-myAccountRating').attr("data-rateit-value",""+currentUser[0].accrating);
+			$('#sdlt-thisshitbetterworknow').append('<li><div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div></li>');
+			$('.rateit').rateit();
 			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
