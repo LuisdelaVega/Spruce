@@ -35,7 +35,9 @@
 			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
-				<h1>Spruce</h1>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
 				<ul id="lrd-homeSidePanel" data-role="listview" data-theme="a"></ul>
@@ -78,16 +80,17 @@
 				<ul id="lrd-loginSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content" >
-				<h1 style="text-align: center">Spruce</h1>
-
+				<div align="center">
+					<img src="images/Untitled-1.png" height="200" width="200"/>
+				</div>
 				<label for="lrd-username">Username:</label>
 				<input type="text" id="lrd-username" name="username">
 				<label for="lrd-password">Password:</label>
 				<input type="password" id="lrd-password" name="password">
-
-				<a id="lrd-home" title="login" onclick="login()" type="button" data-theme="b">Log In</a>
-				<a id="lrd-signuplink" onclick="GoToView('lrd-signup')" data-role="button">Sign up</a>
-
+				<div data-role="fieldcontain" >
+					<a id="lrd-home" title="login" onclick="login()" type="button" data-theme="b">Log In</a>
+					<a id="lrd-signuplink" onclick="GoToView('lrd-signup')" data-role="button">Sign up</a>
+				</div>
 			</div>
 		</div>
 
