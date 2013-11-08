@@ -652,34 +652,66 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$('#lrd-sellerproductId').text("Id: " + currentItem.itemid);
 	$('#lrd-sellerproductDescription').text(currentItem.description);
 	$('#lrd-sellerproductSellerName').text(currentItem.accusername);
-	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-userprofile')");
+	$("#lrd-sellerproductSellerName").attr("onclick", "goToSellerProfile('" + currentItem.accusername + "')");
 	$("#lrd-sellerproductSellerName").attr("data-role", "link");
 	$("#popupimageseller").attr("src", ""+currentItem.photo);
 	$.mobile.loading("hide");
 });
 
-////////////////////////////////////USER PROFILE////////////////////////////////////////
-$(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
-	$.mobile.loading("show");
-	populatePanel("lrd-userprofile");
+////////////////////////////////////SELLER PROFILE////////////////////////////////////////
+function goToSellerProfile(username) {
+	console.log(username);
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/profile",
+		//The server takes care of where to route depending of page (selling,bidding,history)
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/sellerprofile/" + username,
+		// crossDomain : true,
+		// withCredentials : true,
+		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var currentUser = data.user;
-			$('#userProfileName').text(currentUser.userName);
-			$('#userProfileEmail').text(currentUser.email);
-			//$("#userProfileImage").attr("src","./images/"+currentUser.name+".jpg");
-			$('#addressProfileName').html(currentUser.address + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
-			$('#userProfilePhone').text(currentUser.phone);
-			
-			$.mobile.loading("hide");
+			sessionStorage.accountinfo = JSON.stringify(data.sellerprofile[0]);
+			GoToView('lrd-userprofile');
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+			alert("Data not found!seller profile");
 		}
 	});
+
+}
+
+////////////////////////////////////SELLER PROFILE////////////////////////////////////////
+$(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("lrd-userprofile");
+
+	var currentUser = JSON.parse(sessionStorage.accountinfo);
+	$('#rateitstarshit').empty();
+	$('#userProfileName').text(currentUser.accusername);
+	$('#userProfileEmail').text(currentUser.accemail);
+	$("#userProfileImage").attr("src", ""+currentUser.accphoto);
+	$('#addressProfileName').html(currentUser.street + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
+	$('#userProfilePhone').text(currentUser.accphonenum);
+	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="'+currentUser.accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+	$('.rateit').rateit();
+	$.mobile.loading("hide");
+});
+
+////////////////////////////////////SELLER PROFILE////////////////////////////////////////
+$(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("lrd-userprofile");
+
+	var currentUser = JSON.parse(sessionStorage.accountinfo);
+	$('#rateitstarshit').empty();
+	$('#userProfileName').text(currentUser.accusername);
+	$('#userProfileEmail').text(currentUser.accemail);
+	$("#userProfileImage").attr("src", ""+currentUser.accphoto);
+	$('#addressProfileName').html(currentUser.street + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
+	$('#userProfilePhone').text(currentUser.accphonenum);
+	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="'+currentUser.accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+	$('.rateit').rateit();
+	$.mobile.loading("hide");
 });
 
 /////////////////////////ACCOUNT INFO/////////////////////////
