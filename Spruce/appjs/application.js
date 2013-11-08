@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 	$.mobile.loading("show");
-	populatePanel("lrd-myaccountinfo");
+	populatePanel("lrd-checkout");
 	$('#sdlt-totalamount').empty();
 	var password = sessionStorage.acc;
 	console.log(password);
@@ -147,7 +147,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 	$("#rpa-searchtitle").text("Searching for: " + sessionStorage.editId);
 	populatePanel("rpa-searchpage");
 	$.ajax({
-		url : "http://localhost:3412/SpruceServer/searchpage/" + sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/searchpage/" + sessionStorage.editId,
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -248,16 +248,52 @@ $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 	populatePanel("lrd-login");
 });
 
-$(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
-	populatePanel("lrd-checkout");
-});
-
 $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 	populatePanel("lrd-invoice");
+	
+	var account = new Object();
+	account.acc = sessionStorage.acc;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "acc";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary",
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			var objectList = data.items;
+			var len = objectList.length;
+			var list = $("#lrd-invoiceList");
+			list.empty();
+			total = 0;
+			var object;
+			for (var i = 0; i < len; ++i) {
+				object = objectList[i];
+				list.append("<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>');
+				total += object.price*object.quantity;
+			}
+			list.listview("refresh");
+			$("#checkoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminreportspage", function(event, ui) {
 	populatePanel("lrd-adminreportspage");
+});
+
+$(document).on('pagebeforeshow', "#lrd-pastinvoice", function(event, ui) {
+	populatePanel("lrd-pastinvoice");
+	$("#lrd-pastinvoiceList").listview("refresh");
 });
 
 $(document).on('pagebeforeshow', "#rpa-usernameandpassword", function(event, ui) {
@@ -691,14 +727,13 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-purchaseHistory");
 	
-	var password = sessionStorage.acc;
-	console.log(password);
+	var acc = sessionStorage.acc;
 
 	var account = new Object();
-	account.password = password;
+	account.acc = acc;
 
 	var accountfilter = new Array();
-	accountfilter[0] = "password";
+	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
@@ -709,16 +744,17 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var currentUser = data.user;
-			$('#sdlt-thisshitbetterworknow').empty();
-			$('#userMyAccountName').text(currentUser[0].accusername);
-			$('#userMyAccountEmail').text(currentUser[0].accemail);
-			$("#userMyAccountImage").attr("src",""+currentUser[0].accphoto);
-			$('#addressMyAccountName').html(currentUser[0].street + "</br>" + currentUser[0].city + ", " + currentUser[0].state + " " + currentUser[0].zip);
-			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
-			$('#sdlt-thisshitbetterworknow').append('<li><div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div></li>');
-			$('.rateit').rateit();
-			$.mobile.loading("hide");
+			var invoicesList = data.invoices;
+			var len = invoicesList.length;
+			var list = $("#lrd-purchaseHistoryList");
+			console.log("HERE!!!!!!!!!!");
+			list.empty();
+			for (var i = 0; i < len; ++i) {
+				var invoice = invoicesList[i];
+				console.log(invoice);
+				list.append('<li data-icon="false"><a  onclick="getInvoice(' + invoice.invoiceid + ')">' + '<h1 style="margin: 0px">' + new Date(invoice.invoicedate).toUTCString() + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + invoice.invoicetotalprice + '</h2></li>');
+			}
+			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
@@ -756,6 +792,48 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 		}
 	});
 });
+
+function getInvoice(invoiceid){
+	$.mobile.loading("show");
+	
+	var acc = sessionStorage.acc;
+
+	var account = new Object();
+	account.acc = acc;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "acc";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.support.cors = true;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary/"+invoiceid,
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var objectList = data.items;
+			var len = objectList.length;
+			var list = $("#lrd-pastinvoiceList");
+			list.empty();
+			total = 0;
+			var object;
+			for (var i = 0; i < len; ++i) {
+				object = objectList[i];
+				list.append("<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>');
+				total += object.price*object.quantity;
+			}
+			// list.listview("refresh");
+			$("#pastcheckoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
+			GoToView('lrd-pastinvoice');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+}
 
 function checkOut(acc){
 	var account = new Object();
