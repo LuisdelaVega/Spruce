@@ -10,11 +10,11 @@
 		<title>Spruce</title>
 		<meta name="description" content="">
 		<meta name="author" content="Luis de la Vega, Rafael Pol, Sam De La Torre">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+		<link rel="stylesheet" href="css/graphite.css" />
 		<link rel="stylesheet" href="css/rateit.css" />
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery.mobile-1.3.1.js"></script>
@@ -32,8 +32,8 @@
 		<!------------ Home view ------------>
 
 		<div id="lrd-home" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -43,13 +43,13 @@
 			<div data-role="content">
 				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
 				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
-					<a onclick="GoToView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
+					<a onclick="CheckSessionView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
 					<br />
 					Account</a>
 					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
 					<br />
 					Categories</a>
-					<a onclick="GoToView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
+					<a onclick="CheckSessionView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
 					<br />
 					My Spruce</a>
 
@@ -61,7 +61,6 @@
 					</li>
 				</ul>
 				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px"><br />Sell Item </a>
-				<a onclick="GoToView('lrd-login')" data-role="button" data-theme="b" data-mini="true">Log In</a>
 			</div>
 		</div>
 
@@ -70,8 +69,8 @@
 		<!------------ Log in view ------------>
 
 		<div id="lrd-login" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -97,8 +96,8 @@
 		<!------------ Popular shit niggas ------->
 		
 		<div id="sdlt-popularNowView" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -116,8 +115,8 @@
 		<!------------ Items for Category view ------------>
 
 		<div id="lrd-itemsforcategory" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -192,8 +191,8 @@
 		<!------------ Cart view ------------>
 
 		<div id="lrd-cart" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -226,8 +225,8 @@
 
 		<div id="lrd-buyerproduct" data-role="page">
 
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -324,8 +323,8 @@
 
 		<div id="lrd-sellerproduct" data-role="page">
 
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -391,8 +390,8 @@
 		<!------------ Bid History view ------------>
 
 		<div id="lrd-bidhistory" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -410,8 +409,8 @@
 		<!------------ Checkout view ------------>
 
 		<div id="lrd-checkout" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -505,8 +504,8 @@
 		<!-- Category view -->
 
 		<div id="lrd-category" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -576,8 +575,8 @@
 		<!-- My Account Info view -->
 
 		<div id="lrd-myaccountinfo" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -629,8 +628,8 @@
 		<!-- Account Info Edit view -->
 
 		<div id="lrd-myaccountinfoedit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -664,8 +663,8 @@
 			</div>
 		</div>
 		<div id="rpa-usernameandpassword" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -692,8 +691,8 @@
 			</div>
 		</div>
 		<div id="rpa-accphoto" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -714,8 +713,8 @@
 			</div>
 		</div>
 		<div id="rpa-generalinfo" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -747,8 +746,8 @@
 			</div>
 		</div>
 		<div id="rpa-creditcard" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -782,8 +781,8 @@
 			</div>
 		</div>
 		<div id="rpa-creditcardedit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -820,8 +819,8 @@
 			</div>
 		</div>
 		<div id="rpa-shipping" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -868,8 +867,8 @@
 			</div>
 		</div>
 		<div id="rpa-shippingedit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -911,8 +910,8 @@
 		<!-- My Spruce view -->
 
 		<div id="lrd-myspruce" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -944,8 +943,8 @@
 		<!-- Sell Item view -->
 
 		<div id="lrd-sellitem" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -953,73 +952,66 @@
 				<ul id="lrd-sellitemSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content" >
-				<div data-role="fieldcontainer">
+				<h1 align="center">Sell Item</h1>
+				<div data-role="fieldcontain">
 					<label for="lrd-sellitemItemName">Item Name:*</label>
 					<input type="text" id="lrd-sellitemItemName" name="itemName">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-sellitemPrice">Buy it now price:*</label>
 					<input type="number" id="lrd-sellitemPrice" name="price">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-sellitemModel">Model:*</label>
 					<input type="text" id="lrd-sellitemModel" name="model">
 				</div>
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<label for="lrd-sellitemBrand">Brand:*</label>
 					<input type="text" id="lrd-sellitemBrand" name="brand">
 				</div>
-				<label for="lrd-sellitemCategory">Select Category*</label>
-				<select id="lrd-sellitemCategory" name="category" data-native-menu="false">
-					<optgroup label="Books">
-						<option value="kids">Children</option>
-						<option value="kids">Fiction</option>
-						<option value="kids">Technology</option>
-						<option value="kids">Business</option>
-					</optgroup>
-					<optgroup label="Electronics">
-						<option value="tv">TV</option>
-						<option value="tablets">Audio</option>
-						<option value="kids">Phones</option>
-						<option value="kids">Camera</option>
-						<option value="kids">Video</option>
-					</optgroup>
-					<optgroup label="Computers">
-						<option value="tv">Laptops</option>
-						<option value="tablets">Desktops</option>
-						<option value="kids">Tablets</option>
-						<option value="kids">Printers</option>
-					</optgroup>
-					<optgroup label="Clothing">
-						<option value="tv">Children</option>
-						<option value="tablets">Men</option>
-						<option value="kids">Women</option>
-					</optgroup>
-					<optgroup label="Sports">
-						<option value="tv">Bicycles</option>
-						<option value="tablets">Fishing</option>
-						<option value="kids">Baseball</option>
-						<option value="kids">Golf</option>
-						<option value="kids">Basketball</option>
-					</optgroup>
-				</select>
-				<div class="ui-grid-b">
-					<div class="ui-block-a">
-						<label for="width">Width:*</label>
-						<input type="number" id="lrd-sellitemWidth" name="width">
-					</div>
-					<div class="ui-block-b">
-						<label for="height">Height:*</label>
-						<input type="number" id="lrd-sellitemHeight" name="height">
-					</div>
-					<div class="ui-block-c">
-						<label for="depth">Depth:*</label>
-						<input type="number" id="lrd-sellitemDepth" name="depth">
-					</div>
+				<div data-role="fieldcontain">
+					<label for="lrd-sellitemCategory">Select Category*</label>
+					<select id="lrd-sellitemCategory" name="category" data-native-menu="false">
+						<optgroup label="Books">
+							<option value="kids">Children</option>
+							<option value="kids">Fiction</option>
+							<option value="kids">Technology</option>
+							<option value="kids">Business</option>
+						</optgroup>
+						<optgroup label="Electronics">
+							<option value="tv">TV</option>
+							<option value="tablets">Audio</option>
+							<option value="kids">Phones</option>
+							<option value="kids">Camera</option>
+							<option value="kids">Video</option>
+						</optgroup>
+						<optgroup label="Computers">
+							<option value="tv">Laptops</option>
+							<option value="tablets">Desktops</option>
+							<option value="kids">Tablets</option>
+							<option value="kids">Printers</option>
+						</optgroup>
+						<optgroup label="Clothing">
+							<option value="tv">Children</option>
+							<option value="tablets">Men</option>
+							<option value="kids">Women</option>
+						</optgroup>
+						<optgroup label="Sports">
+							<option value="tv">Bicycles</option>
+							<option value="tablets">Fishing</option>
+							<option value="kids">Baseball</option>
+							<option value="kids">Golf</option>
+							<option value="kids">Basketball</option>
+						</optgroup>
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="lrd-dimensions">Dimensions:*</label>
+					<input type="text" id="lrd-dimensions" name="lrd-dimensions">
 				</div>
 				<div data-role="fieldcontain">
 					<label for="lrd-sellitemDescription">Description:</label>
-					<textarea name="description" id="lrd-sellitemDescription"></textarea>
+					<textarea name="lrd-sellitemDescription" id="lrd-sellitemDescription"></textarea>
 				</div>
 				<br />
 				<div class="ui-grid-a">
@@ -1063,8 +1055,8 @@
 		<!-- Sign Up view -->
 
 		<div id="lrd-signup" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1121,8 +1113,8 @@
 		<!-- Sign Up Shipping view -->
 
 		<div id="lrd-signupshipping" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1414,8 +1406,8 @@
 		<!-- Sign Up Billing view-->
 
 		<div id="lrd-signupbilling" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1703,8 +1695,8 @@
 		<!-- Sign Up Credit view -->
 
 		<div id="lrd-signupcredit" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1746,8 +1738,8 @@
 		<!-- User Profile view -->
 
 		<div id="lrd-userprofile" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1785,8 +1777,8 @@
 		<!-- User Store view -->
 
 		<div id="lrd-userstore" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1803,8 +1795,8 @@
 		<!-- Admin Reports Page view -->
 
 		<div id="lrd-adminreportspage" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1906,8 +1898,8 @@
 		<!-- Admin Users Page view -->
 
 		<div id="lrd-adminuserspage" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -1956,8 +1948,8 @@
 		<!-- Admin Categories Page view -->
 
 		<div id="lrd-admincategoriespage" data-role="page">
-			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
-				<a href="#mypanel" data-icon="bars" data-iconpos="notext" ></a>
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
 				<h1>Spruce</h1>
 			</div>
@@ -2011,6 +2003,26 @@
 				<h3 style="text-align: center">Are you sure you want to delete this category?</h3>
 				<a data-role="button" data-theme="b" href="#lrd-admincategoriespage">Sounds Good</a>
 				<a data-role="button" href="#lrd-admincategoriespage">Cancel</a>
+			</div>
+		</div>
+
+		<!--Search Page--->
+
+		<div id="rpa-searchpage" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<h1>Spruce</h1>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-searchpageSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+
+			<div data-role="content">
+				<div data-role="fieldcontainer">
+					<h2 id="rpa-searchtitle" align="center"></h2>
+					<ul id="rpa-searchlist" data-role="listview" data-inset="true"></ul>
+				</div>
 			</div>
 		</div>
 	</body>

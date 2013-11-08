@@ -7,6 +7,16 @@ var total;
 var gtotal = 0;
 
 $(document).ready(function() {
+	$('#lrd-homeSearch-basic').bind("enterKey", function(e) {
+		sessionStorage.editId = $('#lrd-homeSearch-basic').val();
+		GoToView('rpa-searchpage');
+		$('#lrd-homeSearch-basic').val("");
+	});
+	$('#lrd-homeSearch-basic').keyup(function(e) {
+		if (e.keyCode == 13) {
+			$(this).trigger("enterKey");
+		}
+	});
 	var change = true;
 	$("#lrd-signupshippingAddressCheck").click(function() {
 		if (change) {
@@ -123,6 +133,35 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + image.itemdate + '</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
+	$.mobile.loading("show");
+	$("#rpa-searchtitle").text("Searching for: " + sessionStorage.editId);
+	populatePanel("rpa-searchpage");
+	$.ajax({
+		url : "http://localhost:3412/SpruceServer/searchpage/" + sessionStorage.editId,
+		method : 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var objectList = data.items;
+			var len = objectList.length;
+			var list = $("#rpa-searchlist");
+			list.empty();
+			var object;
+			for (var i = 0; i < len; ++i) {
+				object = objectList[i];
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.itemdate + '</b></p></div></div></a></li>');
+
+			}
+			list.listview("refresh");
 			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -398,26 +437,19 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-
-			var objectList = data.subcategories;
+			var objectList = data.categories;
 			var len = objectList.length;
 			var list = $("#lrd-categoryList");
-			var listSub = "";
 			list.empty();
-			var object;
-			var ojectSub;
+			var object;	
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-
-				if (!object.subcategory) {
-					objectSub = object;
-					list.append('<li data-role="list-divider" data-theme="b">' + '<li>' + '<div>' + "<h2 style='text-align: center''>" + object.title + ':</h2>' + '</div></li>');
-				} else {
-					list.append("<li data-role='button'>" + "<a onclick=GetItemsForCategory('" + object.catid + "')><h4>" + object.title + '</h4></a>' + '</li>');
+				list.append('<li data-role="list-divider" data-theme="b">' + '<li>' + '<div>' + "<h2 style='text-align: center''>" + object.catname + ':</h2>' + '</div></li>');
+				for(var j=0;j<object.subcat.length;j++){
+					var subobject = object.subcat[j];
+					list.append("<li data-role='button'>" + "<a onclick=GetItemsForCategory('" + subobject.catid + "')><h4>" + subobject.catname + '</h4></a>' + '</li>');
 				}
-
 			}
-
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -922,7 +954,7 @@ function populatePanel(view) {
 			} else if (sessionStorage.user == 'admin') {
 				list.append("<li><a onclick=GoToView('lrd-adminreportspage') >Admin Tools</a></li>");
 			}
-			if (sessionStorage.user == 'guest') {
+			if (sessionStorage.user == 'guest' || typeof sessionStorage.user == 'undefined') {
 				list.append("<li><a onclick=GoToView('lrd-login')>Sign In</a></li>");
 			} else {
 				list.append("<li><a onclick=signOut()>Sign Out</a></li>");
@@ -1072,4 +1104,13 @@ function signOut() {
 	sessionStorage.acc = "";
 	sessionStorage.user="guest";
 	GoToView('lrd-login');
+}
+
+function CheckSessionView(view){
+	if(sessionStorage.user=="user"){
+		GoToView(view);
+	}
+	else{
+		GoToView('lrd-login');
+	}
 }
