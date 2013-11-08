@@ -4,6 +4,7 @@ var offset = 0;
 var order = "none";
 var by = "none";
 var total;
+var gtotal = 0;
 
 $(document).ready(function() {
 	var change = true;
@@ -27,7 +28,48 @@ $(document).ready(function() {
 			accept = true;
 		}
 	});
+});
 
+$(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("lrd-myaccountinfo");
+	$('#sdlt-totalamount').empty();
+	var password = sessionStorage.acc;
+	console.log(password);
+
+	var account = new Object();
+	account.password = password;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.support.cors = true;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/checkout",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var currentUser = data.info;
+			$('#lrd-checkoutAccountnumber').empty();
+			$('#lrd-checkoutShippingAddress').empty();
+			for(var i = 0; i < currentUser.length; i++){
+				var j = i + 1;
+				$('#lrd-checkoutShippingAddress').append('<option value = "'+j+'"> ' + currentUser[i].city + '</option>');
+				$('#lrd-checkoutAccountnumber').append('<option value = "'+j+'">' + currentUser[i].number + '</option>');
+			}
+			$('#lrd-checkoutAccountnumber').selectmenu('refresh', true);
+			$('#lrd-checkoutShippingAddress').selectmenu('refresh', true);
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+	$('#sdlt-totalamount').append("Total: "+accounting.formatMoney(gtotal));
 });
 
 //Before mySpruceView call ajax for bidding
@@ -487,6 +529,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
 				total += object.price*object.quantity;
 			}
+			gtotal = total;
 			list.listview("refresh");
 			$("#checkoutButton .ui-btn-text").text("Checkout (" + accounting.formatMoney(total) + ")");
 		},
