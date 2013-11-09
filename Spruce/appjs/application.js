@@ -579,7 +579,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 	list.empty();
 	populatePanel("lrd-adminuserspage");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/myadmintools/users",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/users",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.users;
