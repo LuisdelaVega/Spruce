@@ -666,7 +666,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$('#lrd-buyerproductId').text("Id: " + currentItem.itemid);
 	$('#lrd-buyerproductDescription').text(currentItem.description);
 	$('#lrd-buyerproductSellerName').text(currentItem.accusername);
-	$("#lrd-buyerproductSellerName").attr("onlcick", "GoToView('lrd-userprofile')");
+	$("#lrd-buyerproductSellerName").attr("onclick", "goToSellerProfile('" + currentItem.accusername + "')");
 	$("#lrd-buyerproductSellerName").attr("data-role", "link");
 	$("#popupimage").attr("src", ""+currentItem.photo);
 	$.mobile.loading("hide");
@@ -729,6 +729,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-myaccountinfo')");
 	$("#lrd-buyersButton").attr("onclick", "getBuyersList('"+currentItem.itemid+"')");
 	$("#lrd-sellerproductSellerName").attr("data-role", "link");
+	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-myaccountinfo')");
 	$("#popupimageseller").attr("src", ""+currentItem.photo);
 	$.mobile.loading("hide");
 });
