@@ -43,7 +43,7 @@
 				<ul id="lrd-homeSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content">
-				<input type="search" name="search" id="lrd-homeSearch-basic" value="" />
+				<input type="search" name="search" id="lrd-homeSearch-basic" placeholder="Search" />
 				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
 					<a onclick="CheckSessionView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
 					<br />
@@ -641,7 +641,7 @@
 				<div align="center">
 					<img id="userMyAccountImage" style="max-width: 300px;max-height: 300px;"/>
 				</div>
-				<div data-role="fieldcontain" align="center">
+				<div align="center">
 					<div id="sdlt-thisshitbetterworknow" ></div>
 				</div>
 				<ul data-role="listview" data-inset="true" >
@@ -1048,42 +1048,6 @@
 					<input type="text" id="lrd-sellitemBrand" name="brand">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-sellitemCategory">Select Category*</label>
-					<select id="lrd-sellitemCategory" name="category" data-native-menu="false">
-						<optgroup label="Books">
-							<option value="kids">Children</option>
-							<option value="kids">Fiction</option>
-							<option value="kids">Technology</option>
-							<option value="kids">Business</option>
-						</optgroup>
-						<optgroup label="Electronics">
-							<option value="tv">TV</option>
-							<option value="tablets">Audio</option>
-							<option value="kids">Phones</option>
-							<option value="kids">Camera</option>
-							<option value="kids">Video</option>
-						</optgroup>
-						<optgroup label="Computers">
-							<option value="tv">Laptops</option>
-							<option value="tablets">Desktops</option>
-							<option value="kids">Tablets</option>
-							<option value="kids">Printers</option>
-						</optgroup>
-						<optgroup label="Clothing">
-							<option value="tv">Children</option>
-							<option value="tablets">Men</option>
-							<option value="kids">Women</option>
-						</optgroup>
-						<optgroup label="Sports">
-							<option value="tv">Bicycles</option>
-							<option value="tablets">Fishing</option>
-							<option value="kids">Baseball</option>
-							<option value="kids">Golf</option>
-							<option value="kids">Basketball</option>
-						</optgroup>
-					</select>
-				</div>
-				<div data-role="fieldcontain">
 					<label for="lrd-dimensions">Dimensions:*</label>
 					<input type="text" id="lrd-dimensions" name="lrd-dimensions">
 				</div>
@@ -1111,7 +1075,8 @@
 						<input id="lrd-sellitemRestock" type="checkbox" />
 					</div>
 				</div>
-
+				<a id="rpa-selectcategorybutton" data-role="button" onclick="sellCat()" >Select Category</a>
+					<h3 id="rpa-selectedcategory"></h3>
 				<div class="ui-grid-a" >
 					<div class="ui-block-a">
 						<button type="submit" data-theme="c">
@@ -1129,6 +1094,19 @@
 		</div>
 
 		<!-- End of Sell Item view -->
+		
+		<!--Select Category Sell item popup-->
+		
+		<div id="rpa-sellcategorypopup" data-role="page">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>Categories</h1>
+			</div>
+			<div data-role="content">
+				<ul id="rpa-categorylistpopup" data-role="listview" data-inset="true">
+					
+				</ul>
+			</div>
+		</div>
 
 		<!-- Sign Up view -->
 
@@ -1841,9 +1819,6 @@
 				<div data-role="fieldcontain" align="center">
 					<div id="rateitstarshit"></div>
 				</div>
-				<dir data-role="fieldcontain" align="center">
-					<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-				</dir>
 				<ul data-role="listview" data-inset="true" >
 					<li >
 						<div align="center">
