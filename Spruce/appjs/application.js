@@ -55,7 +55,7 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/checkout",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/checkout",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -92,7 +92,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("sdlt-popularNowView");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/Spruce/PopularNow/",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/Spruce/PopularNow/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -118,7 +118,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-home");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/home/",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/home/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -147,7 +147,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 	$("#rpa-searchtitle").text("Searching for: " + sessionStorage.editId);
 	populatePanel("rpa-searchpage");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/searchpage/" + sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/searchpage/" + sessionStorage.editId,
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -174,7 +174,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 	populatePanel("lrd-itemsforcategory");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getItemsForCategory/" + sessionStorage.category+"/"+by+"-"+order+"/"+offset,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getItemsForCategory/" + sessionStorage.category+"/"+by+"-"+order+"/"+offset,
 		method : 'get',
 		crossDomain : true,
 		withCredentials : true,
@@ -203,7 +203,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getCategoriesForSidePanel",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -213,7 +213,7 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 				if (objectList[i].catid == sessionStorage.category) {
 					test = false;
 					$.ajax({
-						url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category + "/parent",
+						url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category + "/parent",
 						method : 'get',
 						contentType : "application/json",
 						success : function(data, textStatus, jqXHR) {
@@ -237,7 +237,7 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 			}
 			if (test) {
 				$.ajax({
-					url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category + "/child",
+					url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + sessionStorage.category + "/child",
 					method : 'get',
 					contentType : "application/json",
 					success : function(data, textStatus, jqXHR) {
@@ -298,7 +298,7 @@ $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/purchaseSumary",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -354,7 +354,7 @@ $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/usergeneralinfo",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usergeneralinfo",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -385,7 +385,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/usercreditcardinfo",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usercreditcardinfo",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -419,7 +419,7 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/usershippinginfo",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usershippinginfo",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -453,7 +453,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/usereditcreditcard/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditcreditcard/"+sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -484,7 +484,7 @@ $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/usereditshipping/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditshipping/"+sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -509,7 +509,7 @@ $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 	populatePanel("lrd-category");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getSubCategories",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
@@ -537,7 +537,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui) {
 	populatePanel("lrd-admincategoriespage");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/myadmintools/category",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/category",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.category;
@@ -562,7 +562,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 	populatePanel("lrd-adminuserspage");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/myadmintools/users",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/users",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.users;
@@ -586,7 +586,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 	populatePanel("lrd-bidhistory");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/seller-product-bids/"+currentItem.itemid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/seller-product-bids/"+currentItem.itemid,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.bids;
@@ -618,7 +618,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 
 	populatePanel("lrd-cart");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/mycart",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/mycart",
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -702,7 +702,7 @@ function goToSellerProfile(username) {
 	console.log(username);
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://localhost:5000/SpruceServer/sellerprofile/" + username,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/sellerprofile/" + username,
 		// crossDomain : true,
 		// withCredentials : true,
 		method : 'get',
@@ -769,7 +769,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/userProfile",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/userProfile",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -808,7 +808,7 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/purchaseHistory",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseHistory",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -842,7 +842,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 	populatePanel("lrd-userstore");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/user/store",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/store",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
@@ -877,7 +877,7 @@ function getInvoice(invoiceid){
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/purchaseSumary/"+invoiceid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary/"+invoiceid,
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -918,7 +918,7 @@ function checkOut(acc){
 	
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://localhost:5000/SpruceServer/generateInvoice",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/generateInvoice",
 		crossDomain : true,
 		withCredentials : true,
 		method : 'put',
@@ -985,7 +985,7 @@ function signup(){
 		var jsonText = JSON.stringify(account, accountfilter, "\t");
 		
 		$.ajax({
-			url : "http://localhost:5000/SpruceServer/signup",
+			url : "http://sprucemarket.herokuapp.com/SpruceServer/signup",
 			method : 'put',
 			crossDomain : true,
 			withCredentials : true,
@@ -1021,7 +1021,7 @@ function login() {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/authenticate1",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate1",
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -1041,7 +1041,7 @@ function login() {
 				var jsonText1 = JSON.stringify(account, accountfilter, "\t");
 
 				$.ajax({
-					url : "http://localhost:5000/SpruceServer/authenticate2",
+					url : "http://sprucemarket.herokuapp.com/SpruceServer/authenticate2",
 					method : 'put',
 					crossDomain : true,
 					withCredentials : true,
@@ -1078,7 +1078,7 @@ function login() {
 
 function populatePanel(view) {
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getCategoriesForSidePanel",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -1129,7 +1129,7 @@ function ajaxMySpruce(where) {
 	
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
-		url : "http://localhost:5000/SpruceServer/mySpruce/" + where,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/mySpruce/" + where,
 		crossDomain : true,
 		withCredentials : true,
 		method : 'put',
@@ -1201,7 +1201,7 @@ function GetItem(id) {
 	itemId = id;
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getProduct/" + itemId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getProduct/" + itemId,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			currentItem = data.product[0];
@@ -1271,7 +1271,7 @@ function sellCat() {
 		changeHash:false
 	});
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getSubCategories",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
@@ -1301,7 +1301,7 @@ function sellSubCat(catid, catname) {
 	console.log(catname);
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
