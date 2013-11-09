@@ -361,24 +361,23 @@
 				</div>
 				<ul data-role="listview" data-theme="a" data-inset="true">
 					<li>
-						<h2 style="text-align: center;font-size: 24px" id="lrd-sellerproductBuyNowPrice" >Buy it Now : $2000.00
-						<br />
-						Bid: $23.00</h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-sellerproductBuyNowPrice" ></h2>
 					</li>
 					<li>
-						<h3 style="text-align: center" id="lrd-sellerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
-						<h4 id="lrd-sellerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
-						<h4 id="lrd-sellerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
-						<h4 id="lrd-sellerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">Id</h4>
+						<h3 style="text-align: center" id="lrd-sellerproductTimeRemaining"></h3>
+						<h4 id="lrd-sellerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center"></h4>
+						<h4 id="lrd-sellerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center"></h4>
+						<h4 id="lrd-sellerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center"></h4>
 						<p id="lrd-sellerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
 						<div align="center">
-							<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
+							<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center"></a>
 						</div>
 						<div align="center" style="padding-top: 5px">
-							<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+							<ul id="lrd-sellerRating" style="list-style: none;" align="center"></ul>
 						</div>
 					</li>
 				</ul>
+				<a id="lrd-buyersButton" data-role="button" unselectable="on" onclick="getBuyersList()" data-theme="b">List of Buyers</a>
 			</div>
 			<div data-role="popup" id="placeholderseller" data-theme="d"  data-overlay-theme="a">
 				<a href="#" data-rel="back" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -675,14 +674,36 @@
 				<ul id="lrd-purchaseHistorySidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
-				<h1></h1>
+				<h1>Purchase History:</h1>
 				<ul id="lrd-purchaseHistoryList" data-role="listview" data-inset="true" >
 				</ul>
 			</div>
 		</div>
 		
 		<!--  End of Purchase History view -->
-
+		
+		<!-- Purchase History view -->
+		
+		<div id="lrd-buyers" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-buyersSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1>List of Buyers:</h1>
+				<ul id="lrd-buyersList" data-role="listview" data-inset="true" >
+				</ul>
+			</div>
+		</div>
+		
+		<!--  End of Purchase History view -->
+		
 		<!-- Account Info Edit view -->
 
 		<div id="lrd-myaccountinfoedit" data-role="page">

@@ -345,6 +345,11 @@ $(document).on('pagebeforeshow', "#rpa-accphoto", function(event, ui) {
 	populatePanel("rpa-accphoto");
 });
 
+$(document).on('pagebeforeshow', "#lrd-buyers", function(event, ui) {
+	populatePanel("lrd-buyers");
+	$("#lrd-buyersList").listview('refresh');
+});
+
 $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
 	var password = sessionStorage.acc;
 	console.log(password);
@@ -682,6 +687,36 @@ $(document).on('pagebeforeshow', "#rpa-bidDialog", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$.mobile.loading("show");
 	populatePanel("lrd-sellerproduct");
+	var password = sessionStorage.acc;
+	console.log(password);
+
+	var account = new Object();
+	account.password = password;
+
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.support.cors = true;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/userRating",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var list = $('#lrd-sellerRating');
+			list.empty();
+			var currentUser = data.user;
+			list.append('<li><div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div></li>');
+			$('.rateit').rateit();
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found! userRating");
+		}
+	});
 	$('#lrd-sellerproductName').text(currentItem.itemname);
 	$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 	$("#lrd-sellerproductImage").attr("src", "" + currentItem.photo);
@@ -692,6 +727,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$('#lrd-sellerproductDescription').text(currentItem.description);
 	$('#lrd-sellerproductSellerName').text(currentItem.accusername);
 	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-myaccountinfo')");
+	$("#lrd-buyersButton").attr("onclick", "getBuyersList('"+currentItem.itemid+"')");
 	$("#lrd-sellerproductSellerName").attr("data-role", "link");
 	$("#popupimageseller").attr("src", ""+currentItem.photo);
 	$.mobile.loading("hide");
@@ -898,6 +934,36 @@ function getInvoice(invoiceid){
 			// list.listview("refresh");
 			$("#pastcheckoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
 			GoToView('lrd-pastinvoice');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+}
+
+function getBuyersList(itemid){
+	$.mobile.loading("show");
+	
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getBuyers/"+itemid,
+		method : 'get',
+
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var buyersList = data.buyers;
+			var len = buyersList.length;
+			var list = $("#lrd-buyersList");
+			list.empty();
+			total = 0;
+			var object;
+			for (var i = 0; i < len; ++i) {
+				buyer = buyersList[i];
+				list.append("<li data-icon='false'><a onclick=goToSellerProfile(" + buyer.accusername + ")><img src='" + buyer.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">User: ' + buyer.accusername + '</h1><p style="font-size: 13px;margin-top:5px"><b>Name: ' + buyer.accfname +' '+ buyer.acclname + '</b></p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(buyer.price) + '</h1><p>Amount:' + buyer.itemquantity + '</p></div></div></a></li>');
+				//"<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>'
+			}
+
+			GoToView('lrd-buyers');
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
