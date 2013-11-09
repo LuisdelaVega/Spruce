@@ -137,7 +137,7 @@
 					<ul id="lrd-itemsList" data-role="listview" data-inset="true" data-filter="true"></ul>
 				</div>
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
@@ -158,20 +158,7 @@
 				<h1>Subcategory</h1>
 			</div>
 			<div data-role="content">
-				<ul id="rpa-subCategoryListPopup" data-role="listview" data-inset="true">
-					<li>
-						<a>Fiction</a>
-					</li>
-					<li>
-						<a>Kids</a>
-					</li>
-					<li>
-						<a>Horror</a>
-					</li>
-					<li>
-						<a>Drama</a>
-					</li>
-				</ul>
+				<ul id="rpa-subCategoryListPopup" data-role="listview" data-inset="true"></ul>
 			</div>
 		</div>
 		
@@ -247,7 +234,7 @@
 				<ul id="lrd-buyerproductSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content" style="padding: 5px">
-				<h1 id="lrd-buyerproductName" style="margin: 0px" align="center">Xbox One</h1>
+				<h1 id="lrd-buyerproductName" style="margin: 0px" align="center"></h1>
 				<div align="center">
 					<a href="#placeholder" data-rel="popup" data-position-to="window" data-transition="fade"> <img id="lrd-buyerproductImage" width="200" height="200" src="css/images/thumbnail.png" /> </a>
 				</div>
@@ -263,18 +250,18 @@
 
 				<ul data-role="listview" data-theme="a" data-inset="true">
 					<li>
-						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBuyNowPrice" >Buy it Now : $2000.00</h2>
-						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBidPrice">Bid:200</h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBuyNowPrice" ></h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-buyerproductBidPrice"></h2>
 					</li>
 					<li>
-						<h3 style="text-align: center" id="lrd-buyerproductTimeRemaining">Time Remaining: 1d 3h 50m</h3>
-						<h3 style="text-align: center" id="lrd-buyerproductQuantity">Quantity: 9999</h3>
-						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center">Modelo, Marca</h4>
-						<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center">Size</h4>
-						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center">id</h4>
+						<h3 style="text-align: center" id="lrd-buyerproductTimeRemaining"></h3>
+						<h3 style="text-align: center" id="lrd-buyerproductQuantity"></h3>
+						<h4 id="lrd-buyerproductModelAndBrand" style="margin-bottom: 0px;margin-top: 12px" align="center"></h4>
+						<h4 id="lrd-buyerproductDimensions" style="margin-bottom: 0px;margin-top: 0px" align="center"></h4>
+						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center"></h4>
 						<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
 						<div align="center">
-							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center">Wigberto Maldonado</a>
+							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center"></a>
 						</div>
 						<div align="center" style="padding-top: 5px">
 							<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
@@ -347,7 +334,7 @@
 				<ul id="lrd-sellerproductSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content" style="padding: 5px">
-				<h1 id="lrd-sellerproductName" style="margin: 0px" align="center">Xbox One</h1>
+				<h1 id="lrd-sellerproductName" style="margin: 0px" align="center"></h1>
 				<div align="center">
 					<a href="#placeholderseller" data-rel="popup" data-position-to="window" data-transition="fade"> <img id="lrd-sellerproductImage" width="200" height="200" src="css/images/thumbnail.png" /> </a>
 				</div>
@@ -565,58 +552,7 @@
 			</div>
 			<div data-role="content" >
 				<ul id="lrd-categoryList" data-role="listview" data-inset="true" style="margin-top: 0px">
-					<li>
-						<div data-role="collapsible" data-collapsed="true">
-							<h2>Books:</h2>
-							<ul id="lrd-categoryBookSubList" data-role="listview" data-inset="true">
-								<li>
-									<a>Children</a>
-								</li>
-								<li>
-									<a>Fiction</a>
-								</li>
-								<li>
-									<a>Technology</a>
-								</li>
-								<li>
-									<a>Business</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<div data-role="collapsible" data-collapsed="true">
-							<h2>Read the terms and conditions:</h2>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							</p>
-						</div>
-					</li>
-					<li>
-						<div data-role="collapsible" data-collapsed="true">
-							<h2>Read the terms and conditions:</h2>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							</p>
-						</div>
-					</li>
-					<li>
-						<div data-role="collapsible" data-collapsed="true">
-							<h2>Read the terms and conditions:</h2>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							</p>
-						</div>
-					</li>
+					
 				</ul>
 			</div>
 		</div>
@@ -846,25 +782,6 @@
 			<div data-role = "content">
 				<h1 align="center">Credit Cards</h1>
 				<ul id="creditcardlist" data-role="listview" data-inset="true">
-					<li  data-icon="delete">
-						<a onclick="GoToView('rpa-creditcardedit')"> <h1>Number: 982734921763</h1>
-						<p>
-							Holder Name: Rafael Pol
-						</p>
-						<p>
-							Type: American Express
-						</p>
-						<p>
-							Expiration Date: 04/17
-						</p>
-						<p>
-							CSC: 067
-						</p>
-						<p>
-							Bills To: Ciudad Jardin 2
-						</p> </a>
-						<a></a>
-					</li>
 				</ul>
 				<a data-role="button" data-theme="b">Add</a>
 			</div>
@@ -922,40 +839,7 @@
 			</div>
 			<div data-role = "content">
 				<h1 align="center">Address Book</h1>
-				<ul id="shippingList" data-role="listview" data-inset="true">
-					<li data-icon="delete">
-						<a onclick="GoToView('rpa-shippingedit')"> <h1>Street: Buganvilia 123</h1>
-						<p>
-							City: Bayamon
-						</p>
-						<p>
-							State: Puerto Rico
-						</p>
-						<p>
-							Country: United States
-						</p>
-						<p>
-							Zip: 00953
-						</p> </a>
-						<a></a>
-					</li>
-					<li data-icon="delete">
-						<a > <h1>Street: Buganvilia 123</h1>
-						<p>
-							City: Bayamon
-						</p>
-						<p>
-							State: Puerto Rico
-						</p>
-						<p>
-							Country: United States
-						</p>
-						<p>
-							Zip: 00953
-						</p> </a>
-						<a></a>
-					</li>
-				</ul>
+				<ul id="shippingList" data-role="listview" data-inset="true"></ul>
 				<a data-role="button" data-theme="b">Add</a>
 			</div>
 		</div>
@@ -1018,7 +902,7 @@
 			<div data-role="content">
 				<ul id="lrd-myspruceMySpruceList" data-role="listview" data-inset="true"></ul>
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
@@ -1965,7 +1849,7 @@
 				</div>
 
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
@@ -2004,7 +1888,7 @@
 					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
 				</div>
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
@@ -2055,7 +1939,7 @@
 					<ul id="lrd-admincategoriespageCategoriesList" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
 				</div>
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>

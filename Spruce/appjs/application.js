@@ -287,6 +287,11 @@ $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 	populatePanel("lrd-login");
 });
 
+$(document).on('pagebeforeshow', "#lrd-sellitem", function(event, ui) {
+	populatePanel("lrd-sellitem");
+});
+
+
 $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 	populatePanel("lrd-invoice");
 	
