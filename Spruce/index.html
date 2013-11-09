@@ -51,7 +51,7 @@
 					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
 					<br />
 					Categories</a>
-					<a onclick="CheckSessionView('lrd-myspruce')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
+					<a onclick="CheckSessionView('lrd-mysprucebidding')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
 					<br />
 					My Spruce</a>
 
@@ -263,8 +263,8 @@
 						<div align="center">
 							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px" align="center"></a>
 						</div>
-						<div align="center" style="padding-top: 5px">
-							<div style="margin-top: 0px" class="rateit" data-rateit-value="2.5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+						<div align="center">
+							<div id="rpa-rateitbuyer"></div>
 						</div>
 					</li>
 
@@ -311,7 +311,7 @@
 					<h1 id="currentBidDialog"></h1>
 					<label for="bidAmount">Bid Amount:</label>
 					<input type="number" id="bidAmount" name="bidAmount">
-					<a href="#lrd-myspruce" data-role="button" data-theme="b">Ok</a>
+					<a href="#lrd-mysprucebidding" data-role="button" data-theme="b">Ok</a>
 					<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
 				</div>
 			</div>
@@ -359,8 +359,8 @@
 						<div align="center">
 							<a onclick="GoToView('lrd-userprofile')" id="lrd-sellerproductSellerName" style="margin-top: 8px" align="center"></a>
 						</div>
-						<div align="center" style="padding-top: 5px">
-							<ul id="lrd-sellerRating" style="list-style: none;" align="center"></ul>
+						<div align="center">
+							<div id="lrd-sellerRating" ></div>
 						</div>
 					</li>
 				</ul>
@@ -888,7 +888,7 @@
 
 		<!-- My Spruce view -->
 
-		<div id="lrd-myspruce" data-role="page">
+		<div id="lrd-mysprucebidding" data-role="page">
 			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
 				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
@@ -897,22 +897,84 @@
 				</div>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
-				<ul id="lrd-myspruceSidePanel" data-role="listview" data-theme="a"></ul>
+				<ul id="lrd-mysprucebiddingSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content">
-				<ul id="lrd-myspruceMySpruceList" data-role="listview" data-inset="true"></ul>
+				<ul id="lrd-myspruceMySpruceListBidding" data-role="listview" data-inset="true"></ul>
 			</div>
-			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
+			<div data-role="footer" data-id="foo2" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a  class="ui-btn-active ui-state-persist" onclick="ajaxMySpruce('bidding')">Bidding</a>
+							<a  class="ui-btn-active ui-state-persist">Bidding</a>
 						</li>
 						<li>
-							<a onclick="ajaxMySpruce('selling')">Selling</a>
+							<a href="#rpa-myspruceselling" data-transition="slide">Selling</a>
 						</li>
 						<li>
-							<a onclick="ajaxMySpruce('sold')">Sold</a>
+							<a href="#rpa-mysprucesold" data-transition="slide">Sold</a>
+						</li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+		
+		<div id="rpa-myspruceselling" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-mysprucesellingSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<ul id="lrd-myspruceMySpruceListSelling" data-role="listview" data-inset="true"></ul>
+			</div>
+			<div data-role="footer" data-id="foo2" data-position="fixed" data-tap-toggle="false">
+				<div data-role="navbar">
+					<ul>
+						<li>
+							<a href="#lrd-mysprucebidding" data-transition="slide" data-direction="reverse">Bidding</a>
+						</li>
+						<li>
+							<a class="ui-btn-active ui-state-persist">Selling</a>
+						</li>
+						<li>
+							<a href="#rpa-mysprucesold" data-transition="slide">Sold</a>
+						</li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+		
+		<div id="rpa-mysprucesold" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-mysprucesoldSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<ul id="lrd-myspruceMySpruceListSold" data-role="listview" data-inset="true"></ul>
+			</div>
+			<div data-role="footer" data-id="foo2" data-position="fixed" data-tap-toggle="false">
+				<div data-role="navbar">
+					<ul>
+						<li>
+							<a href="#lrd-mysprucebidding" data-transition="slide" data-direction="reverse">Bidding</a>
+						</li>
+						<li>
+							<a href="#rpa-myspruceselling" data-transition="slide" data-direction="reverse">Selling</a>
+						</li>
+						<li>
+							<a class="ui-btn-active ui-state-persist">Sold</a>
 						</li>
 					</ul>
 				</div><!-- /navbar -->

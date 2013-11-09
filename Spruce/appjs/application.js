@@ -1,5 +1,3 @@
-var itemId;
-var currentItem;
 var offset = 0;
 var order = "none";
 var by = "none";
@@ -31,7 +29,7 @@ $(document).ready(function() {
 	var accept = true;
 	$("#lrd-checkoutAccept").click(function() {
 		if (accept) {
-			$("#lrd-checkoutPayUp").attr("onclick", "checkOut('"+sessionStorage.acc+"')");
+			$("#lrd-checkoutPayUp").attr("onclick", "checkOut('" + sessionStorage.acc + "')");
 			accept = false;
 		} else {
 			$("#lrd-checkoutPayUp").attr("onclick", "GoToView('lrd-checkout')");
@@ -65,10 +63,10 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 			var currentUser = data.info;
 			$('#lrd-checkoutAccountnumber').empty();
 			$('#lrd-checkoutShippingAddress').empty();
-			for(var i = 0; i < currentUser.length; i++){
+			for (var i = 0; i < currentUser.length; i++) {
 				var j = i + 1;
-				$('#lrd-checkoutShippingAddress').append('<option value = "'+j+'"> ' + currentUser[i].city + '</option>');
-				$('#lrd-checkoutAccountnumber').append('<option value = "'+j+'">' + currentUser[i].number + '</option>');
+				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> '+currentUser[i].street+', ' + currentUser[i].city + '</option>');
+				$('#lrd-checkoutAccountnumber').append('<option value = "' + j + '">' + currentUser[i].number + '</option>');
 			}
 			$('#lrd-checkoutAccountnumber').selectmenu('refresh', true);
 			$('#lrd-checkoutShippingAddress').selectmenu('refresh', true);
@@ -79,25 +77,40 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 			alert("Data not found!");
 		}
 	});
-	$('#sdlt-totalamount').append("Total: "+accounting.formatMoney(gtotal));
+	$('#sdlt-totalamount').append("Total: " + accounting.formatMoney(gtotal));
 });
 
 //Before mySpruceView call ajax for bidding
-$(document).on('pagebeforeshow', "#lrd-myspruce", function(event, ui) {
-	populatePanel("lrd-myspruce");
+$(document).on('pagebeforeshow', "#lrd-mysprucebidding", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("lrd-mysprucebidding");
 	ajaxMySpruce("bidding");
+});
+
+//Before mySpruceView call ajax for selling
+$(document).on('pagebeforeshow', "#rpa-myspruceselling", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("rpa-myspruceselling");
+	ajaxMySpruce("selling");
+});
+
+//Before mySpruceView call ajax for sold
+$(document).on('pagebeforeshow', "#rpa-mysprucesold", function(event, ui) {
+	$.mobile.loading("show");
+	populatePanel("rpa-mysprucesold");
+	ajaxMySpruce("sold");
 });
 
 $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 	$.mobile.loading("show");
+	var list = $("#popularnowlist");
+	list.empty();
 	populatePanel("sdlt-popularNowView");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/Spruce/PopularNow/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var list = $("#popularnowlist");
-			list.empty();
 			var images = data.items;
 			var len = images.length;
 			for (var i = 0; i < len; ++i) {
@@ -116,14 +129,14 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	$.mobile.loading("show");
+	var list = $("#lrd-homePopularContent");
+	list.empty();
 	populatePanel("lrd-home");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/home/",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var list = $("#lrd-homePopularContent");
-			list.empty();
 			list.append("<li><a onclick=GoToView('sdlt-popularNowView')><h3 align='center'>Popular Now</h3></a></li>");
 			var images = data.items;
 			var len = images.length;
@@ -145,6 +158,8 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 	$.mobile.loading("show");
 	$("#rpa-searchtitle").text("Searching for: " + sessionStorage.editId);
+	var list = $("#rpa-searchlist");
+	list.empty();
 	populatePanel("rpa-searchpage");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/searchpage/" + sessionStorage.editId,
@@ -153,8 +168,6 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#rpa-searchlist");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -173,18 +186,17 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 	populatePanel("lrd-itemsforcategory");
+	var list = $("#lrd-itemsList");
+	list.empty();
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/getItemsForCategory/" + sessionStorage.category+"/"+by+"-"+order+"/"+offset,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getItemsForCategory/" + sessionStorage.category + "/" + by + "-" + order + "/" + offset,
 		method : 'get',
 		crossDomain : true,
 		withCredentials : true,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#lrd-itemsList");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -202,6 +214,8 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
+	var list = $("#rpa-subCategoryListPopup");
+	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
@@ -219,8 +233,6 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 						success : function(data, textStatus, jqXHR) {
 							var objectList = data.categories;
 							var len = objectList.length;
-							var list = $("#rpa-subCategoryListPopup");
-							list.empty();
 							var object;
 							for (var i = 0; i < len; ++i) {
 								object = objectList[i];
@@ -243,8 +255,6 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 					success : function(data, textStatus, jqXHR) {
 						var objectList = data.categories;
 						var len = objectList.length;
-						var list = $("#rpa-subCategoryListPopup");
-						list.empty();
 						var object;
 						for (var i = 0; i < len; ++i) {
 							object = objectList[i];
@@ -282,7 +292,6 @@ $(document).on('pagebeforeshow', "#lrd-signupcredit", function(event, ui) {
 	populatePanel("lrd-signupcredit");
 });
 
-
 $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 	populatePanel("lrd-login");
 });
@@ -291,17 +300,15 @@ $(document).on('pagebeforeshow', "#lrd-sellitem", function(event, ui) {
 	populatePanel("lrd-sellitem");
 });
 
-
 $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
+	var list = $("#lrd-invoiceList");
+	list.empty();
 	populatePanel("lrd-invoice");
-	
 	var account = new Object();
 	account.acc = sessionStorage.acc;
-
 	var accountfilter = new Array();
 	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
-
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary",
 		contentType : "application/json",
@@ -312,14 +319,12 @@ $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#lrd-invoiceList");
-			list.empty();
 			total = 0;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 				list.append("<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>');
-				total += object.price*object.quantity;
+				total += object.price * object.quantity;
 			}
 			list.listview("refresh");
 			$("#checkoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
@@ -387,6 +392,8 @@ $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
+	var list = $("#creditcardlist");
+	list.empty();
 	var password = sessionStorage.acc;
 	console.log(password);
 	var account = new Object();
@@ -404,11 +411,9 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var creditList = data.creditcard;
 			var len = creditList.length;
-			var list = $("#creditcardlist");
-			list.empty();
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView("+card.cid+",'rpa-creditcardedit')> <h1>Number: "+card.number+"</h1><p>Holder Name: "+card.name+"</br>Type: "+card.type+"</br>Expiration Date: "+card.month+"/"+card.year+"</br>CSC: "+card.csc+"</br>Bills To: "+card.street+"</p> </a><a></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView(" + card.cid + ",'rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -421,6 +426,8 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
+	var list = $("#shippingList");
+	list.empty();
 	var password = sessionStorage.acc;
 	console.log(password);
 	var account = new Object();
@@ -438,11 +445,9 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var addressList = data.address;
 			var len = addressList.length;
-			var list = $("#shippingList");
-			list.empty();
 			for (var i = 0; i < len; ++i) {
 				var address = addressList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView("+address.sid+",'rpa-shippingedit')> <h1>Street: "+address.street+"</h1><p>City: "+address.city+"</br>State: "+address.state+"</br>Country: "+address.country+"</br>Zip: "+address.zip+"</p> </a><a></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView(" + address.sid + ",'rpa-shippingedit')> <h1>Street: " + address.street + "</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a><a></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -454,7 +459,7 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 	populatePanel("rpa-shipping");
 });
 
-$(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {	
+$(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 	var password = sessionStorage.acc;
 	console.log(password);
 	var account = new Object();
@@ -463,7 +468,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditcreditcard/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditcreditcard/" + sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -481,7 +486,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 			console.log("textStatus: " + textStatus);
 			alert("Data not found!");
 		}
-	});		
+	});
 	populatePanel("rpa-creditcardedit");
 });
 
@@ -494,7 +499,7 @@ $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
 	accountfilter[0] = "password";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditshipping/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/usereditshipping/" + sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -512,11 +517,13 @@ $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
 			console.log("textStatus: " + textStatus);
 			alert("Data not found!");
 		}
-	});	
+	});
 	populatePanel("rpa-shippingedit");
 });
 
 $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
+	var list = $("#lrd-categoryList");
+	list.empty();
 	populatePanel("lrd-category");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
@@ -524,9 +531,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
 			var len = objectList.length;
-			var list = $("#lrd-categoryList");
-			list.empty();
-			var object;	
+			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 				list.append('<li data-role="list-divider" data-theme="b">' + object.catname + '</li>');
@@ -545,6 +550,8 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui) {
+	var list = $("#lrd-admincategoriespageCategoriesList");
+	list.empty();
 	populatePanel("lrd-admincategoriespage");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/category",
@@ -552,8 +559,6 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.category;
 			var len = objectList.length;
-			var list = $("#lrd-admincategoriespageCategoriesList");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -570,6 +575,8 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 });
 
 $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
+	var list = $("#lrd-adminuserspageUsersList");
+	list.empty();
 	populatePanel("lrd-adminuserspage");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/users",
@@ -577,8 +584,6 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.users;
 			var len = objectList.length;
-			var list = $("#lrd-adminuserspageUsersList");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -594,15 +599,15 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
+	var list = $("#lrd-BidHistoryList");
+	list.empty();
 	populatePanel("lrd-bidhistory");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/seller-product-bids/"+currentItem.itemid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/seller-product-bids/" + JSON.parse(sessionStorage.currentItem).itemid,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.bids;
 			var len = objectList.length;
-			var list = $("#lrd-BidHistoryList");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -618,14 +623,13 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 });
 
 $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
-
+	var list = $("#lrd-myCartList");
+	list.empty();
 	var account = new Object();
 	account.acc = sessionStorage.acc;
-
 	var accountfilter = new Array();
 	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
-
 	populatePanel("lrd-cart");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/mycart",
@@ -637,14 +641,12 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.cart;
 			var len = objectList.length;
-			var list = $("#lrd-myCartList");
-			list.empty();
 			total = 0;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div><a href="#rpa-deleteItemCart"  data-rel="dialog"></a>');
-				total += object.price*object.quantity;
+				total += object.price * object.quantity;
 			}
 			gtotal = total;
 			list.listview("refresh");
@@ -660,6 +662,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-buyerproduct");
+	var currentItem = JSON.parse(sessionStorage.currentItem);
 	$('#lrd-buyerproductName').text(currentItem.itemname);
 	$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price));
 	$('#lrd-buyerproductBidPrice').html("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
@@ -672,8 +675,11 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$('#lrd-buyerproductDescription').text(currentItem.description);
 	$('#lrd-buyerproductSellerName').text(currentItem.accusername);
 	$("#lrd-buyerproductSellerName").attr("onclick", "goToSellerProfile('" + currentItem.accusername + "')");
-	$("#lrd-buyerproductSellerName").attr("data-role", "link");
-	$("#popupimage").attr("src", ""+currentItem.photo);
+	$("#popupimage").attr("src", "" + currentItem.photo);
+	var list = $('#rpa-rateitbuyer');
+	list.empty();
+	list.append('<div class="rateit" data-rateit-value="' + currentItem.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+	$('.rateit').rateit();
 	$.mobile.loading("hide");
 });
 
@@ -686,42 +692,13 @@ $(document).on('pagebeforeshow', "#rpa-quantityAddCartDialog", function(event, u
 });
 
 $(document).on('pagebeforeshow', "#rpa-bidDialog", function(event, ui) {
-	$("#currentBidDialog").text("Current Bid: "+accounting.formatMoney($('#lrd-buyerproductBidPrice').text().split(" $")[1]));
+	$("#currentBidDialog").text("Current Bid: " + accounting.formatMoney($('#lrd-buyerproductBidPrice').text().split(" $")[1]));
 });
 
-$(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
+$(document).on('pagebeforeshow', "#lrd-sellerproduct", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-sellerproduct");
-	var password = sessionStorage.acc;
-	console.log(password);
-
-	var account = new Object();
-	account.password = password;
-
-	var accountfilter = new Array();
-	accountfilter[0] = "password";
-	var jsonText = JSON.stringify(account, accountfilter, "\t");
-	$.support.cors = true;
-	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/userRating",
-		method : 'put',
-		crossDomain : true,
-		withCredentials : true,
-		data : jsonText,
-		contentType : "application/json",
-		success : function(data, textStatus, jqXHR) {
-			var list = $('#lrd-sellerRating');
-			list.empty();
-			var currentUser = data.user;
-			list.append('<li><div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div></li>');
-			$('.rateit').rateit();
-			list.listview("refresh");
-		},
-		error : function(data, textStatus, jqXHR) {
-			console.log("textStatus: " + textStatus);
-			alert("Data not found! userRating");
-		}
-	});
+	var currentItem = JSON.parse(sessionStorage.currentItem);
 	$('#lrd-sellerproductName').text(currentItem.itemname);
 	$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 	$("#lrd-sellerproductImage").attr("src", "" + currentItem.photo);
@@ -732,10 +709,14 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 	$('#lrd-sellerproductDescription').text(currentItem.description);
 	$('#lrd-sellerproductSellerName').text(currentItem.accusername);
 	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-myaccountinfo')");
-	$("#lrd-buyersButton").attr("onclick", "getBuyersList('"+currentItem.itemid+"')");
+	$("#lrd-buyersButton").attr("onclick", "getBuyersList('" + currentItem.itemid + "')");
 	$("#lrd-sellerproductSellerName").attr("data-role", "link");
 	$("#lrd-sellerproductSellerName").attr("onclick", "GoToView('lrd-myaccountinfo')");
-	$("#popupimageseller").attr("src", ""+currentItem.photo);
+	$("#popupimageseller").attr("src", "" + currentItem.photo);
+	var list = $('#lrd-sellerRating');
+	list.empty();
+	list.append('<div class="rateit" data-rateit-value="' + currentItem.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+	$('.rateit').rateit();
 	$.mobile.loading("hide");
 });
 
@@ -743,10 +724,9 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function( event, ui ) {
 function goToSellerProfile(username) {
 	console.log(username);
 	$.ajax({
-		//The server takes care of where to route depending of page (selling,bidding,history)
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/sellerprofile/" + username,
-		// crossDomain : true,
-		// withCredentials : true,
+		crossDomain : true,
+		withCredentials : true,
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -770,27 +750,10 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 	$('#rateitstarshit').empty();
 	$('#userProfileName').text(currentUser.accusername);
 	$('#userProfileEmail').text(currentUser.accemail);
-	$("#userProfileImage").attr("src", ""+currentUser.accphoto);
+	$("#userProfileImage").attr("src", "" + currentUser.accphoto);
 	$('#addressProfileName').html(currentUser.street + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
 	$('#userProfilePhone').text(currentUser.accphonenum);
-	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="'+currentUser.accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
-	$('.rateit').rateit();
-	$.mobile.loading("hide");
-});
-
-////////////////////////////////////SELLER PROFILE////////////////////////////////////////
-$(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
-	$.mobile.loading("show");
-	populatePanel("lrd-userprofile");
-
-	var currentUser = JSON.parse(sessionStorage.accountinfo);
-	$('#rateitstarshit').empty();
-	$('#userProfileName').text(currentUser.accusername);
-	$('#userProfileEmail').text(currentUser.accemail);
-	$("#userProfileImage").attr("src", ""+currentUser.accphoto);
-	$('#addressProfileName').html(currentUser.street + "</br>" + currentUser.city + ", " + currentUser.state + " " + currentUser.zip);
-	$('#userProfilePhone').text(currentUser.accphonenum);
-	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="'+currentUser.accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="' + currentUser.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
 	$('.rateit').rateit();
 	$.mobile.loading("hide");
 });
@@ -799,7 +762,7 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 	$.mobile.loading("show");
 	populatePanel("lrd-myaccountinfo");
-	
+
 	var password = sessionStorage.acc;
 	console.log(password);
 
@@ -822,10 +785,10 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 			$('#sdlt-thisshitbetterworknow').empty();
 			$('#userMyAccountName').text(currentUser[0].accusername);
 			$('#userMyAccountEmail').text(currentUser[0].accemail);
-			$("#userMyAccountImage").attr("src",""+currentUser[0].accphoto);
+			$("#userMyAccountImage").attr("src", "" + currentUser[0].accphoto);
 			$('#addressMyAccountName').html(currentUser[0].street + "</br>" + currentUser[0].city + ", " + currentUser[0].state + " " + currentUser[0].zip);
 			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
-			$('#sdlt-thisshitbetterworknow').append('<div class="rateit" data-rateit-value="'+currentUser[0].accrating+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+			$('#sdlt-thisshitbetterworknow').append('<div class="rateit" data-rateit-value="' + currentUser[0].accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
 			$('.rateit').rateit();
 			$.mobile.loading("hide");
 		},
@@ -838,13 +801,12 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 	$.mobile.loading("show");
+	var list = $("#lrd-purchaseHistoryList");
+	list.empty();
 	populatePanel("lrd-purchaseHistory");
-	
 	var acc = sessionStorage.acc;
-
 	var account = new Object();
 	account.acc = acc;
-
 	var accountfilter = new Array();
 	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
@@ -859,9 +821,6 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var invoicesList = data.invoices;
 			var len = invoicesList.length;
-			var list = $("#lrd-purchaseHistoryList");
-			console.log("HERE!!!!!!!!!!");
-			list.empty();
 			for (var i = 0; i < len; ++i) {
 				var invoice = invoicesList[i];
 				console.log(invoice);
@@ -882,6 +841,8 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function(event, ui) {
 
 //////////////////////////SELLER STORE//////////////////////////////////
 $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
+	var list = $("#lrd-userstoreSellerItems");
+	list.empty();
 	populatePanel("lrd-userstore");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/store",
@@ -889,8 +850,6 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#lrd-userstoreSellerItems");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -906,20 +865,19 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 	});
 });
 
-function getInvoice(invoiceid){
+function getInvoice(invoiceid) {
 	$.mobile.loading("show");
-	
+	var list = $("#lrd-pastinvoiceList");
+	list.empty();
 	var acc = sessionStorage.acc;
-
 	var account = new Object();
 	account.acc = acc;
-
 	var accountfilter = new Array();
 	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.support.cors = true;
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary/"+invoiceid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/purchaseSumary/" + invoiceid,
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -928,14 +886,12 @@ function getInvoice(invoiceid){
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#lrd-pastinvoiceList");
-			list.empty();
 			total = 0;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 				list.append("<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>');
-				total += object.price*object.quantity;
+				total += object.price * object.quantity;
 			}
 			// list.listview("refresh");
 			$("#pastcheckoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
@@ -948,24 +904,22 @@ function getInvoice(invoiceid){
 	});
 }
 
-function getBuyersList(itemid){
+function getBuyersList(itemid) {
 	$.mobile.loading("show");
-	
+	var list = $("#lrd-buyersList");
+	list.empty();
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/getBuyers/"+itemid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getBuyers/" + itemid,
 		method : 'get',
-
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var buyersList = data.buyers;
 			var len = buyersList.length;
-			var list = $("#lrd-buyersList");
-			list.empty();
 			total = 0;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				buyer = buyersList[i];
-				list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + buyer.accusername + "')><img src='" + buyer.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">User: ' + buyer.accusername + '</h1><p style="font-size: 13px;margin-top:5px"><b>Name: ' + buyer.accfname +' '+ buyer.acclname + '</b></p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(buyer.price) + '</h1><p>Amount:' + buyer.itemquantity + '</p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + buyer.accusername + "')><img src='" + buyer.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">User: ' + buyer.accusername + '</h1><p style="font-size: 13px;margin-top:5px"><b>Name: ' + buyer.accfname + ' ' + buyer.acclname + '</b></p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(buyer.price) + '</h1><p>Amount:' + buyer.itemquantity + '</p></div></div></a></li>');
 				//"<li data-icon='false'><img src='" + object.photo + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + object.itemname + '</h1><p style="font-size: 13px;margin-top:0px"><b>' + object.model + '</b></p><p>' + object.brand + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >' + accounting.formatMoney(object.price) + '</h1><p>Amount:' + object.quantity + '</p></div></div>'
 			}
 
@@ -978,7 +932,7 @@ function getBuyersList(itemid){
 	});
 }
 
-function checkOut(acc){
+function checkOut(acc) {
 	var account = new Object();
 	account.acc = acc;
 	account.total = total;
@@ -987,7 +941,7 @@ function checkOut(acc){
 	accountfilter[0] = "acc";
 	accountfilter[1] = "total";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
-	
+
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/generateInvoice",
@@ -1007,7 +961,7 @@ function checkOut(acc){
 	});
 }
 
-function signup(){
+function signup() {
 	var username = document.all["lrd-signupUsername"].value;
 	console.log(username);
 	var fname = document.all["lrd-signupName"].value;
@@ -1027,8 +981,8 @@ function signup(){
 	var slt = Math.random();
 	console.log(slt);
 	var rating = 0;
-	
-	if(password == rpassword){
+
+	if (password == rpassword) {
 		var account = new Object();
 		account.username = username;
 		account.fname = fname;
@@ -1042,7 +996,7 @@ function signup(){
 		account.rating = rating;
 		account.slt = slt;
 		account.photo = photo;
-		
+
 		var accountfilter = new Array();
 		accountfilter[0] = "username";
 		accountfilter[1] = "fname";
@@ -1053,9 +1007,9 @@ function signup(){
 		accountfilter[6] = "rating";
 		accountfilter[7] = "slt";
 		accountfilter[8] = "photo";
-		
+
 		var jsonText = JSON.stringify(account, accountfilter, "\t");
-		
+
 		$.ajax({
 			url : "http://sprucemarket.herokuapp.com/SpruceServer/signup",
 			method : 'put',
@@ -1073,8 +1027,7 @@ function signup(){
 				GoToView('lrd-login');
 			}
 		});
-	}
-	else{
+	} else {
 		GoToView("lrd-signup");
 	}
 }
@@ -1122,10 +1075,13 @@ function login() {
 					success : function(data, textStatus, jqXHR) {
 						if (data.success) {
 							sessionStorage.acc = data.acc[0].accpassword;
-							sessionStorage.user=data.user;
+							sessionStorage.user = data.user;
+							$("#lrd-username").val("");
+							$("#lrd-password").val("");
 							GoToView('lrd-home');
+							
 						} else {
-							sessionStorage.user="guest";
+							sessionStorage.user = "guest";
 							alert("Username and password does not exist");
 						}
 					},
@@ -1133,7 +1089,6 @@ function login() {
 						console.log("textStatus: " + textStatus);
 						alert("Data not found");
 						GoToView('lrd-login');
-						//pa q?
 					}
 				});
 			} else {
@@ -1149,6 +1104,8 @@ function login() {
 }
 
 function populatePanel(view) {
+	var list = $("#" + view + "SidePanel");
+	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
@@ -1156,13 +1113,11 @@ function populatePanel(view) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
 			var len = objectList.length;
-			var list = $("#" + view + "SidePanel");
-			list.empty();
 			var object;
 			console.log(sessionStorage.user);
 			list.append("<li><a onclick=GoToView('lrd-home')>Home</a></li>");
 			if (sessionStorage.user == 'user') {
-				list.append("<li><a  onclick=GoToView('lrd-myspruce') >My Spruce</a></li>");
+				list.append("<li><a  onclick=GoToView('lrd-mysprucebidding') >My Spruce</a></li>");
 			}
 			list.append("<li data-role=list-divider data-theme=a>Categories</li>");
 			for (var i = 0; i < len; ++i) {
@@ -1191,14 +1146,13 @@ function populatePanel(view) {
 
 //Function for the three pages of my Spruce
 function ajaxMySpruce(where) {
-	populatePanel("lrd-myspruce");
 	var account = new Object();
 	account.acc = sessionStorage.acc;
 
 	var accountfilter = new Array();
 	accountfilter[0] = "acc";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
-	
+
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/mySpruce/" + where,
@@ -1210,26 +1164,31 @@ function ajaxMySpruce(where) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.items;
 			var len = objectList.length;
-			var list = $("#lrd-myspruceMySpruceList");
-			list.empty();
 			var object;
 			if (where == 'sold') {
+				var list = $("#lrd-myspruceMySpruceListSold");
+				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
 					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.solddate + '</b></p></div></div></a></li>');
 				}
 			} else if (where == 'bidding') {
+				var list = $("#lrd-myspruceMySpruceListBidding");
+				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
 					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.date + '</b></p></div></div></a></li>');
 				}
 			} else {
+				var list = $("#lrd-myspruceMySpruceListSelling");
+				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
 					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.itemdate + '</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");
+			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
@@ -1238,7 +1197,8 @@ function ajaxMySpruce(where) {
 	});
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 /// Functions Called Directly from Buttons ///////////////////////
 
 function ConverToJSON(formData) {
@@ -1270,13 +1230,13 @@ function GetItemsForCategory(category) {
 }
 
 function GetItem(id) {
-	itemId = id;
 	$.mobile.loading("show");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/getProduct/" + itemId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getProduct/" + id,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			currentItem = data.product[0];
+			var currentItem = data.product[0];
+			sessionStorage.currentItem = JSON.stringify(currentItem);
 			if ( typeof (Storage) !== "undefined") {
 				if (currentItem.accpassword == sessionStorage.acc) {
 					$.mobile.changePage("#lrd-sellerproduct", {
@@ -1300,38 +1260,39 @@ function GetItem(id) {
 		}
 	});
 }
-function refineQuery(paramby,paramorder){
-	by=paramby;
-	order=paramorder;
-	console.log(by+" "+order);
+
+function refineQuery(paramby, paramorder) {
+	by = paramby;
+	order = paramorder;
+	console.log(by + " " + order);
 	GoToView('lrd-itemsforcategory');
 	$('#rpa-refinePage').dialog('close');
 }
-function resetQuery(){
-	order="none";
-	by="none";
+
+function resetQuery() {
+	order = "none";
+	by = "none";
 	$('#rpa-refinePage').dialog('close');
 }
 
-function GoToEditView(id,view){
-	sessionStorage.editId=id;
+function GoToEditView(id, view) {
+	sessionStorage.editId = id;
 	$.mobile.loading("show");
-	$.mobile.changePage("#"+view, {
+	$.mobile.changePage("#" + view, {
 		allowSamePageTransition : true
 	});
 }
 
 function signOut() {
 	sessionStorage.acc = "";
-	sessionStorage.user="guest";
+	sessionStorage.user = "guest";
 	GoToView('lrd-login');
 }
 
-function CheckSessionView(view){
-	if(sessionStorage.user=="user"){
+function CheckSessionView(view) {
+	if (sessionStorage.user == "user") {
 		GoToView(view);
-	}
-	else{
+	} else {
 		GoToView('lrd-login');
 	}
 }
@@ -1340,16 +1301,16 @@ function sellCat() {
 	$.mobile.changePage("#rpa-sellcategorypopup", {
 		allowSamePageTransition : true,
 		transition : "slide",
-		changeHash:false
+		changeHash : false
 	});
+	var list = $("#rpa-categorylistpopup");
+	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategories",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
 			var len = objectList.length;
-			var list = $("#rpa-categorylistpopup");
-			list.empty();
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
@@ -1372,6 +1333,8 @@ function sellSubCat(catid, catname) {
 	var i = 0;
 	console.log(catname);
 	$.mobile.loading("show");
+	var list = $("#rpa-categorylistpopup");
+	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
 		method : 'get',
@@ -1379,16 +1342,14 @@ function sellSubCat(catid, catname) {
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.categories;
 			var len = objectList.length;
-			var list = $("#rpa-categorylistpopup");
-			list.empty();
 			var object;
 			for ( i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li><a onclick=sellSubCat('" + object.catid +"','" + object.catname + "')>" + object.catname + "</a></li>");
+				list.append("<li><a onclick=sellSubCat('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a></li>");
 			}
 			list.listview("refresh");
 			if (i == 0) {
-				$("#rpa-selectcategorybutton .ui-btn-text").text(catname+'('+catid+')');
+				$("#rpa-selectcategorybutton .ui-btn-text").text(catname + '(' + catid + ')');
 				$.mobile.changePage("#lrd-sellitem", {
 					allowSamePageTransition : true,
 					transition : "slide",
