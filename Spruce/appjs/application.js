@@ -579,15 +579,16 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 	list.empty();
 	populatePanel("lrd-adminuserspage");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/users",
+		url : "http://localhost:5000/SpruceServer/myadmintools/users",
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
 			var objectList = data.users;
 			var len = objectList.length;
+			var list = $('#lrd-adminuserspageUsersList');
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a href="#lrd-myaccountinfoedit">' + object.user + '</a><a href="#lrd-adminremoveuserdialog" data-rel="dialog"></a></li>');
+				list.append('<li data-icon="false"><a onclick=goToAccountEditPage("' + object.accusername + '")>' + object.accusername + '</a><a href="#lrd-adminremoveuserdialog" data-rel="dialog"></a></li>');
 			}
 			list.listview("refresh");
 		},
@@ -596,6 +597,80 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 			alert("Data not found!");
 		}
 	});
+});
+
+function goToAccountEditPage(username) {
+	console.log(username);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/adminaccountedit/" + username,
+		crossDomain : true,
+		withCredentials : true,
+		method : 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			sessionStorage.adminaccountinfo = JSON.stringify(data.userinfo);
+			GoToView('sdlt-adminmyaccountinfoedit');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!seller profile");
+		}
+	});
+}
+
+
+$(document).on('pagebeforeshow', "#sam-usernameandpassword", function(event, ui) {
+	populatePanel("sam-usernameandpassword");
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	$("#sam-username").attr("value", accountinfo[0].accusername);
+});
+
+$(document).on('pagebeforeshow', "#sam-accphoto", function(event, ui) {
+	populatePanel("sam-accphoto");
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	$("#sam-accphotoimg").attr("src", accountinfo[0].accphoto);
+});
+
+$(document).on('pagebeforeshow', "#sam-generalinfo", function(event, ui) {
+	populatePanel("sam-generalinfo");
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	$("#sam-firstname").attr("value", accountinfo[0].accfname);
+	$("#sam-lastname").attr("value", accountinfo[0].acclname);
+	$("#sam-email").attr("value", accountinfo[0].accemail);
+	$("#sam-lastname").attr("value", accountinfo[0].acclname);
+	$("#sam-phone").attr("value", accountinfo[0].accphonenum);
+});
+
+$(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
+	populatePanel("sam-creditcard");
+
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	console.log(sessionStorage.adminaccountinfo);
+	console.log(accountinfo);
+	var list = $('#sam-creditcardlist');
+	list.empty();
+	for (var i = 0; i < accountinfo.length; ++i) {
+		var card = accountinfo[i];
+		console.log(card.number);
+		list.append("<li data-icon='delete'><a onclick=GoToEditView(" + card.cid + ",'rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+	}
+	list.listview("refresh");
+});
+
+$(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
+	populatePanel("sam-shipping");
+
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	console.log(sessionStorage.adminaccountinfo);
+	console.log(accountinfo);
+	var list = $('#sam-shippingList');
+	list.empty();
+	var len = accountinfo.length;
+	for (var i = 0; i < len; ++i) {
+		var address = accountinfo[i];
+		list.append("<li data-icon='delete'><a onclick=GoToEditView(" + address.sid + ",'rpa-shippingedit')> <h1>Street: " + address.street + "</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a><a></a></li>");
+	}
+	list.listview("refresh");
 });
 
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {

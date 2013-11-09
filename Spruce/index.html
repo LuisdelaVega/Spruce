@@ -885,6 +885,252 @@
 		</div>
 
 		<!-- End of Account Info Edit view -->
+		
+		<!-- Admin Account Info Edit view -->
+
+		<div id="sdlt-adminmyaccountinfoedit" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-myaccountinfoeditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">
+						User Info
+					</li>
+					<li>
+						<a onclick="GoToView('sam-usernameandpassword')">Username & Password</a>
+					</li>
+					<li>
+						<a onclick="GoToView('sam-accphoto')">Photo</a>
+					</li>
+					<li>
+						<a onclick="GoToView('sam-generalinfo')">General</a>
+					</li>
+					<li data-role="list-divider">
+						Account Info
+					</li>
+					<li>
+						<a onclick="GoToView('sam-creditcard')">Credit Card</a>
+					</li>
+					<li>
+						<a onclick="GoToView('sam-shipping')">Shipping Address</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="sam-usernameandpassword" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-usernameandpasswordSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Username</h1>
+							<input type="text" id="sam-username" value="Rapol"  />
+							<a data-role="button">Change</a>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Password</h1>
+							<input type="text" id="sam-password"/>
+							<h1>Confirm Password</h1>
+							<input type="text" id="sam-confirmpassword"/>
+							<a data-role="button" data-theme"b">Change</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="sam-accphoto" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-accphotoSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label" align="center">
+							<img id="sam-accphotoimg" style="max-width: 300px;max-height: 300px;" src="/images/Unknown-person_80x80.gif"/>
+							<label for="lrd-signupUploadPicture">Upload Picture:</label>
+							<input type="file" id="lrd-signupUploadPicture" name="uploadpicture">
+							<a data-role="button" data-theme="b">Change</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="sam-generalinfo" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-generalinfoSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<ul data-role="listview" data-inset="true">
+					<li>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>First Name</h1>
+							<input type="text" id="sam-firstname" value="Luis"  />
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Last Name</h1>
+							<input type="text" id="sam-lastname" value="de la"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Email</h1>
+							<input type="email" id="sam-email" value="luis@vega.com"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Phone Number</h1>
+							<input type="tel" id="sam-phone" value="787-555-0854"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button" data-theme="b">Change</a>
+			</div>
+		</div>
+		<div id="sam-creditcard" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-creditcardSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1 align="center">Credit Cards</h1>
+				<ul id="sam-creditcardlist" data-role="listview" data-inset="true">
+				</ul>
+				<a data-role="button" data-theme="b">Add</a>
+			</div>
+		</div>
+		<div id="sam-creditcardedit" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-creditcardeditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1 align="center">Edit Billing Address</h1>
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="sam-creditstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="sam-creditcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="sam-creditstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="sam-creditcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="sam-creditzip"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button" data-theme="b">Change</a>
+			</div>
+		</div>
+		<div id="sam-shipping" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-shippingSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1 align="center">Address Book</h1>
+				<ul id="sam-shippingList" data-role="listview" data-inset="true"></ul>
+				<a data-role="button" data-theme="b">Add</a>
+			</div>
+		</div>
+		<div id="sam-shippingedit" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-shippingeditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1 align="center">Edit Address</h1>
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="sam-shippingstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="sam-shippingcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="sam-shippingstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="sam-shippingcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="sam-shippingzip"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button" data-theme="b">Change</a>
+			</div>
+		</div>
+
+		<!-- End of Admin Account Info Edit view -->
 
 		<!-- My Spruce view -->
 
@@ -1947,7 +2193,7 @@
 			<div data-role="content">
 				<div data-role="fieldcontainer">
 					<a data-role="button" href="#lrd-signup">Add User</a>
-					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
+					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>
 				</div>
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
