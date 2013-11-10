@@ -587,7 +587,7 @@ $(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, 
 	populatePanel("rpa-adminsubcategoriespageSidePanel");
 	$('#rpa-nomorecats').text("");
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + sessionStorage.editId + "/parent",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + sessionStorage.editId + "/parent",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
@@ -1477,7 +1477,7 @@ function adminSubCategories(catid,catname) {
 	var list = $("#rpa-adminsubcategoriespagelist");
 	list.empty();
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
