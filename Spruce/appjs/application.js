@@ -132,6 +132,14 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	var list = $("#lrd-homePopularContent");
 	list.empty();
 	populatePanel("lrd-home");
+	if(sessionStorage.user=="admin"){
+		document.getElementById("adminbuttons").style.display="block";
+		document.getElementById("userbuttons").style.display="none";
+	}
+	else{
+		document.getElementById("adminbuttons").style.display="none";
+		document.getElementById("userbuttons").style.display="block";
+	}
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/home/",
 		method : 'get',
@@ -554,16 +562,41 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 	list.empty();
 	populatePanel("lrd-admincategoriespage");
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/category",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
+		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var objectList = data.category;
+			var objectList = data.categories;
 			var len = objectList.length;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='false'><a>" + object.title + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
-
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + object.catid + "','rpa-adminsubcategoriespage')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+$(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, ui) {
+	var list = $("#rpa-adminsubcategoriespagelist");
+	list.empty();
+	populatePanel("rpa-adminsubcategoriespageSidePanel");
+	$('#rpa-nomorecats').text("");
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + sessionStorage.editId + "/parent",
+		method : 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var objectList = data.categories;
+			var len = objectList.length;
+			var object;
+			for ( i = 0; i < len; ++i) {
+				object = objectList[i];
+				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','"+object.catname+"')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -643,7 +676,6 @@ $(document).on('pagebeforeshow', "#sam-generalinfo", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 	populatePanel("sam-creditcard");
-
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
 	console.log(sessionStorage.adminaccountinfo);
 	console.log(accountinfo);
@@ -1272,8 +1304,6 @@ function ajaxMySpruce(where) {
 	});
 }
 
-
-
 /// Functions Called Directly from Buttons ///////////////////////
 
 function ConverToJSON(formData) {
@@ -1354,7 +1384,8 @@ function GoToEditView(id, view) {
 	sessionStorage.editId = id;
 	$.mobile.loading("show");
 	$.mobile.changePage("#" + view, {
-		allowSamePageTransition : true
+		allowSamePageTransition : true,
+		transition:"slide"
 	});
 }
 
@@ -1430,6 +1461,37 @@ function sellSubCat(catid, catname) {
 					transition : "slide",
 					reverse : true
 				});
+			}
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+	$.mobile.loading("hide");
+}
+
+function adminSubCategories(catid,catname) {
+	var i = 0;
+	$.mobile.loading("show");
+	var list = $("#rpa-adminsubcategoriespagelist");
+	list.empty();
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
+		method : 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var objectList = data.categories;
+			var len = objectList.length;
+			var object;
+			if (len == 0) {
+				$('#rpa-nomorecats').text("No more categories for: "+catname+"("+catid+")");
+			} else {
+				for ( i = 0; i < len; ++i) {
+					object = objectList[i];
+					list.append("<li data-icon'delete'><a onclick=adminSubCategories('" + object.catid + "','"+object.catname+"')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+				}
+				list.listview("refresh");
 			}
 		},
 		error : function(data, textStatus, jqXHR) {

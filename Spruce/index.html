@@ -34,7 +34,7 @@
 		<div id="lrd-home" data-role="page">
 			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
-				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
 				<div align="center">
 					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
 				</div>
@@ -43,17 +43,29 @@
 				<ul id="lrd-homeSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content">
-				<input type="search" name="search" id="lrd-homeSearch-basic" placeholder="Search" />
-				<div data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
-					<a onclick="CheckSessionView('lrd-myaccountinfo')" data-role="button" data-theme="b" data-mini="true"><img src="css/user-icon.png" height="21px" width="21px "/>
-					<br />
-					Account</a>
-					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="b" data-mini="true"><img src="css/category-icon.png" height="21px" width="21px" />
-					<br />
-					Categories</a>
-					<a onclick="CheckSessionView('lrd-mysprucebidding')" data-role="button" data-theme="b" data-mini="true"><img src="css/3D-Tree-icon.png" height="21px" width="21px" />
+				<input type="search" name="search" id="lrd-homeSearch-basic" placeholder="Search"/>
+				<div id="userbuttons" style="display: block;padding-top: 5px;margin-bottom: 0px" data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
+					<a  onclick="CheckSessionView('lrd-mysprucebidding')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/myspruce.png" height="21px" width="21px "/>
 					<br />
 					My Spruce</a>
+					<a  onclick="CheckSessionView('lrd-myaccountinfo')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/user.png" height="21px" width="21px" />
+					<br />
+					&nbsp;Account&nbsp;</a>
+					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/categories.png" height="21px" width="21px" />
+					<br />
+					Categories</a>
+
+				</div>
+				<div id="adminbuttons" style="display: none;padding-top: 5px;margin-bottom: 0px" data-role="controlgroup" data-type="horizontal" align="center" style="padding-top: 10px">
+					<a  href="#lrd-adminreportspage" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/report.png" height="21px" width="21px "/>
+					<br />
+					&nbsp;Reports&nbsp;</a>
+					<a href="#lrd-adminuserspage" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/user.png" height="21px" width="21px" />
+					<br />
+					&nbsp;&nbsp;Users&nbsp;&nbsp;</a>
+					<a href="#lrd-admincategoriespage" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/categories.png" height="21px" width="21px" />
+					<br />
+					&nbsp;Categories&nbsp;</a>
 
 				</div>
 				<br />
@@ -62,7 +74,7 @@
 						<h3 align="center">Popular Now</h3>
 					</li>
 				</ul>
-				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="b" data-mini="true"><img src="css/Ecommerce-Price-tag-icon.png" height="21px" width="21px"><br />Sell Item </a>
+				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/sell.png" height="21px" width="21px"><br />Sell Item </a>
 			</div>
 		</div>
 
@@ -2164,10 +2176,10 @@
 							<a class="ui-btn-active ui-state-persist" >Reports</a>
 						</li>
 						<li>
-							<a onclick="GoToView('lrd-adminuserspage')" data-transition="slide">Users</a>
+							<a href="#lrd-adminuserspage" data-transition="slide">Users</a>
 						</li>
 						<li>
-							<a onclick="GoToView('lrd-admincategoriespage')" data-transition="slide">Categories</a>
+							<a href="#lrd-admincategoriespage" data-transition="slide">Categories</a>
 						</li>
 					</ul>
 				</div>
@@ -2191,22 +2203,22 @@
 			</div>
 
 			<div data-role="content">
-				<div data-role="fieldcontainer">
-					<a data-role="button" href="#lrd-signup">Add User</a>
-					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true"></ul>
+				<a data-role="button" href="#lrd-signup">Add User</a>
+				<div data-role="fieldcontain">
+					<ul id="lrd-adminuserspageUsersList" data-role="listview" data-inset="true" data-split-icon="delete" data-filter="true" data-filter-placeholder="Search Users" ></ul>
 				</div>
 			</div>
 			<div data-role="footer" data-id="foo1" data-position="fixed" data-tap-toggle="false">
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a onclick="GoToView('lrd-adminreportspage')" data-transition="slide" data-direction="reverse">Reports</a>
+							<a href="#lrd-adminreportspage" data-transition="slide" data-direction="reverse">Reports</a>
 						</li>
 						<li>
 							<a class="ui-btn-active ui-state-persist">Users</a>
 						</li>
 						<li>
-							<a onclick="GoToView('lrd-admincategoriespage')" data-transition="slide">Categories</a>
+							<a href="#lrd-admincategoriespage" data-transition="slide">Categories</a>
 						</li>
 					</ul>
 				</div>
@@ -2242,7 +2254,7 @@
 				<ul id="lrd-admincategoriespageSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role="content">
-				<div data-role="fieldcontainer">
+				<div data-role="fieldcontain">
 					<a data-role="button" href="#rpa-adminaddcatdialog" data-rel="dialog">Add Category</a>
 					<ul id="lrd-admincategoriespageCategoriesList" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
 				</div>
@@ -2251,15 +2263,37 @@
 				<div data-role="navbar">
 					<ul>
 						<li>
-							<a onclick="GoToView('lrd-adminreportspage')" data-transition="slide" data-direction="reverse">Reports</a>
+							<a href="#lrd-adminreportspage" data-transition="slide" data-direction="reverse">Reports</a>
 						</li>
 						<li>
-							<a onclick="GoToView('lrd-adminuserspage')" data-transition="slide" data-direction="reverse">Users</a>
+							<a href="#lrd-adminuserspage" data-transition="slide" data-direction="reverse">Users</a>
 						</li>
 						<li>
 							<a class="ui-btn-active ui-state-persist">Categories</a>
 						</li>
 					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!--Subcategory page for admin-->
+		
+		<div id="rpa-adminsubcategoriespage" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Untitled-2.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-adminsubcategoriespageSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontainer">
+					<a data-role="button" href="#rpa-adminaddcatdialog" data-rel="dialog">Add Category</a>
+					<ul id="rpa-adminsubcategoriespagelist" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
+					<h2 id="rpa-nomorecats" align="middle"></h2>
 				</div>
 			</div>
 		</div>
