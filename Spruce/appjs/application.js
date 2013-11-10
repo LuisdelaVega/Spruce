@@ -602,7 +602,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 function goToAccountEditPage(username) {
 	console.log(username);
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/adminaccountedit/" + username,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/adminaccountedit/" + username,
 		crossDomain : true,
 		withCredentials : true,
 		method : 'get',
