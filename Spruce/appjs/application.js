@@ -966,7 +966,7 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 			for (var i = 0; i < len; ++i) {
 				var invoice = invoicesList[i];
 				console.log(invoice);
-				list.append('<li data-icon="false"><a  onclick="getInvoice(' + invoice.invoiceid + ')">' + '<h1 style="margin: 0px">' + new Date(invoice.invoicedate).toUTCString() + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + invoice.invoicetotalprice + '</h2></li>');
+				list.append('<li data-icon="false"><a  onclick="getInvoice(' + invoice.invoiceid + ')">' + '<h1 style="margin: 0px">' + new Date(invoice.invoicedate) + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + accounting.formatMoney(invoice.invoicetotalprice) + '</h2></li>');
 			}
 			list.listview("refresh");
 		},
@@ -1045,8 +1045,7 @@ function getTotalSells(){
 						method : 'get',
 						contentType : "application/json",
 						success : function(data, textStatus, jqXHR) {
-							$('#lrd-adminreportspageTotalItemsSold').text('Total '+cat+' items sold '+thistime+': ' + data.sells[0].sells);
-							GoToView('lrd-adminreportspage');
+							document.getElementById("lrd-adminreportspageTotalItemsSold").innerHTML='Total '+cat+' items sold '+thistime+': ' + data.sells[0].sells;
 							$.mobile.loading("hide");
 						},
 						error : function(data, textStatus, jqXHR) {
@@ -1104,8 +1103,7 @@ function getTotalRevenue(){
 						method : 'get',
 						contentType : "application/json",
 						success : function(data, textStatus, jqXHR) {
-							$('#lrd-adminreportspageTotalItemsRevenue').text('Total '+cat+' items revenue '+thistime+': ' + accounting.formatMoney(data.sells[0].sells));
-							GoToView('lrd-adminreportspage');
+							document.getElementById("lrd-adminreportspageTotalItemsRevenue").innerHTML='Total '+cat+' items revenue '+thistime+': ' + accounting.formatMoney(data.sells[0].sells);
 							$.mobile.loading("hide");
 						},
 						error : function(data, textStatus, jqXHR) {
