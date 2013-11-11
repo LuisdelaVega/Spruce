@@ -60,13 +60,17 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			var currentUser = data.info;
+			var currentUser = data;
+			console.log(JSON.stringify(currentUser));
 			$('#lrd-checkoutAccountnumber').empty();
 			$('#lrd-checkoutShippingAddress').empty();
-			for (var i = 0; i < currentUser.length; i++) {
+			for(var i=0 ; i< currentUser.creditnumber.length ; i++){
 				var j = i + 1;
-				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> '+currentUser[i].street+', ' + currentUser[i].city + '</option>');
-				$('#lrd-checkoutAccountnumber').append('<option value = "' + j + '">' + currentUser[i].number + '</option>');
+				$('#lrd-checkoutAccountnumber').append('<option value = "' + j + '">' + currentUser.creditnumber[i].number + '</option>');
+			}
+			for (var i = 0; i < currentUser.shippinginfo.length; i++) {
+				var j = i + 1;
+				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> '+currentUser.shippinginfo[i].street+', ' + currentUser.shippinginfo[i].city + '</option>');
 			}
 			$('#lrd-checkoutAccountnumber').selectmenu('refresh', true);
 			$('#lrd-checkoutShippingAddress').selectmenu('refresh', true);
@@ -456,7 +460,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 			var len = creditList.length;
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView(" + card.cid + ",'rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('"+card.cid+"-"+card.bid+"','rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -712,32 +716,101 @@ $(document).on('pagebeforeshow', "#sam-generalinfo", function(event, ui) {
 $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 	populatePanel("sam-creditcard");
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
-	console.log(sessionStorage.adminaccountinfo);
-	console.log(accountinfo);
 	var list = $('#sam-creditcardlist');
 	list.empty();
-	for (var i = 0; i < accountinfo.length; ++i) {
-		var card = accountinfo[i];
-		console.log(card.number);
-		list.append("<li data-icon='delete'><a onclick=GoToEditView(" + card.cid + ",'rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
-	}
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admincreditcardinfo/"+accountinfo[0].accusername,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			var creditList = data.creditcard;
+			var len = creditList.length;
+			for (var i = 0; i < len; ++i) {
+				var card = creditList[i];
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('"+card.cid+"-"+card.bid+"','sam-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 	list.listview("refresh");
 });
 
 $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 	populatePanel("sam-shipping");
-
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
-	console.log(sessionStorage.adminaccountinfo);
-	console.log(accountinfo);
 	var list = $('#sam-shippingList');
 	list.empty();
-	var len = accountinfo.length;
-	for (var i = 0; i < len; ++i) {
-		var address = accountinfo[i];
-		list.append("<li data-icon='delete'><a onclick=GoToEditView(" + address.sid + ",'rpa-shippingedit')> <h1>Street: " + address.street + "</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a><a></a></li>");
-	}
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/adminshippinginfo/"+accountinfo[0].accusername,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			var addressList = data.address;
+			var len = addressList.length;
+			for (var i = 0; i < len; ++i) {
+				var address = addressList[i];
+				list.append("<li data-icon='delete'><a onclick=GoToEditView(" + address.sid + ",'sam-shippingedit')> <h1>Street: " + address.street + "</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a><a></a></li>");
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 	list.listview("refresh");
+});
+
+$(document).on('pagebeforeshow', "#sam-shippingedit", function(event, ui) {
+	populatePanel("sam-shippingedit");
+	var user=JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditshipping/" + user+"/"+sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			var address = data.address[0];
+			$("#sam-shippingstreet").attr("value", address.street);
+			$("#sam-shippingcity").attr("value", address.city);
+			$("#sam-shippingstate").attr("value", address.state);
+			$("#sam-shippingcountry").attr("value", address.country);
+			$("#sam-shippingzip").attr("value", address.zip);
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#sam-creditcardedit", function(event, ui) {
+	populatePanel("sam-creditcardedit");
+	var user=JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditcreditcard/" + user+"/"+sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			var address = data.address[0];
+			$("#sam-creditstreet").attr("value", address.street);
+			$("#sam-creditcity").attr("value", address.city);
+			$("#sam-creditstate").attr("value", address.state);
+			$("#sam-creditcountry").attr("value", address.country);
+			$("#sam-creditzip").attr("value", address.zip);
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 });
 
 $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
