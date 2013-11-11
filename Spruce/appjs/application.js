@@ -119,7 +119,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 			var len = images.length;
 			for (var i = 0; i < len; ++i) {
 				var image = images[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + image.itemdate + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.itemdate) + '</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");
@@ -155,7 +155,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 
 			for (var i = 0; i < 3; ++i) {
 				var image = images[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + image.itemdate + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.itemdate) + '</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");
@@ -183,7 +183,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.itemdate + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
 
 			}
 			list.listview("refresh");
@@ -213,7 +213,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 
-				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.itemdate + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
 
 			}
 			list.listview("refresh");
@@ -883,7 +883,7 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 	$('#lrd-buyerproductBidPrice').html("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 	$("#lrd-buyerproductImage").attr("src", "" + currentItem.photo);
 	$('#lrd-buyerproductQuantity').html("Quantity: " + currentItem.amount);
-	$('#lrd-buyerproductTimeRemaining').html("Ending in: " + currentItem.bideventdate);
+	$('#lrd-buyerproductTimeRemaining').html("Ending in: " + new Date(currentItem.bideventdate));
 	$('#lrd-buyerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
 	$('#lrd-buyerproductDimensions').text("Dimensions: " + currentItem.dimensions);
 	$('#lrd-buyerproductId').text("Id: " + currentItem.itemid);
@@ -917,7 +917,7 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function(event, ui) {
 	$('#lrd-sellerproductName').text(currentItem.itemname);
 	$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 	$("#lrd-sellerproductImage").attr("src", "" + currentItem.photo);
-	$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + currentItem.bideventdate);
+	$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + new Date(currentItem.bideventdate));
 	$('#lrd-sellerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
 	$('#lrd-sellerproductDimensions').text("Dimensions: " + currentItem.dimensions);
 	$('#lrd-sellerproductId').text("Id: " + currentItem.itemid);
@@ -1068,7 +1068,7 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + object.startingDate + '</b></p></div></div></a></li>');
+				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.startingDate) + '</b></p></div></div></a></li>');
 
 			}
 			list.listview("refresh");
