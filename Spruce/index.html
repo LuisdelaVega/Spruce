@@ -2098,73 +2098,54 @@
 			</div>
 			<div data-role="content">
 				<h1>Reports</h1>
-				<p>
-					Total sells: 14,354,654
-				</p>
+				<p ><b id="lrd-adminreportspageTotalSells"></b></p>
 				<hr />
+				<p><b>
+					Filter sells by:
+				</b></p>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<p>
-							Total sells for:
-						</p>
+						<select id="lrd-adminreportspageSellsCategory" name="category0" data-native-menu="false"></select>
 					</div>
 					<div class="ui-block-b">
-						<select id="lrd-adminreportspageCategory0" name="category0" data-native-menu="false">
-							<option value="1">Category</option>
-							<option value="2">Category 1</option>
-							<option value="3">Category 2</option>
-							<option value="4">Category 3</option>
-							<option value="5">Category 4</option>
-							<option value="6">Category 5</option>
-							<option value="7">Category 6</option>
-						</select>
-					</div>
-				</div>
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<select id="lrd-adminreportspageTime0" name="time0" data-native-menu="false">
+						<select id="lrd-adminreportspageSellsTime" name="time0" data-native-menu="false">
 							<option value="1">Today</option>
 							<option value="2">This week</option>
 							<option value="3">This month</option>
 						</select>
 					</div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<p><b id="lrd-adminreportspageTotalItemsSold"></b></p>
+					</div>
 					<div class="ui-block-b">
-						<p align="right">
-							137,093
-						</p>
+						<a id="lrd-adminreportspageTotalItemsSoldButton" title="login" onclick="getTotalSells()" type="button" data-theme="b">Get amount</a>
 					</div>
 				</div>
+					
 				<hr />
+				<p><b>
+					Filter revenue by:
+				</b></p>
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<p>
-							Total revenue for:
-						</p>
+						<select id="lrd-adminreportspageRevenueCategory" name="category0" data-native-menu="false"></select>
 					</div>
 					<div class="ui-block-b">
-						<select id="lrd-adminreportspageCategory1" name="category1" data-native-menu="false">
-							<option value="1">Category</option>
-							<option value="2">Category 1</option>
-							<option value="3">Category 2</option>
-							<option value="4">Category 3</option>
-							<option value="5">Category 4</option>
-							<option value="6">Category 5</option>
-							<option value="7">Category 6</option>
-						</select>
-					</div>
-				</div>
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<select id="lrd-adminreportspageTime1" name="time1" data-native-menu="false">
+						<select id="lrd-adminreportspageRevenueTime" name="time0" data-native-menu="false">
 							<option value="1">Today</option>
 							<option value="2">This week</option>
 							<option value="3">This month</option>
 						</select>
 					</div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<p><b id="lrd-adminreportspageTotalItemsRevenue"></b></p>
+					</div>
 					<div class="ui-block-b">
-						<p align="right">
-							25,376
-						</p>
+						<a id="lrd-adminreportspageTotalItemsRevenueButton" title="login" onclick="getTotalRevenue()" type="button" data-theme="b">Get amount</a>
 					</div>
 				</div>
 
