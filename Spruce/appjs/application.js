@@ -1022,7 +1022,6 @@ function getTotalSells(){
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			$('#lrd-adminreportspageSellsCategory').empty();
 			for (var i = 0; i < data.categories.length; i++) {
 				if(i+1 == category){
 					if(time == 1){
@@ -1080,7 +1079,6 @@ function getTotalRevenue(){
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			$('#lrd-adminreportspageSellsCategory').empty();
 			for (var i = 0; i < data.categories.length; i++) {
 				if(i+1 == category){
 					if(time == 1){
