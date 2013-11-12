@@ -588,8 +588,8 @@
 				<div align="center">
 					<img id="userMyAccountImage" style="max-width: 300px;max-height: 300px;"/>
 				</div>
-				<div align="center">
-					<div id="sdlt-thisshitbetterworknow" ></div>
+				<div data-role="fieldcontain" align="center">
+					<div id="sdlt-thisshitbetterworknow" style="padding-top: 10px" ></div>
 				</div>
 				<ul data-role="listview" data-inset="true" >
 					<li >
@@ -603,11 +603,30 @@
 				</ul>
 				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button" data-theme="b"> Edit </a>
 				<a onclick="GoToView('lrd-purchaseHistory')" data-role="button" data-theme="a"> Purchase History </a>
+				<a onclick="GoToView('rpa-rating')" data-role="button" data-theme="a"> Ratings </a>
 			</div>
 		</div>
 
 		<!-- End of My Account Info view -->
 
+		<div id="rpa-rating" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="css/Shopping-Cart-icon.png" /></a>
+				<div align="center">
+					<img align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-ratingSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1>Ratings:</h1>
+				<ul id="rpa-ratinglist" data-role="listview" data-inset="true" >
+				</ul>
+			</div>
+		</div>
+		
 		<!-- Purchase History view -->
 		
 		<div id="lrd-purchaseHistory" data-role="page">
@@ -909,7 +928,7 @@
 				</div>
 			</div>
 			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
-				<ul id="lrd-myaccountinfoeditSidePanel" data-role="listview" data-theme="a"></ul>
+				<ul id="sdlt-adminmyaccountinfoeditSidePanel" data-role="listview" data-theme="a"></ul>
 			</div>
 			<div data-role = "content">
 				<ul data-role="listview" data-inset="true">

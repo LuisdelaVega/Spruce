@@ -308,8 +308,45 @@ $(document).on('pagebeforeshow', "#lrd-login", function(event, ui) {
 	populatePanel("lrd-login");
 });
 
+$(document).on('pagebeforeshow', "#sdlt-adminmyaccountinfoedit", function(event, ui) {
+	populatePanel("sdlt-adminmyaccountinfoedit");
+});
+
 $(document).on('pagebeforeshow', "#lrd-sellitem", function(event, ui) {
 	populatePanel("lrd-sellitem");
+});
+
+$(document).on('pagebeforeshow', "#rpa-rating", function(event, ui) {
+	populatePanel("rpa-rating");
+	$.mobile.loading("show");
+	var list = $("#rpa-ratinglist");
+	list.empty();
+	var account = new Object();
+	account.password = sessionStorage.acc;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getRating",
+		data : jsonText,
+		method : 'put',
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			var ratingList = data.ratings;
+			var len = ratingList.length;
+			for (var i = 0; i < len; ++i) {
+				var rating = ratingList[i];
+				list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + rating.accusername + "')><img src='" + rating.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">User: ' + rating.accusername + '</h1><p style="font-size: 13px;margin-top:5px"><b>Name: ' + rating.accfname + ' ' + rating.acclname + '</b></p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >Rating: ' + rating.rating + '</h1></div></div></a></li>');
+			}
+			list.listview("refresh");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			alert("Data not found!");
+		}
+	});
 });
 
 $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
@@ -621,9 +658,9 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 	});
 });
 $(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, ui) {
+	populatePanel("rpa-adminsubcategoriespage");
 	var list = $("#rpa-adminsubcategoriespagelist");
 	list.empty();
-	populatePanel("rpa-adminsubcategoriespageSidePanel");
 	$('#rpa-nomorecats').text("");
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + sessionStorage.editId + "/parent",
