@@ -1056,20 +1056,25 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfoedit", function(event, ui) {
 
 //////////////////////////SELLER STORE//////////////////////////////////
 $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
-	var list = $("#lrd-userstoreSellerItems");
-	list.empty();
 	populatePanel("lrd-userstore");
+	$.support.cors = true;
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/user/store",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/getUserStore",
 		contentType : "application/json",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : sessionStorage.accountinfo,
 		success : function(data, textStatus, jqXHR) {
+			var list = $("#lrd-userstoreSellerItems");
+			list.empty();
 			var objectList = data.items;
+			console.log(objectList);
 			var len = objectList.length;
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.id + ')"><img style="padding-left:5px; padding-top: 7px"src="css/images/thumbnail.png">' + '<h1 style="margin: 0px">' + object.name + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.startingDate) + '</b></p></div></div></a></li>');
-
+				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px"src="'+object.photo+'">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemate) + '</b></p></div></div></a></li>');
 			}
 			list.listview("refresh");
 		},
