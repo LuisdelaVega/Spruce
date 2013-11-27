@@ -3,6 +3,9 @@ var order = "none";
 var by = "none";
 var total;
 var gtotal = 0;
+var change = false;
+var didChange = false;
+var link = '';
 
 $(document).ready(function() {
 	$('#lrd-homeSearch-basic').bind("enterKey", function(e) {
@@ -15,7 +18,7 @@ $(document).ready(function() {
 			$(this).trigger("enterKey");
 		}
 	});
-	var change = true;
+	didChange = change = true;
 	$("#lrd-signupshippingAddressCheck").click(function() {
 		if (change) {
 			$("#lrd-signupshippingShippingButton").attr("onclick", "GoToView('lrd-signupbilling')");
@@ -36,6 +39,7 @@ $(document).ready(function() {
 			accept = true;
 		}
 	});
+
 });
 
 $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
@@ -64,13 +68,13 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 			console.log(JSON.stringify(currentUser));
 			$('#lrd-checkoutAccountnumber').empty();
 			$('#lrd-checkoutShippingAddress').empty();
-			for(var i=0 ; i< currentUser.creditnumber.length ; i++){
+			for (var i = 0; i < currentUser.creditnumber.length; i++) {
 				var j = i + 1;
 				$('#lrd-checkoutAccountnumber').append('<option value = "' + j + '">' + currentUser.creditnumber[i].number + '</option>');
 			}
 			for (var i = 0; i < currentUser.shippinginfo.length; i++) {
 				var j = i + 1;
-				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> '+currentUser.shippinginfo[i].street+', ' + currentUser.shippinginfo[i].city + '</option>');
+				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> ' + currentUser.shippinginfo[i].street + ', ' + currentUser.shippinginfo[i].city + '</option>');
 			}
 			$('#lrd-checkoutAccountnumber').selectmenu('refresh', true);
 			$('#lrd-checkoutShippingAddress').selectmenu('refresh', true);
@@ -78,7 +82,7 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	$('#sdlt-totalamount').append("Total: " + accounting.formatMoney(gtotal));
@@ -126,7 +130,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -136,13 +140,12 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 	var list = $("#lrd-homePopularContent");
 	list.empty();
 	populatePanel("lrd-home");
-	if(sessionStorage.user=="admin"){
-		document.getElementById("adminbuttons").style.display="block";
-		document.getElementById("userbuttons").style.display="none";
-	}
-	else{
-		document.getElementById("adminbuttons").style.display="none";
-		document.getElementById("userbuttons").style.display="block";
+	if (sessionStorage.user == "admin") {
+		document.getElementById("adminbuttons").style.display = "block";
+		document.getElementById("userbuttons").style.display = "none";
+	} else {
+		document.getElementById("adminbuttons").style.display = "none";
+		document.getElementById("userbuttons").style.display = "block";
 	}
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/home/",
@@ -162,7 +165,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -191,7 +194,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -220,7 +223,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -254,7 +257,7 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 						},
 						error : function(data, textStatus, jqXHR) {
 							console.log("textStatus: " + textStatus);
-							alert("Data not found!");
+
 						}
 					});
 				}
@@ -276,14 +279,14 @@ $(document).on('pagebeforeshow', "#rpa-subCategoryPopup", function(event, ui) {
 					},
 					error : function(data, textStatus, jqXHR) {
 						console.log("textStatus: " + textStatus);
-						alert("Data not found!");
+
 					}
 				});
 			}
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -344,7 +347,7 @@ $(document).on('pagebeforeshow', "#rpa-rating", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -380,7 +383,7 @@ $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -396,7 +399,7 @@ $(document).on('pagebeforeshow', "#lrd-adminreportspage", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	$.ajax({
@@ -408,20 +411,20 @@ $(document).on('pagebeforeshow', "#lrd-adminreportspage", function(event, ui) {
 			$('#lrd-adminreportspageRevenueCategory').empty();
 			for (var i = 0; i < data.categories.length; i++) {
 				var j = i + 1;
-				$('#lrd-adminreportspageSellsCategory').append('<option value = "' + j + '" id="'+data.categories[i].catname+'"> '+data.categories[i].catname+'</option>');
-				$('#lrd-adminreportspageRevenueCategory').append('<option value = "' + j + '" id="'+data.categories[i].catname+'"> '+data.categories[i].catname+'</option>');
+				$('#lrd-adminreportspageSellsCategory').append('<option value = "' + data.categories[i].catname + '" id="' + data.categories[i].catname + '"> ' + data.categories[i].catname + '</option>');
+				$('#lrd-adminreportspageRevenueCategory').append('<option value = "' + data.categories[i].catname + '" id="' + data.categories[i].catname + '"> ' + data.categories[i].catname + '</option>');
 			}
 			$('#lrd-adminreportspageSellsCategory').selectmenu('refresh', true);
 			$('#lrd-adminreportspageRevenueCategory').selectmenu('refresh', true);
 			$.mobile.loading("hide");
-			
+
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
-	
+
 });
 
 $(document).on('pagebeforeshow', "#lrd-pastinvoice", function(event, ui) {
@@ -469,7 +472,7 @@ $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	populatePanel("lrd-generalinfo");
@@ -497,13 +500,13 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 			var len = creditList.length;
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('"+card.cid+"-"+card.bid+"','rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
 			}
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	populatePanel("rpa-creditcard");
@@ -537,7 +540,7 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	populatePanel("rpa-shipping");
@@ -568,7 +571,7 @@ $(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	populatePanel("rpa-creditcardedit");
@@ -599,7 +602,7 @@ $(document).on('pagebeforeshow', "#rpa-shippingedit", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	populatePanel("rpa-shippingedit");
@@ -628,7 +631,7 @@ $(document).on('pagebeforeshow', "#lrd-category", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -653,7 +656,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -672,13 +675,13 @@ $(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, 
 			var object;
 			for ( i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','"+object.catname+"')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
 			}
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -703,7 +706,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -722,7 +725,7 @@ function goToAccountEditPage(username) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!seller profile");
+
 		}
 	});
 }
@@ -756,7 +759,7 @@ $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 	var list = $('#sam-creditcardlist');
 	list.empty();
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/admincreditcardinfo/"+accountinfo[0].accusername,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admincreditcardinfo/" + accountinfo[0].accusername,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -765,13 +768,13 @@ $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 			var len = creditList.length;
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('"+card.cid+"-"+card.bid+"','sam-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','sam-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
 			}
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	list.listview("refresh");
@@ -783,7 +786,7 @@ $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 	var list = $('#sam-shippingList');
 	list.empty();
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/adminshippinginfo/"+accountinfo[0].accusername,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/adminshippinginfo/" + accountinfo[0].accusername,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -798,7 +801,7 @@ $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	list.listview("refresh");
@@ -806,9 +809,9 @@ $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 
 $(document).on('pagebeforeshow', "#sam-shippingedit", function(event, ui) {
 	populatePanel("sam-shippingedit");
-	var user=JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
+	var user = JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditshipping/" + user+"/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditshipping/" + user + "/" + sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -822,16 +825,16 @@ $(document).on('pagebeforeshow', "#sam-shippingedit", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
 
 $(document).on('pagebeforeshow', "#sam-creditcardedit", function(event, ui) {
 	populatePanel("sam-creditcardedit");
-	var user=JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
+	var user = JSON.parse(sessionStorage.adminaccountinfo)[0].accusername;
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditcreditcard/" + user+"/"+sessionStorage.editId,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/admineditcreditcard/" + user + "/" + sessionStorage.editId,
 		contentType : "application/json",
 		crossDomain : true,
 		withCredentials : true,
@@ -845,7 +848,7 @@ $(document).on('pagebeforeshow', "#sam-creditcardedit", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -869,7 +872,7 @@ $(document).on('pagebeforeshow', "#lrd-bidhistory", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -906,7 +909,7 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -987,7 +990,7 @@ function goToSellerProfile(username) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!seller profile");
+
 		}
 	});
 
@@ -1046,7 +1049,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -1082,7 +1085,7 @@ $(document).on('pagebeforeshow', "#lrd-purchaseHistory", function(event, ui) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
@@ -1111,129 +1114,91 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px"src="'+object.photo+'">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemate) + '</b></p></div></div></a></li>');
+				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px"src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
 			}
 			list.listview("refresh");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 });
 
-function getTotalSells(){
+function getTotalSells() {
 	$.mobile.loading("show");
 	var category = document.all["lrd-adminreportspageSellsCategory"].value;
 	console.log(category);
 	var time = document.all["lrd-adminreportspageSellsTime"].value;
 	console.log(time);
-	
+
 	var d = new Date();
 	var thistime;
-	
+
+	if (time == 1) {
+		thistime = "today";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " 00:00:00.000000";
+	} else if (time == 2) {
+		thistime = "this week";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate() - 7) + " 00:00:00.000000";
+	} else {
+		thistime = "this month";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1 - 1) + "-" + d.getDate() + " 00:00:00.000000";
+	}
+
+	console.log(time);
+
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			for (var i = 0; i < data.categories.length; i++) {
-				if(i+1 == category){
-					if(time == 1){
-						thistime = "today";
-						time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" 00:00:00.000000";
-					}
-					else if(time == 2){
-						thistime = "this week";
-						time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-7)+" 00:00:00.000000";
-					}
-					else{
-						thistime = "this month";
-						time = d.getFullYear()+"-"+(d.getMonth()+1-1)+"-"+d.getDate()+" 00:00:00.000000";
-					}
-	
-					console.log(time);
-					var cat = data.categories[i].catname;
-					$.ajax({
-						url : "http://sprucemarket.herokuapp.com/SpruceServer/totalSellsReport/"+data.categories[i].catname+"/"+time,
-						method : 'get',
-						contentType : "application/json",
-						success : function(data, textStatus, jqXHR) {
-							document.getElementById("lrd-adminreportspageTotalItemsSold").innerHTML='Total '+cat+' items sold '+thistime+': ' + data.sells[0].sells;
-							$.mobile.loading("hide");
-						},
-						error : function(data, textStatus, jqXHR) {
-							console.log("textStatus: " + textStatus);
-							alert("Data not found!");
-						}
-					});
-				}
-			}
-			
+			document.getElementById("lrd-adminreportspageTotalItemsSold").innerHTML = 'Total ' + category + ' items sold ' + thistime + ': ' + data.sells[0].sells;
+			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
-
 }
 
-function getTotalRevenue(){
+function getTotalRevenue() {
 	$.mobile.loading("show");
 	var category = document.all["lrd-adminreportspageRevenueCategory"].value;
 	console.log(category);
 	var time = document.all["lrd-adminreportspageRevenueTime"].value;
 	console.log(time);
-	
+
 	var d = new Date();
 	var thistime;
-	
+
+	if (time == 1) {
+		thistime = "today";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " 00:00:00.000000";
+	} else if (time == 2) {
+		thistime = "this week";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate() - 7) + " 00:00:00.000000";
+	} else {
+		thistime = "this month";
+		time = d.getFullYear() + "-" + (d.getMonth() + 1 - 1) + "-" + d.getDate() + " 00:00:00.000000";
+	}
+
+	console.log(time);
+
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/getCategoriesForSidePanel",
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/totalRevenueReport/" + category + "/" + time,
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			for (var i = 0; i < data.categories.length; i++) {
-				if(i+1 == category){
-					if(time == 1){
-						thistime = "today";
-						time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+" 00:00:00.000000";
-					}
-					else if(time == 2){
-						thistime = "this week";
-						time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-7)+" 00:00:00.000000";
-					}
-					else{
-						thistime = "this month";
-						time = d.getFullYear()+"-"+(d.getMonth()+1-1)+"-"+d.getDate()+" 00:00:00.000000";
-					}
-	
-					console.log(time);
-					var cat = data.categories[i].catname;
-					$.ajax({
-						url : "http://sprucemarket.herokuapp.com/SpruceServer/totalRevenueReport/"+data.categories[i].catname+"/"+time,
-						method : 'get',
-						contentType : "application/json",
-						success : function(data, textStatus, jqXHR) {
-							document.getElementById("lrd-adminreportspageTotalItemsRevenue").innerHTML='Total '+cat+' items revenue '+thistime+': ' + accounting.formatMoney(data.sells[0].sells);
-							$.mobile.loading("hide");
-						},
-						error : function(data, textStatus, jqXHR) {
-							console.log("textStatus: " + textStatus);
-							alert("Data not found!");
-						}
-					});
-				}
-			}
-			
+			document.getElementById("lrd-adminreportspageTotalItemsRevenue").innerHTML = 'Total ' + category + ' items revenue ' + thistime + ': ' + accounting.formatMoney(data.sells[0].sells);
+			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
-
 }
 
 function getInvoice(invoiceid) {
@@ -1270,7 +1235,7 @@ function getInvoice(invoiceid) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1297,7 +1262,7 @@ function getBuyersList(itemid) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1325,81 +1290,359 @@ function checkOut(acc) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found! checkOut");
+
 			GoToView('lrd-checkout');
 		}
 	});
 }
 
 function signup() {
+	//User info
 	var username = document.all["lrd-signupUsername"].value;
-	console.log(username);
-	var fname = document.all["lrd-signupName"].value;
-	console.log(fname);
-	var lname = document.all["lrd-signupLastname"].value;
-	console.log(lname);
-	var email = document.all["lrd-signupEmail"].value;
-	console.log(email);
-	var password = document.all["lrd-signupPassword"].value;
-	console.log(password);
-	var rpassword = document.all["lrd-signupRetypepassword"].value;
-	console.log(rpassword);
-	var phone = document.all["lrd-signupPhone"].value;
-	console.log(phone);
-	var photo = document.all["lrd-signupUploadPicture"].value;
-	console.log(photo);
-	var slt = Math.random();
-	console.log(slt);
-	var rating = 0;
-
-	if (password == rpassword) {
-		var account = new Object();
-		account.username = username;
-		account.fname = fname;
-		account.lname = lname;
-		account.email = email;
-		var shaObj = new jsSHA(slt + password, "TEXT");
-		var hash = shaObj.getHash("SHA-512", "HEX");
-		var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
-		account.password = hash;
-		account.phone = phone;
-		account.rating = rating;
-		account.slt = slt;
-		account.photo = photo;
-
-		var accountfilter = new Array();
-		accountfilter[0] = "username";
-		accountfilter[1] = "fname";
-		accountfilter[2] = "lname";
-		accountfilter[3] = "email";
-		accountfilter[4] = "password";
-		accountfilter[5] = "phone";
-		accountfilter[6] = "rating";
-		accountfilter[7] = "slt";
-		accountfilter[8] = "photo";
-
-		var jsonText = JSON.stringify(account, accountfilter, "\t");
-
+	if (username == '') {
+		document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>ERROR ERROR, PLEASE INPUT SOMETHING!</b>";
+		$.mobile.navigate("#lrd-signup");
+	} else {
 		$.ajax({
-			url : "http://sprucemarket.herokuapp.com/SpruceServer/signup",
-			method : 'put',
-			crossDomain : true,
-			withCredentials : true,
-			data : jsonText,
+			url : "http://sprucemarket.herokuapp.com/SpruceServer/checkUsername/" + username,
+			method : 'get',
 			contentType : "application/json",
 			success : function(data, textStatus, jqXHR) {
-				// data.signup;
-				GoToView('lrd-login');
+				if (data.success) {
+					document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>Username already taken!</b>";
+					$.mobile.navigate("#lrd-signup");
+				} else {
+					document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:*";
+					document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+					document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+
+					var fname = document.all["lrd-signupName"].value;
+					var lname = document.all["lrd-signupLastname"].value;
+					var email = document.all["lrd-signupEmail"].value;
+					var password = document.all["lrd-signupPassword"].value;
+					var rpassword = document.all["lrd-signupRetypepassword"].value;
+					if (password != rpassword) {
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:* <b style='color:#ED0000'>Did not match!</b>";
+						$.mobile.navigate("#lrd-signup");
+					} else if (password == '' || rpassword == '') {
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:* <b style='color:#ED0000'>Passwords can't be left blank, dummy!</b>";
+						$.mobile.navigate("#lrd-signup");
+					} else if (!validateEmail(email)) {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:* <b style='color:#ED0000'>Not valid!</b>";
+						$.mobile.navigate("#lrd-signup");
+					} else if (fname == '') {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:* <b style='color:#ED0000'>No first name? That's badass!</b>";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+						$.mobile.navigate("#lrd-signup");
+					} else if (lname == '') {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:* <b style='color:#ED0000'>You gotta have a last name...</b>";
+						$.mobile.navigate("#lrd-signup");
+					} else {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+
+						var phone = document.all["lrd-signupPhone"].value;
+						var photo = document.all["lrd-signupUploadPicture1"].value;
+						if (photo == '') {
+							photo = "http://i.imgur.com/682NR9z.png";
+						} else {
+							photo = link + ".png";
+						}
+
+						var slt = Math.random();
+						var rating = 0;
+
+						//Shipping
+						var saddresLine = document.all["lrd-signupshippingAddress"].value;
+						var scity = document.all["lrd-signupshippingCity"].value;
+						var sstate = document.all["lrd-signupshippingState"].value;
+						var szip = document.all["lrd-signupshippingZip"].value;
+						var scountry = document.all["lrd-signupshippingCountry"].value;
+
+						if (saddresLine == '') {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:* <b style='color:#ED0000'>There's no place like home. Fill it out!</b>";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (scity == '') {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:* <b style='color:#ED0000'>A house in Nowhere...</b>";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (sstate == '') {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:* <b style='color:#ED0000'>You're so close...</b>";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (szip == '') {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:* <b style='color:#ED0000'>The zip code man...</b>";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (scountry == 'Country') {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:* <b style='color:#ED0000'>Choose the country for which you cheer and stuff!</b>";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+
+							//Billing
+							var baddresLine;
+							var bcity;
+							var bstate;
+							var bzip;
+							var bcountry;
+
+							if (didChange) {
+								baddresLine = document.all["lrd-signupbillingAddressBilling"].value;
+								bcity = document.all["lrd-signupbillingCityBilling"].value;
+								bstate = document.all["lrd-signupbillingStateBilling"].value;
+								bzip = document.all["lrd-signupbillingZipBilling"].value;
+								bcountry = document.all["lrd-signupbillingCountryBilling"].value;
+								didChange = false;
+							} else {
+								baddresLine = saddresLine;
+								bcity = scity;
+								bstate = sstate;
+								bzip = szip;
+								bcountry = scountry;
+							}
+
+							if (baddresLine == '') {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:* <b style='color:#ED0000'>There's no place like home. Fill it out!</b>";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bcity == '') {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:* <b style='color:#ED0000'>A house in Nowhere...</b>";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bstate == '') {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:* <b style='color:#ED0000'>You're so close...</b>";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bzip == '') {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:* <b style='color:#ED0000'>The zip code man...</b>";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bcountry == 'Country') {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:* <b style='color:#ED0000'>Choose the country for which you cheer and stuff!</b>";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+
+								//Credit
+								var cardholderName = document.all["lrd-signupcreditCardholder"].value;
+								var card;
+
+								if ($('#lrd-signupcreditVisa').is(':checked')) {
+									card = document.all["lrd-signupcreditVisa"].value;
+								} else if ($('#lrd-signupcreditMasterCard').is(':checked')) {
+									card = document.all["lrd-signupcreditMasterCard"].value;
+								} else {
+									card = document.all["lrd-signupcreditAmericanExpress"].value;
+								}
+
+								var cardNumber = document.all["lrd-signupcreditNumberCard"].value;
+								var expMonth = document.all["lrd-signupcreditExpMonth"].value;
+								var expYear = document.all["lrd-signupcreditExpYear"].value;
+								var csc = document.all["lrd-signupcreditCsc"].value;
+
+								if (cardholderName == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:* <b style='color:#ED0000'>Y U do dis?</b>";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (card == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:* <b style='color:#ED0000'>Choose a card type</b>";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (cardNumber == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:* <b style='color:#ED0000'>The numbers! What do they mean?</b>";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (expMonth == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:* <b style='color:#ED0000'>Month pls!</b>";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (expYear == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:* <b style='color:#ED0000'>Year pls!</b>";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (csc == '') {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:* <b style='color:#ED0000'>༼ ) ◕_◕ ༽)Give CSC</b>";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else {//If everything whent according to plan
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+
+									var account = new Object();
+									account.username = username;
+									account.fname = fname;
+									account.lname = lname;
+									account.email = email;
+									var shaObj = new jsSHA(slt + password, "TEXT");
+									var hash = shaObj.getHash("SHA-512", "HEX");
+									var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
+									account.password = hash;
+									account.phone = phone;
+									account.rating = rating;
+									account.slt = slt;
+									account.photo = photo;
+									account.saddresLine = saddresLine;
+									account.scity = scity;
+									account.sstate = sstate;
+									account.szip = szip;
+									account.scountry = scountry;
+									account.baddresLine = baddresLine;
+									account.bcity = bcity;
+									account.bstate = bstate;
+									account.bzip = bzip;
+									account.bcountry = bcountry;
+									account.cardholderName = cardholderName;
+									account.card = card;
+									account.cardNumber = cardNumber;
+									account.expMonth = expMonth;
+									account.expYear = expYear;
+									account.csc = csc;
+
+									var accountfilter = new Array();
+									accountfilter[0] = "username";
+									accountfilter[1] = "fname";
+									accountfilter[2] = "lname";
+									accountfilter[3] = "email";
+									accountfilter[4] = "password";
+									accountfilter[5] = "phone";
+									accountfilter[6] = "rating";
+									accountfilter[7] = "slt";
+									accountfilter[8] = "photo";
+									accountfilter[9] = "saddresLine";
+									accountfilter[10] = "scity";
+									accountfilter[11] = "sstate";
+									accountfilter[12] = "szip";
+									accountfilter[13] = "scountry";
+									accountfilter[14] = "baddresLine";
+									accountfilter[15] = "bcity";
+									accountfilter[16] = "bstate";
+									accountfilter[17] = "bzip";
+									accountfilter[18] = "bcountry";
+									accountfilter[19] = "cardholderName";
+									accountfilter[20] = "card";
+									accountfilter[21] = "cardNumber";
+									accountfilter[22] = "expMonth";
+									accountfilter[23] = "expYear";
+									accountfilter[24] = "csc";
+
+									var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+									$.ajax({
+										url : "http://localhost:5000/SpruceServer/signup",
+										method : 'put',
+										crossDomain : true,
+										withCredentials : true,
+										data : jsonText,
+										contentType : "application/json",
+										success : function(data, textStatus, jqXHR) {
+											// data.signup;
+											GoToView('lrd-login');
+										},
+										error : function(data, textStatus, jqXHR) {
+											console.log("textStatus: " + textStatus);
+
+											GoToView('lrd-login');
+										}
+									});
+								}
+							}
+						}
+					}
+				}
 			},
 			error : function(data, textStatus, jqXHR) {
-				console.log("textStatus: " + textStatus);
-				alert("Data not found! Signup");
-				GoToView('lrd-login');
+				document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>Username already taken!</b>";
+				GoToView('lrd-signup');
 			}
 		});
-	} else {
-		GoToView("lrd-signup");
 	}
+}
+
+function validateEmail(email) {
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
+
+// Imgur api!
+function upload(file) {
+	if (!file || !file.type.match(/image.*/))
+		return;
+
+	console.log(file.type);
+
+	document.body.className = "uploading";
+
+	var fd = new FormData();
+	fd.append("image", file);
+	fd.append("key", "6528448c258cff474ca9701c5bab6927");
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "http://api.imgur.com/2/upload.json");
+	xhr.onload = function() {
+		link = JSON.parse(xhr.responseText).upload.links.imgur_page;
+		document.querySelector("#lrd-signupUploadPicture1Pic").src = link + ".png";
+	};
+	xhr.send(fd);
 }
 
 function login() {
@@ -1449,25 +1692,25 @@ function login() {
 							$("#lrd-username").val("");
 							$("#lrd-password").val("");
 							GoToView('lrd-home');
-							
+
 						} else {
 							sessionStorage.user = "guest";
-							alert("Username and password does not exist");
+
 						}
 					},
 					error : function(data, textStatus, jqXHR) {
 						console.log("textStatus: " + textStatus);
-						alert("Data not found");
+
 						GoToView('lrd-login');
 					}
 				});
 			} else {
-				alert("Username not found");
+
 			}
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found");
+
 			GoToView('lrd-login');
 		}
 	});
@@ -1509,7 +1752,7 @@ function populatePanel(view) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1562,7 +1805,7 @@ function ajaxMySpruce(where) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1624,7 +1867,7 @@ function GetItem(id) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1648,7 +1891,7 @@ function GoToEditView(id, view) {
 	$.mobile.loading("show");
 	$.mobile.changePage("#" + view, {
 		allowSamePageTransition : true,
-		transition:"slide"
+		transition : "slide"
 	});
 }
 
@@ -1693,7 +1936,7 @@ function sellCat() {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 }
@@ -1728,13 +1971,13 @@ function sellSubCat(catid, catname) {
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	$.mobile.loading("hide");
 }
 
-function adminSubCategories(catid,catname) {
+function adminSubCategories(catid, catname) {
 	var i = 0;
 	$.mobile.loading("show");
 	var list = $("#rpa-adminsubcategoriespagelist");
@@ -1748,18 +1991,18 @@ function adminSubCategories(catid,catname) {
 			var len = objectList.length;
 			var object;
 			if (len == 0) {
-				$('#rpa-nomorecats').text("No more categories for: "+catname+"("+catid+")");
+				$('#rpa-nomorecats').text("No more categories for: " + catname + "(" + catid + ")");
 			} else {
 				for ( i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append("<li data-icon'delete'><a onclick=adminSubCategories('" + object.catid + "','"+object.catname+"')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+					list.append("<li data-icon'delete'><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
 				}
 				list.listview("refresh");
 			}
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
-			alert("Data not found!");
+
 		}
 	});
 	$.mobile.loading("hide");

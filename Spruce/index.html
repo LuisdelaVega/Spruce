@@ -1368,19 +1368,19 @@
 			<div data-role="content" >
 				<h1 style="text-align: center">User Info</h1>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupUsername">Username:*</label>
+					<label for="lrd-signupUsername" id="lrd-signupUsernameLabel">Username:*</label>
 					<input type="text" id="lrd-signupUsername" name="username">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupName">Name:*</label>
+					<label for="lrd-signupName" id="lrd-signupNameLabel">First Name:*</label>
 					<input type="text" id="lrd-signupName" name="name">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupLastname">Last Name:*</label>
+					<label for="lrd-signupLastname" id="lrd-signupLastnameLabel">Last Name:*</label>
 					<input type="text" id="lrd-signupLastname" name="lastname">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupEmail">Email:*</label>
+					<label for="lrd-signupEmail" id="lrd-signupEmailLabel">Email:*</label>
 					<input type="email" id="lrd-signupEmail" name="email">
 				</div>
 				<div data-role="fieldcontain">
@@ -1388,21 +1388,21 @@
 					<input type="password" id="lrd-signupPassword" name="password">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupRetypepassword">Re-type Password:*</label>
+					<label for="lrd-signupRetypepassword" id="lrd-signupRetypepasswordLabel">Re-type Password:*</label>
 					<input type="password" id="lrd-signupRetypepassword" name="retypepassword">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupPhone">Phone Number:*</label>
+					<label for="lrd-signupPhone">Phone Number:</label>
 					<input type="number" id="lrd-signupPhone" name="phone">
 				</div>
 				<div data-role="fieldcontain">
 					<div class="ui-grid-a">
 						<div class="ui-block-a">
-							<img src="images/Unknown-person_80x80.gif" />
+							<img id="lrd-signupUploadPicture1Pic" src="images/Unknown-person_80x80.gif" style="height: 80px; width: 80px"/>
 						</div>
 						<div class="ui-block-b">
-							<label for="lrd-signupUploadPicture">Upload Picture:</label>
-							<input type="file" id="lrd-signupUploadPicture" name="uploadpicture">
+							<label for="lrd-signupUploadPicture1" id="lrd-signupUploadPicture1Label">Upload Picture:</label>
+							<input type="file" id="lrd-signupUploadPicture1" name="uploadpicture" onchange="upload(this.files[0])" >
 						</div>
 					</div>
 				</div>
@@ -1428,19 +1428,19 @@
 			<div data-role="content">
 				<h1 style="text-align: center">Shipping Address</h1>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupshippingAddress">Address Line:*</label>
+					<label for="lrd-signupshippingAddress" id="lrd-signupshippingAddressLabel">Address Line:*</label>
 					<input type="text" id="lrd-signupshippingAddress" name="address">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupshippingCity">City:*</label>
+					<label for="lrd-signupshippingCity" id="lrd-signupshippingCityLabel">City:*</label>
 					<input type="text" id="lrd-signupshippingCity" name="city">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupshippingState">State/Province/Region:*</label>
+					<label for="lrd-signupshippingState" id="lrd-signupshippingStateLabel">State/Province/Region:*</label>
 					<input type="text" id="lrd-signupshippingState" name="state">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupshippingZip">Zip Code:*</label>
+					<label for="lrd-signupshippingZip" id="lrd-signupshippingZipLabel">Zip Code:*</label>
 					<input type="number" id="lrd-signupshippingZip" name="zip">
 				</div>
 				<div data-role="fieldcontain" align="right">
@@ -1723,19 +1723,19 @@
 			<div data-role="content">
 				<h1 style="text-align: center">Billing Address</h1>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupbillingAddressBilling">Address Line:*</label>
+					<label for="lrd-signupbillingAddressBilling" id="lrd-signupbillingAddressBillingLabel">Address Line:*</label>
 					<input type="text" id="lrd-signupbillingAddressBilling" name="addressBilling">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupbillingCityBilling">City:*</label>
+					<label for="lrd-signupbillingCityBilling" id="lrd-signupbillingCityBillingLabel">City:*</label>
 					<input type="text" id="lrd-signupbillingCityBilling" name="cityBilling">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupbillingStateBilling">State/Province/Region:*</label>
+					<label for="lrd-signupbillingStateBilling" id="lrd-signupbillingStateBillingLabel">State/Province/Region:*</label>
 					<input type="text" id="lrd-signupbillingStateBilling" name="stateBilling">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupbillingZipBilling">Zip Code:*</label>
+					<label for="lrd-signupbillingZipBilling" id="lrd-signupbillingZipBillingLabel">Zip Code:*</label>
 					<input type="number" id="lrd-signupbillingZipBilling" name="zipBilling">
 				</div>
 				<div data-role="fieldcontain" align="right">
@@ -2014,27 +2014,35 @@
 			<div data-role="content" >
 				<h1 style="text-align: center">Credit</h1>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupcreditCardholder">Cardholder Name:*</label>
+					<label for="lrd-signupcreditCardholder" id="lrd-signupcreditCardholderLabel">Cardholder Name:*</label>
 					<input type="text" id="lrd-signupcreditCardholder" name="cardholder">
 				</div>
 				<fieldset data-role="controlgroup" data-type="horizontal" align="center">
-					<input type="radio" name="q2" id="lrd-signupcreditVisa" value="0" checked="checked" />
+					<input type="radio" name="Card" id="lrd-signupcreditVisa" value="Visa" />
 					<label for="lrd-signupcreditVisa">Visa</label>
-					<input type="radio" name="q2" id="lrd-signupcreditMasterCard" value="1" />
+					<input type="radio" name="Card" id="lrd-signupcreditMasterCard" value="Master Card" />
 					<label for="lrd-signupcreditMasterCard">Master Card</label>
-					<input type="radio" name="q2" id="lrd-signupcreditAmericanExpress" value="2" />
+					<input type="radio" name="Card" id="lrd-signupcreditAmericanExpress" value="AmEx" />
 					<label for="lrd-signupcreditAmericanExpress">AmEx</label>
 				</fieldset>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupcreditNumberCard">Number:*</label>
+					<label for="lrd-signupcreditNumberCard" id="lrd-signupcreditNumberCardLabel">Number:*</label>
 					<input type="text" id="lrd-signupcreditNumberCard" name="numberCard">
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupcreditExpDate">Expiration Date*:</label>
-					<input type="month" name="expDate" id="lrd-signupcreditExpDate" value="" />
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="lrd-signupcreditExpDate" id="lrd-signupcreditExpMonthLabel">Expiration Month:*</label>
+							<input type="month" name="expDate" id="lrd-signupcreditExpMonth" value="" />
+						</div>
+						<div class="ui-block-b">
+							<label for="lrd-signupcreditExpDate" id="lrd-signupcreditExpYearLabel">Expiration Year:*</label>
+							<input type="month" name="expDate" id="lrd-signupcreditExpYear" value="" />
+						</div>
+					</div>
 				</div>
 				<div data-role="fieldcontain">
-					<label for="lrd-signupcreditCsc">CSC:*</label>
+					<label for="lrd-signupcreditCsc" id="lrd-signupcreditCscLabel">CSC:*</label>
 					<input type="number" id="lrd-signupcreditCsc" name="csc">
 				</div>
 				<a data-role="button" data-theme="b" onclick="signup()">Sign Up!</a>
