@@ -74,7 +74,7 @@
 						<h3 align="center">Popular Now</h3>
 					</li>
 				</ul>
-				<a onclick="GoToView('lrd-sellitem')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/sell.png" height="21px" width="21px"><br />Sell Item </a>
+				<a onclick="CheckSessionView('lrd-sellitem')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/sell.png" height="21px" width="21px"><br />Sell Item </a>
 			</div>
 		</div>
 
@@ -332,7 +332,7 @@
 					<h1 id="currentBidDialog"></h1>
 					<label for="bidAmount">Bid Amount:</label>
 					<input type="number" id="bidAmount" name="bidAmount">
-					<a href="#lrd-mysprucebidding" data-role="button" data-theme="b">Ok</a>
+					<a onclick="bidItem()" data-role="button" data-theme="b">Bid</a>
 					<a data-role="button" href="#lrd-buyerproduct">Cancel</a>
 				</div>
 			</div>
@@ -358,19 +358,12 @@
 				<div align="center">
 					<a href="#placeholderseller" data-rel="popup" data-position-to="window" data-transition="fade"> <img id="lrd-sellerproductImage" width="200" height="200" src="css/images/thumbnail.png" /> </a>
 				</div>
-				<div id="rpa-sellerbuttons" style="display: none" class="ui-grid-a">
-					<div class="ui-block-a">
-						<a data-role="button"  href="#restockPage" data-rel="dialog" data-theme="a">Restock</a>
-					</div>
-					<div class="ui-block-b">
-						<a onclick="GoToView('lrd-bidhistory')" data-role="button" data-theme="b">Bid History</a>
-					</div>
-				</div>
-				<a id="rpa-restockbutton" style="display: none" type="button" href="#restockPage" data-rel="dialog" data-theme="a">Restock</a>
+				<a id="rpa-restockbutton" style="display: none" type="button" href="#restockPage" data-rel="dialog" data-theme="b">Restock</a>
 				<a id="rpa-bidhistorybutton" style="display: none" onclick="GoToView('lrd-bidhistory')" data-role="button" data-theme="b">Bid History</a>
 				<ul data-role="listview" data-theme="a" data-inset="true">
 					<li>
 						<h2 style="text-align: center;font-size: 24px" id="lrd-sellerproductBuyNowPrice" ></h2>
+						<h2 style="text-align: center;font-size: 24px" id="lrd-sellerproductBidPrice" ></h2>
 					</li>
 					<li>
 						<h3 style="text-align: center;white-space:normal" id="lrd-sellerproductTimeRemaining"></h3>
@@ -402,8 +395,8 @@
 			</div>
 			<div data-role="content">
 				<h3 style="text-align: center">Restock Quantity</h3>
-				<input type="range" name="quantitySlider" id="quantitySlider" value="1" min="1" max="100" />
-				<a data-role="button" data-theme="b" href="#lrd-sellerproduct">Restock</a>
+				<input type="range" id="restockSlider" value="1" min="1" max="100" />
+				<a data-role="button" data-theme="b" onclick="restockItem()">Restock</a>
 				<a data-role="button" href="#lrd-sellerproduct">Cancel</a>
 			</div>
 		</div>
@@ -1285,9 +1278,10 @@
 			</div>
 			<div data-role="content" >
 				<h1 align="center">Sell Item</h1>
+				<h3 id="rpa-sellwarning"></h3>
 				<div data-role="fieldcontain">
-					<label for="lrd-sellitemItemName">Item Name:*</label>
-					<input type="text" id="lrd-sellitemItemName" name="itemName">
+					<label for="lrd-sellitemName">Item Name:*</label>
+					<input type="text" id="lrd-sellitemName" name="itemName">
 				</div>
 				<div data-role="fieldcontain">
 					<label for="lrd-sellitemPrice">Buy it now price:*</label>
@@ -1309,38 +1303,32 @@
 					<label for="lrd-sellitemDescription">Description:</label>
 					<textarea name="lrd-sellitemDescription" id="lrd-sellitemDescription"></textarea>
 				</div>
+				<div data-role="fieldcontain">
+					<label for="lrd-sellitemAmount">Amount:*</label>
+					<input id="lrd-sellitemAmount" name="lrd-sellitemAmount" type="number"/>
+				</div>
 				<br />
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<img src="images/Unknown-person_80x80.gif" />
+						<img style="height: 80px; width: 80px" id="sellitemimg" src="images/Unknown-person_80x80.gif" />
 					</div>
 					<div class="ui-block-b">
-						<label for="lrd-sellitemUploadPicture">Upload Picture:</label>
-						<input type="file" id="lrd-sellitemUploadPicture" name="uploadpicture">
-					</div>
-				</div>
-				
-				<div class="ui-grid-a" >
-					<div class="ui-block-a">
-						<input id="lrd-sellitemAmount" type="number" placeholder="Amount:" />
-					</div>
-					<div class="ui-block-b">
-						<label for="lrd-sellitemRestock">Restock:</label>
-						<input id="lrd-sellitemRestock" type="checkbox" />
+						<label for="lrd-sellitemUploadPicture">Upload Picture:*</label>
+						<input type="file" id="lrd-sellitemUploadPicture" name="uploadpicture" onchange="upload(this.files[0],'sellitemimg')">
 					</div>
 				</div>
 				<a id="rpa-selectcategorybutton" data-role="button" onclick="sellCat()" >Select Category</a>
-					<h3 id="rpa-selectedcategory"></h3>
+				<h3 id="rpa-selectedcategory" align="center"></h3>
 				<div class="ui-grid-a" >
 					<div class="ui-block-a">
-						<button type="submit" data-theme="c">
+						<a data-role="button" onclick="GoToView('lrd-home')" data-theme="c">
 							Cancel
-						</button>
+						</a>
 					</div>
 					<div class="ui-block-b">
-						<button type="submit" data-theme="b" onclick="GoToView('lrd-home')">
+						<a data-role="button" data-theme="b" onclick="checkSell()">
 							Sell
-						</button>
+						</a>
 					</div>
 				</div>
 
@@ -1412,7 +1400,7 @@
 						</div>
 						<div class="ui-block-b">
 							<label for="lrd-signupUploadPicture1" id="lrd-signupUploadPicture1Label">Upload Picture:</label>
-							<input type="file" id="lrd-signupUploadPicture1" name="uploadpicture" onchange="upload(this.files[0])" >
+							<input type="file" id="lrd-signupUploadPicture1" name="uploadpicture" onchange="upload(this.files[0],'lrd-signupUploadPicture1Pic')" >
 						</div>
 					</div>
 				</div>

@@ -122,7 +122,7 @@ $(document).on('pagebeforeshow', "#sdlt-popularNowView", function(event, ui) {
 			var len = images.length;
 			for (var i = 0; i < len; ++i) {
 				var image = images[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.itemdate) + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.item_end_date) + '</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");
@@ -159,7 +159,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 
 			for (var i = 0; i < 3; ++i) {
 				var image = images[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.itemdate) + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.item_end_date) + '</b></p></div></div></a></li>');
 			}
 			list.listview('refresh');
 			$.mobile.loading("hide");
@@ -187,7 +187,7 @@ $(document).on('pagebeforeshow', "#rpa-searchpage", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.item_end_date) + '</b></p></div></div></a></li>');
 
 			}
 			list.listview("refresh");
@@ -217,7 +217,7 @@ $(document).on('pagebeforeshow', "#lrd-itemsforcategory", function(event, ui) {
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
 
-				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ")><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + object.photo + "'>" + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.item_end_date) + '</b></p></div></div></a></li>');
 
 			}
 			list.listview("refresh");
@@ -967,10 +967,9 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 			sessionStorage.currentItem = JSON.stringify(currentItem);
 			$('#lrd-buyerproductName').text(currentItem.itemname);
 			$('#lrd-buyerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price));
-			$('#lrd-buyerproductBidPrice').html("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 			$("#lrd-buyerproductImage").attr("src", "" + currentItem.photo);
 			$('#lrd-buyerproductQuantity').html("Quantity: " + currentItem.amount);
-			$('#lrd-buyerproductTimeRemaining').html("Ending in: " + new Date(currentItem.bideventdate));
+			$('#lrd-buyerproductTimeRemaining').html("Ending in: " + new Date(currentItem.item_end_date));
 			$('#lrd-buyerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
 			$('#lrd-buyerproductDimensions').text("Dimensions: " + currentItem.dimensions);
 			$('#lrd-buyerproductId').text("Id: " + currentItem.itemid);
@@ -982,10 +981,14 @@ $(document).on('pagebeforeshow', "#lrd-buyerproduct", function(event, ui) {
 			list.empty();
 			list.append('<div class="rateit" data-rateit-value="' + currentItem.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
 			$('.rateit').rateit();
-			if ( typeof currentItem.currentbidprice === "undefined" || currentItem.amount>1) {
+			// Logic for diplaying bid button and bid price
+			if (currentItem.currentbidprice === null) {
 				document.getElementById("rpa-bidbutton").style.display = "none";
+				document.getElementById("lrd-buyerproductBidPrice").style.display = "none";
 			} else {
 				document.getElementById("rpa-bidbutton").style.display = "block";
+				document.getElementById("lrd-buyerproductBidPrice").style.display = "block";
+				$('#lrd-buyerproductBidPrice').html("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
 			}
 			// If user has the item in cart update quantity button appears
 			if (currentItem.quantityincart != "0") {
@@ -1040,26 +1043,39 @@ $(document).on('pagebeforeshow', "#lrd-sellerproduct", function(event, ui) {
 		success : function(data, textStatus, jqXHR) {
 			var currentItem = data.product[0];
 			sessionStorage.currentItem = JSON.stringify(currentItem);
-			console.log(currentItem.restock && ( typeof currentItem.currentbidprice != "undefined"));
-			if (currentItem.restock && ( typeof currentItem.currentbidprice != "undefined")) {
-				document.getElementById("rpa-sellerbuttons").style.display = "block";
+			// Logic for diplaying bid button and bid price
+			if (currentItem.restock) {
+				document.getElementById("rpa-restockbutton").style.display = "block";
+				document.getElementById("rpa-bidhistorybutton").style.display = "none";
+				document.getElementById("lrd-sellerproductBidPrice").style.display = "none";
 			} else {
-				document.getElementById("rpa-sellerbuttons").style.display = "none";
-				if (currentItem.restock) {
-					document.getElementById("rpa-restockbutton").style.display = "block";
-				} else {
-					document.getElementById("rpa-restockbutton").style.display = "none";
-				}
-				if ( typeof currentItem.currentbidprice === "undefined") {
-					document.getElementById("rpa-bidhistorybutton").style.display = "none";
-				} else {
-					document.getElementById("rpa-bidhistorybutton").style.display = "block";
-				}
+				$('#lrd-sellerproductBidPrice').text("Bid: " + accounting.formatMoney(currentItem.currentbidprice));
+				document.getElementById("rpa-bidhistorybutton").style.display = "block";
+				document.getElementById("lrd-sellerproductBidPrice").style.display = "block";
+				document.getElementById("rpa-restockbutton").style.display = "none";
 			}
+			///DONT TOUCH THIS. IN CASE OF EMERGENCY
+			// if (currentItem.restock && (currentItem.currentbidprice !== null)) {
+			// document.getElementById("rpa-sellerbuttons").style.display = "block";
+			// document.getElementById("rpa-bidhistorybutton").style.display = "none";
+			// document.getElementById("rpa-restockbutton").style.display = "none";
+			// } else {
+			// document.getElementById("rpa-sellerbuttons").style.display = "none";
+			// if (currentItem.restock) {
+			// document.getElementById("rpa-restockbutton").style.display = "block";
+			// } else {
+			// document.getElementById("rpa-restockbutton").style.display = "none";
+			// }
+			// if (currentItem.currentbidprice === null) {
+			// document.getElementById("rpa-bidhistorybutton").style.display = "none";
+			// } else {
+			// document.getElementById("rpa-bidhistorybutton").style.display = "block";
+			// }
+			// }
 			$('#lrd-sellerproductName').text(currentItem.itemname);
-			$('#lrd-sellerproductBuyNowPrice').html("Buy it Now: " + accounting.formatMoney(currentItem.price) + "</br> Bid: " + accounting.formatMoney(currentItem.currentbidprice));
+			$('#lrd-sellerproductBuyNowPrice').text("Buy it Now: " + accounting.formatMoney(currentItem.price));
 			$("#lrd-sellerproductImage").attr("src", "" + currentItem.photo);
-			$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + new Date(currentItem.bideventdate));
+			$('#lrd-sellerproductTimeRemaining').html("Quantity: " + currentItem.amount + "</br>Ending in: " + new Date(currentItem.item_end_date));
 			$('#lrd-sellerproductModelAndBrand').text(currentItem.model + ", " + currentItem.brand);
 			$('#lrd-sellerproductDimensions').text("Dimensions: " + currentItem.dimensions);
 			$('#lrd-sellerproductId').text("Id: " + currentItem.itemid);
@@ -1226,7 +1242,7 @@ $(document).on('pagebeforeshow', "#lrd-userstore", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px"src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
+				list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px"src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.item_end_date) + '</b></p></div></div></a></li>');
 			}
 			list.listview("refresh");
 		},
@@ -1737,7 +1753,8 @@ function validateEmail(email) {
 }
 
 // Imgur api!
-function upload(file) {
+function upload(file, imgtag) {
+	$.mobile.loading("show");
 	if (!file || !file.type.match(/image.*/))
 		return;
 
@@ -1752,9 +1769,10 @@ function upload(file) {
 	xhr.open("POST", "http://api.imgur.com/2/upload.json");
 	xhr.onload = function() {
 		link = JSON.parse(xhr.responseText).upload.links.imgur_page;
-		document.querySelector("#lrd-signupUploadPicture1Pic").src = link + ".png";
+		document.querySelector("#" + imgtag).src = link + ".png";
 	};
 	xhr.send(fd);
+	$.mobile.loading("hide");
 }
 
 function login() {
@@ -1905,14 +1923,14 @@ function ajaxMySpruce(where) {
 				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.date) + '</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.item_end_date) + '</b></p></div></div></a></li>');
 				}
 			} else {
 				var list = $("#lrd-myspruceMySpruceListSelling");
 				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.itemdate) + '</b></p></div></div></a></li>');
+					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.item_end_date) + '</b></p></div></div></a></li>');
 				}
 			}
 			list.listview("refresh");
@@ -2079,7 +2097,7 @@ function sellSubCat(catid, catname) {
 			}
 			list.listview("refresh");
 			if (i == 0) {
-				$("#rpa-selectcategorybutton .ui-btn-text").text(catname + '(' + catid + ')');
+				$("#rpa-selectedcategory").text(catname + ' (' + catid + ')');
 				$.mobile.changePage("#lrd-sellitem", {
 					allowSamePageTransition : true,
 					transition : "slide",
@@ -2279,4 +2297,133 @@ function rateUser() {
 			alert("Data not found!");
 		}
 	});
+}
+
+function checkSell() {
+	var name = $('#lrd-sellitemName').val();
+	var price = $('#lrd-sellitemPrice').val();
+	var model = $('#lrd-sellitemModel').val();
+	var brand = $('#lrd-sellitemBrand').val();
+	var dimensions = $('#lrd-dimensions').val();
+	var amount = $('#lrd-sellitemAmount').val();
+	var description = $('#lrd-sellitemDescription').val();
+	var category = $("#rpa-selectedcategory").text();
+	var photo = document.all["lrd-sellitemUploadPicture"].value;
+	if (name == "" || price == "" || model == "" || brand == "" || dimensions == "" || amount == "" || category == "" || photo == "") {
+		$('#rpa-sellwarning').html("<b>Please fill all</b> *");
+	} else if (amount < 1) {
+		$('#rpa-sellwarning').html("<b>Amount must be greater than 0</b> *");
+	} else {
+		$.mobile.loading("show");
+		$('#rpa-sellwarning').text("");
+		photo = link + ".png";
+		// Magic for getting category id
+		var categoryArray = category.split(" ");
+		var categoryid = categoryArray[categoryArray.length - 1].substring(1, categoryArray[categoryArray.length - 1].length - 1);
+		var item = new Object();
+		item.name = name;
+		item.price = price;
+		item.model = model;
+		item.brand = brand;
+		item.dimensions = dimensions;
+		item.amount = amount;
+		item.description = description;
+		item.category = categoryid;
+		item.photo = photo;
+		item.password = sessionStorage.acc;
+
+		var itemfilter = new Array();
+		itemfilter[0] = "name";
+		itemfilter[1] = "price";
+		itemfilter[2] = "model";
+		itemfilter[3] = "brand";
+		itemfilter[4] = "dimensions";
+		itemfilter[5] = "amount";
+		itemfilter[6] = "category";
+		itemfilter[7] = "photo";
+		itemfilter[8] = "password";
+		itemfilter[9] = "description";
+		var jsonText = JSON.stringify(item, itemfilter, "\t");
+		$.ajax({
+			url : "http://localhost:5000/SpruceServer/sellitem",
+			method : 'put',
+			crossDomain : true,
+			withCredentials : true,
+			data : jsonText,
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				$.mobile.loading("hide");
+				if (data.success) {
+					GoToView('rpa-myspruceselling');
+				} else {
+					GoToView('lrd-home');
+				}
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+				$.mobile.loading("hide");
+				GoToView('lrd-home');
+			}
+		});
+	}
+}
+
+function restockItem() {
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/restockItem/" + sessionStorage.editId + "/" + $('#restockSlider').val(),
+		crossDomain : true,
+		withCredentials : true,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			$.mobile.loading("hide");
+			if (data.success) {
+				GoToView('lrd-sellerproduct');
+			} else {
+				GoToView('lrd-home');
+			}
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			$.mobile.loading("hide");
+			GoToView('lrd-home');
+		}
+	});
+}
+
+function bidItem() {
+	var currentItem = JSON.parse(sessionStorage.currentItem);
+	if (sessionStorage.user == "guest" || sessionStorage.user == "admin") {
+		GoToView('lrd-login');
+	} else if (parseFloat($('#bidAmount').val()) <= parseFloat(currentItem.currentbidprice)) {
+		$('#currentBidDialog').text("Bid must be greater than " + accounting.formatMoney(currentItem.currentbidprice));
+	} else {
+		$.mobile.loading("show");
+		var password = sessionStorage.acc;
+		var account = new Object();
+		account.password = password;
+		var accountfilter = new Array();
+		accountfilter[0] = "password";
+		jsonText = JSON.stringify(account, accountfilter, "\t");
+		$.ajax({
+			url : "http://localhost:5000/SpruceServer/bidItem/" + sessionStorage.editId + "/" + $('#bidAmount').val(),
+			crossDomain : true,
+			withCredentials : true,
+			method: 'put',
+			data: jsonText,
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				$.mobile.loading("hide");
+				if (data.success) {
+					GoToView('lrd-buyerproduct');
+				} else {
+					$('#currentBidDialog').text("A new bid appeared, please bid again: " + accounting.formatMoney(data.bid));
+				}
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+				$.mobile.loading("hide");
+			}
+		});
+	}
 }
