@@ -50,7 +50,10 @@
 					My Spruce</a>
 					<a  onclick="CheckSessionView('lrd-myaccountinfo')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/user.png" height="21px" width="21px" />
 					<br />
-					&nbsp;Account&nbsp;</a>
+					Account</a>
+					<a onclick="CheckSessionView('rpa-conversations')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/chat.png" height="21px" width="21px" />
+					<br />
+					Messages</a>
 					<a onclick="GoToView('lrd-category')" data-role="button" data-theme="a" data-mini="true"><img src="images/Icons/categories.png" height="21px" width="21px" />
 					<br />
 					Categories</a>
@@ -607,6 +610,7 @@
 				<a onclick="GoToView('lrd-myaccountinfoedit')" data-role="button" data-theme="b"> Edit </a>
 				<a onclick="GoToView('lrd-purchaseHistory')" data-role="button" data-theme="a"> Purchase History </a>
 				<a onclick="GoToView('rpa-rating')" data-role="button" data-theme="a"> Ratings </a>
+				<a onclick="GoToView('rpa-conversations')" data-role="button" data-theme="a"> Messages </a>
 			</div>
 		</div>
 
@@ -2081,6 +2085,7 @@
 				</ul>
 				<a onclick="GoToView('lrd-userstore')" data-role="button" data-theme="b"> Seller's Store</a>
 				<a onclick="GoToView('rpa-rating')" data-role="button" data-theme="a"> Ratings </a>
+				<a id="rpa-sendMessage" data-role="button" onclick="GoToView('rpa-chat')" style="display: none" data-theme="a">Send Message</a>
 				<a id="rpa-rateButton" data-role="button" style="display: none" href="#rpa-userRatingdialog" data-rel="dialog" data-theme="a"> Rate User</a>
 			</div>
 		</div>
@@ -2362,6 +2367,47 @@
 				<div data-role="fieldcontainer">
 					<h2 id="rpa-searchtitle" align="center"></h2>
 					<ul id="rpa-searchlist" data-role="listview" data-inset="true"></ul>
+				</div>
+			</div>
+		</div>
+		
+		<div id="rpa-chat" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-chatSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontainer">
+					<h2 id="rpa-messagetitle" align="center"></h2>
+					<ul id="rpa-messagelist" data-role="listview" data-inset="true"></ul>
+					<label for="replymessage">Reply:</label>
+					<textarea id="replymessage" name="replymessage"></textarea>
+					<a data-role="button" onclick="reply()">Reply</a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="rpa-conversations" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-conversationsSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontainer">
+					<h1 id="conversationtitle">Conversations</h1>
+					<ul id="rpa-chatlist" data-role="listview" data-inset="true"></ul>
 				</div>
 			</div>
 		</div>

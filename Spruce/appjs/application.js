@@ -1134,10 +1134,13 @@ $(document).on('pagebeforeshow', "#lrd-userprofile", function(event, ui) {
 	$('#userProfilePhone').text(currentUser.accphonenum);
 	$('#rateitstarshit').append('<div style="margin-top: 0px" class="rateit" data-rateit-value="' + currentUser.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
 	$('.rateit').rateit();
-	if (sessionStorage.user == "user")
+	if (sessionStorage.user == "user") {
 		document.getElementById("rpa-rateButton").style.display = "block";
-	else
+		document.getElementById("rpa-sendMessage").style.display = "block";
+	} else {
 		document.getElementById("rpa-rateButton").style.display = "none";
+		document.getElementById("rpa-sendMessage").style.display = "none";
+	}
 	$.mobile.loading("hide");
 });
 
@@ -1173,6 +1176,106 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 			$('#userMyAccountPhone').text(currentUser[0].accphonenum);
 			$('#sdlt-thisshitbetterworknow').append('<div class="rateit" data-rateit-value="' + currentUser[0].accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
 			$('.rateit').rateit();
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#rpa-chat", function(event, ui) {
+	$.mobile.loading("show");
+	var list = $("#rpa-messagelist");
+	list.empty();
+	populatePanel("rpa-chat");
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	var accid;
+	console.log(sessionStorage.chatid===null || sessionStorage.chatid=="");
+	if(typeof sessionStorage.user == 'undefined' || sessionStorage.chatid==""){
+		var currentUser = JSON.parse(sessionStorage.accountinfo);
+		accid=currentUser.accid
+	}
+	else{
+		accid=sessionStorage.chatid;
+		sessionStorage.chatid="";
+	}
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/chatUser/" + accid,
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var messages = data.messages;
+			var id1 = data.id1[0];
+			var id2 = data.id2[0];
+			var len = messages.length;
+			for (var i = 0; i < len; ++i) {
+				var message = messages[i];
+				if (message.fromid == id1.accid) {
+					list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + id1.accusername + "')><img src='" + id1.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<p style="font-size: 16px;margin-top:5px;white-space:normal"><b>' + message.sendmessage + '</b></p>' + '<p style="font-size: 10px" >' + new Date(message.mdate) + '</p></a></li>');
+				} else {
+					list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + id2.accusername + "')><img src='" + id2.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<p style="font-size: 16px;margin-top:5px;white-space:normal"><b>' + message.sendmessage + '</b></p>' + '<p style="font-size: 10px" >' + new Date(message.mdate) + '</p></a></li>');
+				}
+			}
+			if(len==0){
+				$('#rpa-messagetitle').text("Create new conversation of "+id1.accusername+" and "+id2.accusername);
+			}
+			else{
+				$('#rpa-messagetitle').text("Conversation of "+id1.accusername+" and "+id2.accusername);
+			}
+			list.listview("refresh");
+			$.mobile.loading("hide");
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+});
+
+$(document).on('pagebeforeshow', "#rpa-conversations", function(event, ui) {
+	$.mobile.loading("show");
+	var list = $("#rpa-chatlist");
+	list.empty();
+	populatePanel("rpa-conversations");
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/conversationUser",
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			var conversations = data.conversations;
+			var len = conversations.length;
+			for (var i = 0; i < len; ++i) {
+				var conversation = conversations[i];
+				list.append("<li data-icon='false'><a onclick=goToChat('" + conversation.accid + "')><img src='" + conversation.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<p style="font-size: 20px;margin-top:5px;white-space:normal"><b>' + conversation.accusername + '</b></p></a></li>');
+			}
+			if(len==0){
+				$('#conversationtitle').text("No Conversations :(");
+			}
+			else{
+				$('#conversationtitle').text("Conversations");
+			}
+			list.listview("refresh");
 			$.mobile.loading("hide");
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -2446,4 +2549,40 @@ function bidItem() {
 			}
 		});
 	}
+}
+
+function reply() {
+	$.mobile.loading("show");
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	account.reply = $('#replymessage').val();
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	accountfilter[1] = "reply";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	var currentUser = JSON.parse(sessionStorage.accountinfo);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/replyUser/" + currentUser.accid,
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			$.mobile.loading("hide");
+			$('#replymessage').val("");
+			GoToView('rpa-chat');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+function goToChat(id){
+	sessionStorage.chatid=id;
+	GoToView('rpa-chat');
 }
