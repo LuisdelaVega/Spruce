@@ -2080,11 +2080,12 @@
 					</li>
 				</ul>
 				<a onclick="GoToView('lrd-userstore')" data-role="button" data-theme="b"> Seller's Store</a>
+				<a onclick="GoToView('rpa-rating')" data-role="button" data-theme="a"> Ratings </a>
 				<a id="rpa-rateButton" data-role="button" style="display: none" href="#rpa-userRatingdialog" data-rel="dialog" data-theme="a"> Rate User</a>
 			</div>
 		</div>
 		
-		<!--Dialog for ratings-->
+		<!--Dialog for rating user-->
 		<div id="rpa-userRatingdialog" data-role="page">
 			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
 				<h1>Rate User</h1>
@@ -2092,6 +2093,7 @@
 			<div data-role="content">
 				<h2 align="center">Rating</h2>
 				<input type="range" name="ratingSlider" id="ratingSlider" value="0" min="0" max="5"  step="0.1" />
+				<textarea id="ratingComment"></textarea>
 				<a data-role="button" onclick="rateUser()" data-theme="b">Rate it</a>
 				<a data-role="button"  href="#lrd-userprofile">Cancel</a>
 			</div>
