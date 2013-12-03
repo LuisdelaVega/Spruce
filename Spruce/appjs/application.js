@@ -69,11 +69,11 @@ $(document).on('pagebeforeshow', "#lrd-checkout", function(event, ui) {
 			$('#lrd-checkoutShippingAddress').empty();
 			for (var i = 0; i < currentUser.creditnumber.length; i++) {
 				var j = i + 1;
-				$('#lrd-checkoutAccountnumber').append('<option value = "' + j + '">' + currentUser.creditnumber[i].number + '</option>');
+				$('#lrd-checkoutAccountnumber').append('<option value = "' + currentUser.creditnumber[i].cid + '">' + currentUser.creditnumber[i].number + '</option>');
 			}
 			for (var i = 0; i < currentUser.shippinginfo.length; i++) {
 				var j = i + 1;
-				$('#lrd-checkoutShippingAddress').append('<option value = "' + j + '"> ' + currentUser.shippinginfo[i].street + ', ' + currentUser.shippinginfo[i].city + '</option>');
+				$('#lrd-checkoutShippingAddress').append('<option value = "' + currentUser.shippinginfo[i].sid + '"> ' + currentUser.shippinginfo[i].street + ', ' + currentUser.shippinginfo[i].city + '</option>');
 			}
 			$('#lrd-checkoutAccountnumber').selectmenu('refresh', true);
 			$('#lrd-checkoutShippingAddress').selectmenu('refresh', true);
@@ -413,7 +413,9 @@ $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 				total += object.price * object.quantity;
 			}
 			list.listview("refresh");
-			$("#checkoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
+			$("#checkoutSaddress").html("Shipped to: <span style='font-size:medium'>" +objectList[0].street+ ", "+objectList[0].city+", "+objectList[0].state+", "+objectList[0].country+", "+objectList[0].zip+"</span>");
+			$("#checkoutCard").html("Paid with credit card with number: " +objectList[0].number);
+			$("#checkoutTotal").html("Total price: " + accounting.formatMoney(total));
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
@@ -1172,7 +1174,7 @@ function buyitnow() {
 	if (sessionStorage.user == 'user') {
 		how = "buyitnow";
 		var currentItem = JSON.parse(sessionStorage.currentItem);
-		total = currentItem.price;
+		total = currentItem.price * document.all["quantityBuyItSlider"].value;
 		GoToView('lrd-checkout');
 	} else {
 		GoToView('lrd-login');
@@ -1626,6 +1628,8 @@ function getInvoice(invoiceid) {
 				total += object.price * object.quantity;
 			}
 			// list.listview("refresh");
+			$("#pastcheckoutSaddress").html("Shipped to: <span style='font-size:medium'>" +objectList[0].street+ ", "+objectList[0].city+", "+objectList[0].state+", "+objectList[0].country+", "+objectList[0].zip+"</span>");
+			$("#pastcheckoutCard").html("Paid with credit card with number: " +objectList[0].number);
 			$("#pastcheckoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
 			GoToView('lrd-pastinvoice');
 		},
@@ -1670,10 +1674,14 @@ function checkOut(acc) {
 		var account = new Object();
 		account.acc = acc;
 		account.total = total;
+		account.card = document.all["lrd-checkoutAccountnumber"].value;
+		account.address = document.all["lrd-checkoutShippingAddress"].value;
 
 		var accountfilter = new Array();
 		accountfilter[0] = "acc";
 		accountfilter[1] = "total";
+		accountfilter[2] = "card";
+		accountfilter[3] = "address";
 	}
 	else if(how == "buyitnow"){
 		var currentItem = JSON.parse(sessionStorage.currentItem);
@@ -1681,14 +1689,18 @@ function checkOut(acc) {
 		var account = new Object();
 		account.acc = acc;
 		account.total = total;
+		account.card = document.all["lrd-checkoutAccountnumber"].value;
+		account.address = document.all["lrd-checkoutShippingAddress"].value;
 		account.itemid = currentItem.itemid;
 		account.quantity = document.all["quantityBuyItSlider"].value;
 
 		var accountfilter = new Array();
 		accountfilter[0] = "acc";
 		accountfilter[1] = "total";
-		accountfilter[2] = "itemid";
-		accountfilter[3] = "quantity";
+		accountfilter[2] = "card";
+		accountfilter[3] = "address";
+		accountfilter[4] = "itemid";
+		accountfilter[5] = "quantity";
 	}
 	
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
@@ -2577,7 +2589,7 @@ function rateUser() {
 	console.log(password);
 	var account = new Object();
 	account.password = password;
-	account.comment = $('#ratingComment').val()
+	account.comment = $('#ratingComment').val();
 	var accountfilter = new Array();
 	accountfilter[0] = "password";
 	accountfilter[1] = "comment";
@@ -2789,14 +2801,20 @@ function declineBid(){
 
 function acceptBid(id){
 	how="auction";
+	
 	var account = new Object();
 	account.username = $('#bidderusername').text();
 	account.price = $('#acceptbidinfo').text().split("$")[1];
 	account.itemid = id;
+	account.card = document.all["lrd-checkoutAccountnumber"].value;
+	account.address = document.all["lrd-checkoutShippingAddress"].value;
+	
 	var accountfilter = new Array();
 	accountfilter[0] = "username";
 	accountfilter[1] = "price";
 	accountfilter[2] = "itemid";
+	accountfilter[3] = "card";
+	accountfilter[4] = "address";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)
