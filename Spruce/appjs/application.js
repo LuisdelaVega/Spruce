@@ -164,7 +164,7 @@ $(document).on('pagebeforeshow', "#lrd-home", function(event, ui) {
 			var images = data.items;
 			var len = images.length;
 
-			for (var i = 0; i < 3; ++i) {
+			for (var i = 0; i < len; ++i) {
 				var image = images[i];
 				list.append("<li data-icon='false'><a onclick=GetItem(" + image.itemid + ")><img height='80px' width='80px' style='padding-left:5px; padding-top: 6px' src=" + image.photo + ">" + "<h1 style='margin: 0px'>" + image.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left">' + '<h2 style="font-size: 13px;margin-top:0px">' + image.model + '</h2><p>' + image.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(image.price) + '</h3><p><b>' + new Date(image.item_end_date) + '</b></p></div></div></a></li>');
 			}
@@ -2220,7 +2220,12 @@ function ajaxMySpruce(where) {
 				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append('<li data-icon="false"><a  onclick="GetItem(' + object.itemid + ')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');
+					if(object.bidwonid===null){
+						list.append('<li data-icon="false"><a  href="#rpa-soldreciept"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');	
+					}
+					else{
+						list.append('<li data-icon="false"><a  href="#rpa-soldreciept"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">Auction ' + accounting.formatMoney(object.currentbidprice) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');
+					}
 				}
 			} else if (where == 'bidding') {
 				var list = $("#lrd-myspruceMySpruceListBidding");
@@ -2801,20 +2806,15 @@ function declineBid(){
 
 function acceptBid(id){
 	how="auction";
-	
 	var account = new Object();
 	account.username = $('#bidderusername').text();
 	account.price = $('#acceptbidinfo').text().split("$")[1];
 	account.itemid = id;
-	account.card = document.all["lrd-checkoutAccountnumber"].value;
-	account.address = document.all["lrd-checkoutShippingAddress"].value;
 	
 	var accountfilter = new Array();
 	accountfilter[0] = "username";
 	accountfilter[1] = "price";
 	accountfilter[2] = "itemid";
-	accountfilter[3] = "card";
-	accountfilter[4] = "address";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	$.ajax({
 		//The server takes care of where to route depending of page (selling,bidding,history)

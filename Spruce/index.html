@@ -1363,6 +1363,44 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Reciept for seller for an item that has been bought this will show general info of the buyer (shipping..) -->
+		
+		<div id="rpa-soldreciept" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-soldrecieptSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<h1>Buyer info:</h1>
+				<div align="center">
+					<img id="buyerimagereciept" style="max-width: 300px;max-height: 300px;"/>
+				</div>
+				<ul data-role="listview" data-inset="true" >
+					<li>
+						<div align="center">
+							<h2 style="font-size: 22px" align="center">Ship to</h2>
+							<h3 id="buyershippingreciept" style="font-size: 18px;white-space: normal;margin-bottom: 0px"></h3>
+							<h2 style="font-size: 22px" align="center">Amount</h2>
+							<h3 id="buyeramountreciept" style="font-size: 18px;margin-bottom: 0px"></h3>
+							<h2 style="font-size: 22px" align="center">Date Bought</h2>
+							<h3 id="buyerdatereciept" style="font-size: 18px;margin-bottom: 0px"></h3>
+							<h3 id="buyerusernamereciept" style="font-size: 18px;margin-bottom: 0px"></h3>
+							<div data-role="fieldcontain" align="center" style="margin-top: 0px;padding-top: 3px">
+								<div id="rateitstarshitreciept"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul id="rpa-buyeritemreciept" data-role="listview" data-inset="true"></ul>
+			</div>
+		</div>
 
 		<!-- Sell Item view -->
 
