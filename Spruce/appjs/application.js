@@ -1023,6 +1023,10 @@ $(document).on('pagebeforeshow', "#rpa-quantityAddCartDialog", function(event, u
 	$("#quantityAddCartSlider").attr("max", parseInt($('#lrd-buyerproductQuantity').text().split(" ")[1]));
 });
 
+$(document).on('pagebeforeshow', "#rpa-quantityUpdateCartDialog", function(event, ui) {
+	$("#quantityUpdateCartSlider").attr("max", parseInt($('#lrd-buyerproductQuantity').text().split(" ")[1]));
+});
+
 $(document).on('pagebeforeshow', "#rpa-bidDialog", function(event, ui) {
 	var currentItem = JSON.parse(sessionStorage.currentItem);
 	$("#currentBidDialog").text("Current Bid: " + accounting.formatMoney(currentItem.currentbidprice));
