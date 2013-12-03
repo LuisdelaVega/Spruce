@@ -980,7 +980,7 @@
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Username</h1>
 							<input type="text" id="sam-username" value="Rapol"  />
-							<a data-role="button">Change</a>
+							<a data-role="button" onclick="changeUsername()">Change</a>
 						</div>
 						<div data-role="fieldcontain" class="ui-hide-label">
 							<h1>Password</h1>
@@ -1007,11 +1007,17 @@
 			<div data-role = "content">
 				<ul data-role="listview" data-inset="true">
 					<li>
-						<div data-role="fieldcontain" class="ui-hide-label" align="center">
-							<img id="sam-accphotoimg" style="max-width: 300px;max-height: 300px;" src="images/Unknown-person_80x80.gif"/>
-							<label for="lrd-signupUploadPicture">Upload Picture:</label>
-							<input type="file" id="lrd-signupUploadPicture" name="uploadpicture">
-							<a data-role="button" data-theme="b">Change</a>
+						<div data-role="fieldcontain">
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<img id="sam-signupUploadPicture1Pic" src="images/Unknown-person_80x80.gif" style="height: 80px; width: 80px"/>
+								</div>
+								<div class="ui-block-b">
+									<label for="sam-signupUploadPicture1" id="sam-signupUploadPicture1Label">Upload Picture:</label>
+									<input type="file" id="sam-signupUploadPicture1" name="uploadpicture" onchange="upload(this.files[0],'sam-signupUploadPicture1Pic')">
+									<a data-role="button" id="sam-adminchangepic" onclick="adminupload()">Change</a>
+								</div>
+							</div>
 						</div>
 					</li>
 				</ul>
@@ -1049,7 +1055,7 @@
 						</div>
 					</li>
 				</ul>
-				<a data-role="button" data-theme="b">Change</a>
+				<a data-role="button" data-theme="b" onclick="changeGeneralInfo()">Change</a>
 			</div>
 		</div>
 		<div id="sam-creditcard" data-role="page">
@@ -1107,7 +1113,7 @@
 						</div>
 					</li>
 				</ul>
-				<a data-role="button" data-theme="b">Change</a>
+				<a data-role="button" data-theme="b" onclick="changeCreditCardInfo()">Change</a>
 			</div>
 		</div>
 		<div id="sam-shipping" data-role="page">
@@ -1164,7 +1170,7 @@
 						</div>
 					</li>
 				</ul>
-				<a data-role="button" data-theme="b">Change</a>
+				<a data-role="button" data-theme="b" onclick="changeShippingAddressInfo()">Change</a>
 			</div>
 		</div>
 

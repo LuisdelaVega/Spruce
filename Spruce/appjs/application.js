@@ -732,11 +732,64 @@ $(document).on('pagebeforeshow', "#sam-usernameandpassword", function(event, ui)
 	$("#sam-username").attr("value", accountinfo[0].accusername);
 });
 
+function changeUsername() {
+	var toChange = document.getElementById('sam-username').value;
+	console.log(toChange);
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	console.log(accountinfo);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeUsername/" + accountinfo[0].accusername + "/" + toChange,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-usernameandpassword');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
 $(document).on('pagebeforeshow', "#sam-accphoto", function(event, ui) {
 	populatePanel("sam-accphoto");
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
 	$("#sam-accphotoimg").attr("src", accountinfo[0].accphoto);
 });
+
+function adminupload(){
+	var photo = link + ".png";
+						
+	console.log(photo);
+		var account = new Object();
+		account.photo = photo;
+
+		var accountfilter = new Array();
+		accountfilter[0] = "photo";
+		
+		var jsonText = JSON.stringify(account, accountfilter, "\t");
+		console.log(jsonText);
+		var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+		
+		console.log(accountinfo);
+		$.ajax({
+			url : "http://localhost:5000/SpruceServer/editaccphoto/" + accountinfo[0].accusername,
+			method : 'put',
+			crossDomain : true,
+			withCredentials : true,
+			data : jsonText,
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				GoToView('sdlt-adminmyaccountinfoedit');
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+
+			}
+		});
+	$.mobile.loading("hide");
+}
 
 $(document).on('pagebeforeshow', "#sam-generalinfo", function(event, ui) {
 	populatePanel("sam-generalinfo");
@@ -747,6 +800,28 @@ $(document).on('pagebeforeshow', "#sam-generalinfo", function(event, ui) {
 	$("#sam-lastname").attr("value", accountinfo[0].acclname);
 	$("#sam-phone").attr("value", accountinfo[0].accphonenum);
 });
+
+function changeGeneralInfo() {
+	var fname = document.getElementById('sam-firstname').value;
+	var lname = document.getElementById('sam-lastname').value;
+	var email = document.getElementById('sam-email').value;
+	var tel = document.getElementById('sam-phone').value;
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeGeneralInfo/" + accountinfo[0].accusername + "/" + fname + "/" + lname + "/" + email + "/" + tel,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-generalinfo');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 	populatePanel("sam-creditcard");
@@ -774,6 +849,30 @@ $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 	});
 	list.listview("refresh");
 });
+
+function changeCreditCardInfo() {
+	var street = document.getElementById('sam-creditstreet').value;
+	var city = document.getElementById('sam-creditcity').value;
+	var state = document.getElementById('sam-creditstate').value;
+	var country = document.getElementById('sam-creditcountry').value;
+	var zip = document.getElementById('sam-creditzip').value;
+
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeCreditCardInfo/" + accountinfo[0].accusername + "/" + street + "/" + city + "/" + state + "/" + country + "/" + zip + "/" + sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 	populatePanel("sam-shipping");
@@ -824,6 +923,30 @@ $(document).on('pagebeforeshow', "#sam-shippingedit", function(event, ui) {
 		}
 	});
 });
+
+function changeShippingAddressInfo() {
+	var street = document.getElementById('sam-shippingstreet').value;
+	var city = document.getElementById('sam-shippingcity').value;
+	var state = document.getElementById('sam-shippingstate').value;
+	var country = document.getElementById('sam-shippingcountry').value;
+	var zip = document.getElementById('sam-shippingzip').value;
+
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeShippingAddressInfo/" + sessionStorage.editId + "/" + street + "/" + city + "/" + state + "/" + country + "/" + zip,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-shipping');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 $(document).on('pagebeforeshow', "#sam-creditcardedit", function(event, ui) {
 	populatePanel("sam-creditcardedit");
