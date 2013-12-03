@@ -1367,6 +1367,7 @@ $(document).on('pagebeforeshow', "#lrd-myaccountinfo", function(event, ui) {
 		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
+			sessionStorage.accountinfo= JSON.stringify(data.user[0]);
 			var currentUser = data.user;
 			$('#sdlt-thisshitbetterworknow').empty();
 			$('#userMyAccountName').text(currentUser[0].accusername);
@@ -1401,7 +1402,7 @@ $(document).on('pagebeforeshow', "#rpa-chat", function(event, ui) {
 	console.log(sessionStorage.chatid===null || sessionStorage.chatid=="");
 	if(typeof sessionStorage.user == 'undefined' || sessionStorage.chatid==""){
 		var currentUser = JSON.parse(sessionStorage.accountinfo);
-		accid=currentUser.accid
+		accid=currentUser.accid;
 	}
 	else{
 		accid=sessionStorage.chatid;
