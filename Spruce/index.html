@@ -273,7 +273,7 @@
 						<h4 id="lrd-buyerproductId" style="margin-bottom: 0px;margin-top: 0px" align="center"></h4>
 						<p id="lrd-buyerproductDescription" style="padding: 8px;margin: 0px;white-space:normal" align="justify"></p>
 						<div align="center">
-							<a onclick="GoToView('lrd-userprofile')" id="lrd-buyerproductSellerName" style="margin-top: 8px;color: white" align="center"></a>
+							<a id="lrd-buyerproductSellerName" style="margin-top: 8px;color: white" align="center"></a>
 						</div>
 						<div align="center">
 							<div id="rpa-rateitbuyer"></div>
@@ -1202,6 +1202,9 @@
 							<a href="#rpa-myspruceselling" data-transition="slide">Selling</a>
 						</li>
 						<li>
+							<a href="#rpa-myspruceauction" data-transition="slide">Auction</a>
+						</li>
+						<li>
 							<a href="#rpa-mysprucesold" data-transition="slide">Sold</a>
 						</li>
 					</ul>
@@ -1233,12 +1236,50 @@
 							<a class="ui-btn-active ui-state-persist">Selling</a>
 						</li>
 						<li>
+							<a href="#rpa-myspruceauction" data-transition="slide">Auction</a>
+						</li>
+						<li>
 							<a href="#rpa-mysprucesold" data-transition="slide">Sold</a>
 						</li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
 		</div>
+		
+		<div id="rpa-myspruceauction" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-myspruceauctionSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<ul id="lrd-mysprucelistauction" data-role="listview" data-inset="true"></ul>
+			</div>
+			<div data-role="footer" data-id="foo2" data-position="fixed" data-tap-toggle="false">
+				<div data-role="navbar">
+					<ul>
+						<li>
+							<a href="#lrd-mysprucebidding" data-transition="slide" data-direction="reverse">Bidding</a>
+						</li>
+						<li>
+							<a href="#rpa-myspruceselling" data-transition="slide" data-direction="reverse">Selling</a>
+						</li>
+						<li>
+							<a class="ui-btn-active ui-state-persist">Auction</a>
+						</li>
+						<li>
+							<a href="#rpa-mysprucesold" data-transition="slide">Sold</a>
+						</li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div>
+		
 		
 		<div id="rpa-mysprucesold" data-role="page">
 			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
@@ -1264,6 +1305,9 @@
 							<a href="#rpa-myspruceselling" data-transition="slide" data-direction="reverse">Selling</a>
 						</li>
 						<li>
+							<a href="#rpa-myspruceauction" data-transition="slide" data-direction="reverse">Auction</a>
+						</li>
+						<li>
 							<a class="ui-btn-active ui-state-persist">Sold</a>
 						</li>
 					</ul>
@@ -1272,6 +1316,50 @@
 		</div>
 
 		<!-- End of My Spruce view -->
+		
+		<!-- Accept Bid Page-->
+		
+		<div id="rpa-acceptbidpage" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="rpa-acceptbidpageSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content">
+				<div align="center">
+					<img id="acceptbidimage" style="max-width: 300px;max-height: 300px;"/>
+				</div>
+				<ul data-role="listview" data-inset="true" >
+					<li>
+						<div align="center">
+							<h3 id="acceptbidinfo" style="font-size: 24px;white-space: normal;margin-bottom: 0px"></h3>
+							<h3 id="bidderusername" style="font-size: 18px;margin-bottom: 0px"></h3>
+							<div data-role="fieldcontain" align="center" style="margin-top: 0px;padding-top: 3px">
+								<div id="rateitstarshitbid"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul id="rpa-itemacceptbid" data-role="listview" data-inset="true"></ul>
+				<div class="ui-grid-a" >
+					<div class="ui-block-a">
+						<a data-role="button" onclick="declineBid()" data-theme="c">
+							Decline
+						</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="acceptbidbutton" data-role="button" data-theme="b">
+							Accept
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Sell Item view -->
 
