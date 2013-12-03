@@ -1553,7 +1553,10 @@ function signup() {
 	//User info
 	var username = document.all["lrd-signupUsername"].value;
 	if (username == '') {
-		document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>ERROR ERROR, PLEASE INPUT SOMETHING!</b>";
+		document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>PLEASE INPUT SOMETHING!</b>";
+		$.mobile.navigate("#lrd-signup");
+	} else if(!validateUsername(username)) {
+		document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* <b style='color:#ED0000'>Not in my house</b>";
 		$.mobile.navigate("#lrd-signup");
 	} else {
 		$.ajax({
@@ -1870,6 +1873,11 @@ function signup() {
 			}
 		});
 	}
+}
+
+function validateUsername(username) {
+	var re = /^([a-zA-Z0-9.]+@){0,1}([a-zA-Z0-9.])+$/;
+	return re.test(username);
 }
 
 function validateEmail(email) {
