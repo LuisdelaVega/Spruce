@@ -359,6 +359,39 @@ $(document).on('pagebeforeshow', "#rpa-acceptbidpage", function(event, ui) {
 	});
 });
 
+$(document).on('pagebeforeshow', "#rpa-soldreciept", function(event, ui) {
+	populatePanel("rpa-soldreciept");
+	$.mobile.loading("show");
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/soldReciept/" + sessionStorage.invoice+"/"+sessionStorage.item,
+		crossDomain : true,
+		withCredentials : true,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			$.mobile.loading("hide");
+			var info = data.recieptinfo[0];
+			$('#buyerimagereciept').attr("src",info.accphoto);
+			$('#buyershippingreciept').text(info.street+", "+info.city+", "+info.state+", "+info.country+", "+info.zip);
+			$('#buyeramountreciept').text(accounting.formatMoney(sessionStorage.price*info.itemquantity)+", "+info.itemquantity);
+			$('#buyerdatereciept').text(new Date(info.invoicedate));
+			$('#buyerusernamereciept').text(info.accusername);
+			$('#buyerusernamereciept').attr("onclick", "goToSellerProfile('" + info.accusername + "')");
+			var list = $('#rateitstarshitreciept');
+			list.empty();
+			list.append('<div class="rateit" data-rateit-value="' + info.accrating + '" data-rateit-ispreset="true" data-rateit-readonly="true"></div>');
+			$('.rateit').rateit();
+			var list = $("#rpa-buyeritemreciept");
+			list.empty();
+			list.append("<li data-icon='false'><a><img style='padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px' src='" + info.photo + "'>" + '<h1 style="margin: 0px">' + info.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + info.model + '</h2><p>' + info.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(sessionStorage.price) + '</h3><p>&nbsp</p></div></div></a></li>');
+			list.listview('refresh');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+});
+
 $(document).on('pagebeforeshow', "#rpa-rating", function(event, ui) {
 	populatePanel("rpa-rating");
 	$.mobile.loading("show");
@@ -2220,11 +2253,11 @@ function ajaxMySpruce(where) {
 				list.empty();
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					if(object.bidwonid===null){
-						list.append('<li data-icon="false"><a  href="#rpa-soldreciept"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');	
+					if(object.bidwonid===null){ 
+						list.append('<li data-icon="false"><a  onclick="soldReciept(' + object.invoiceid + ','+object.itemid+','+object.price+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">' + accounting.formatMoney(object.price) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');	
 					}
 					else{
-						list.append('<li data-icon="false"><a  href="#rpa-soldreciept"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">Auction ' + accounting.formatMoney(object.currentbidprice) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');
+						list.append('<li data-icon="false"><a  onclick="soldReciept(' + object.invoiceid + ','+object.itemid+','+object.currentbidprice+')"><img style="padding-left:5px; padding-top: 7px; resize:both; overflow:scroll; width:80px; height:80px" src="' + object.photo + '">' + '<h1 style="margin: 0px">' + object.itemname + '</h1><hr style="margin-bottom: 0px;margin-top: 3px"/><div class="ui-grid-a"><div class="ui-block-a" align="left" style="">' + '<h2 style="font-size: 13px;margin-top:0px">' + object.model + '</h2><p>' + object.brand + '</p></div><div class="ui-block-b" align="right">' + '<h3 style="margin-top:0px;padding-top: 0px">Auction ' + accounting.formatMoney(object.currentbidprice) + '</h3><p><b>' + new Date(object.solddate) + '</b></p></div></div></a></li>');
 					}
 				}
 			} else if (where == 'bidding') {
@@ -2832,4 +2865,11 @@ function acceptBid(id){
 			GoToView('rpa-myspruceauction');
 		}
 	});
+}
+
+function soldReciept(invoiceid,itemid,price){
+	sessionStorage.invoice=invoiceid;
+	sessionStorage.item=itemid;
+	sessionStorage.price=price;
+	GoToView('rpa-soldreciept');
 }
