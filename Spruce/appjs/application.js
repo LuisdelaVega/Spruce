@@ -336,7 +336,7 @@ $(document).on('pagebeforeshow', "#rpa-rating", function(event, ui) {
 			var len = ratingList.length;
 			for (var i = 0; i < len; ++i) {
 				var rating = ratingList[i];
-				list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + rating.accusername + "')><img src='" + rating.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">User: ' + rating.accusername + '</h1><p style="font-size: 13px;margin-top:5px;white-space:normal">' + rating.comment + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >Rating: ' + rating.rating + '</h1></div></div></a></li>');
+				list.append("<li data-icon='false'><a onclick=goToSellerProfile('" + rating.accusername + "')><img src='" + rating.accphoto + "' style='resize:both; overflow:scroll; width:80px; height:80px'>" + '<div class="ui-grid-a"><div class="ui-block-a"><h1 style="margin: 0px">' + rating.accusername + '</h1><p style="font-size: 13px;margin-top:5px;white-space:normal">' + rating.comment + '</p>' + '</div><div class="ui-block-b" align="right"><h1 style="font-size: 16px" >Rating: ' + rating.rating + '</h1></div></div></a></li>');
 			}
 			list.listview("refresh");
 		},
@@ -893,7 +893,6 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 		accountfilter[0] = "acc";
 		jsonText = JSON.stringify(account, accountfilter, "\t");
 	}
-	populatePanel("lrd-cart");
 	$.ajax({
 		url : "http://localhost:5000/SpruceServer/mycart",
 		contentType : "application/json",
