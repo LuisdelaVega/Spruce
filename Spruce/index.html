@@ -745,7 +745,7 @@
 							<input type="text" id="rpa-password"/>
 							<h1>Confirm Password</h1>
 							<input type="text" id="rpa-confirmpassword"/>
-							<a data-role="button" data-theme"b">Change</a>
+							<a data-role="button" data-theme"b" onclick="changeUserUsername()">Change</a>
 						</div>
 					</li>
 				</ul>
@@ -1077,7 +1077,7 @@
 				<h1 align="center">Credit Cards</h1>
 				<ul id="sam-creditcardlist" data-role="listview" data-inset="true">
 				</ul>
-				<a data-role="button" data-theme="b">Add</a>
+				<a data-role="button" data-theme="b" onclick="GoToView('sam-adminaddcredit')" >Add</a>
 			</div>
 		</div>
 		<div id="sam-creditcardedit" data-role="page">
@@ -1134,7 +1134,48 @@
 			<div data-role = "content">
 				<h1 align="center">Address Book</h1>
 				<ul id="sam-shippingList" data-role="listview" data-inset="true"></ul>
-				<a data-role="button" data-theme="b">Add</a>
+				<a data-role="button" data-theme="b" onclick="GoToView('sam-adminaddshipping')">Add</a>
+			</div>
+		</div>
+		
+		<div id="sam-adminaddshipping" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="sam-adminaddshippingSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role = "content">
+				<h1 align="center">Add Shipping Address</h1>
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="sam-adminshippingstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="sam-adminshippingcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="sam-adminshippingstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="sam-adminshippingcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="sam-adminshippingzip"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button" data-theme="b" onclick="addShippingAddress()">Change</a>
 			</div>
 		</div>
 		<div id="sam-shippingedit" data-role="page">
@@ -1175,6 +1216,80 @@
 					</li>
 				</ul>
 				<a data-role="button" data-theme="b" onclick="changeShippingAddressInfo()">Change</a>
+			</div>
+		</div>
+		
+		<div id="sam-adminaddcredit" data-role="page">
+			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
+				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
+				<a onclick="GoToView('lrd-cart')"><img src="images/Icons/cart.png" width="20" height="15"/></a>
+				<div align="center">
+					<img onclick="GoToView('lrd-home')" align="center" src="images/Icons/header.png" width="40" height="40" />
+				</div>
+			</div>
+			<div data-role="panel" id="mypanel" data-theme="a" data-position="left" data-display="reveal" data-position-fixed="true">
+				<ul id="lrd-signupcreditSidePanel" data-role="listview" data-theme="a"></ul>
+			</div>
+			<div data-role="content" >
+				<h1 style="text-align: center">Add Credit Card:</h1>
+				<div data-role="fieldcontain">
+					<label for="sam-signupcreditCardholder" id="sam-creditCardholderLabel">Cardholder Name:</label>
+					<input type="text" id="sam-signupcreditCardholder" name="cardholder">
+				</div>
+				<div data-role="controlgroup" data-type="horizontal" align="center">
+					<input type="radio" name="Card" id="sam-creditVisa" value="Visa" />
+					<label for="sam-creditVisa">Visa</label>
+					<input type="radio" name="Card" id="sam-creditMasterCard" value="MasterCard" />
+					<label for="sam-creditMasterCard">MC</label>
+					<input type="radio" name="Card" id="sam-creditAmericanExpress" value="AmEx" />
+					<label for="sam-creditAmericanExpress">AmEx</label>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="sam-creditNumberCard" id="sam-creditNumberLabel">Number:</label>
+					<input type="text" id="sam-creditNumberCard" name="numberCard">
+				</div>
+				<div data-role="fieldcontain">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="sam-signupcreditExpDate" id="sam-creditExpMonthLabel">Expiration Month:</label>
+							<input type="number" name="expDate" id="sam-creditExpMonth" value="" />
+						</div>
+						<div class="ui-block-b">
+							<label for="sam-signupcreditExpDate" id="sam-signupcreditExpYearLabel">Expiration Year:</label>
+							<input type="number" name="expDate" id="sam-creditExpYear" value="" />
+						</div>
+					</div>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="sam-signupcreditCsc" id="sam-creditCscLabel">CSC:</label>
+					<input type="number" id="sam-creditCsc" name="csc">
+				</div>
+				<h1 align="center">Edit Billing Address</h1>
+				<ul data-role="listview" data-inset="true">
+					<li  data-icon="delete">
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Street</h1>
+							<input type="text" id="sam-admincreditstreet"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>City</h1>
+							<input type="text" id="sam-admincreditcity"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>State</h1>
+							<input type="text" id="sam-admincreditstate"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Country</h1>
+							<input type="text" id="sam-admincreditcountry"/>
+						</div>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<h1>Zip</h1>
+							<input type="number" id="sam-admincreditzip"/>
+						</div>
+					</li>
+				</ul>
+				<a data-role="button" data-theme="b" onclick="addCreditCard()">Add</a>
 			</div>
 		</div>
 

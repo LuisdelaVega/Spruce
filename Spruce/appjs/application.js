@@ -826,13 +826,14 @@ function changeUsername() {
 	});
 }
 
+
 $(document).on('pagebeforeshow', "#sam-accphoto", function(event, ui) {
 	populatePanel("sam-accphoto");
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
 	$("#sam-accphotoimg").attr("src", accountinfo[0].accphoto);
 });
 
-function adminupload(){
+function adminupload() {
 	var photo = link + ".png";
 						
 	console.log(photo);
@@ -948,6 +949,45 @@ function changeCreditCardInfo() {
 	});
 }
 
+function addCreditCard() {
+	var name = document.getElementById('sam-signupcreditCardholder').value;
+	var number = document.getElementById('sam-creditNumberCard').value;
+	var expmonth = document.getElementById('sam-creditExpMonth').value;
+	var expyear = document.getElementById('sam-creditExpYear').value;
+	var csc = document.getElementById('sam-creditExpYear').value;
+	var type;
+	if ($('#sam-creditVisa').is(':checked')) {
+		type = document.all["sam-creditVisa"].value;
+	} else if ($('#sam-creditMasterCard').is(':checked')) {
+		type = document.all["sam-creditMasterCard"].value;
+	} else {
+		type = document.all["sam-creditAmericanExpress"].value;
+	}
+	
+	var street = document.getElementById('sam-admincreditstreet').value;
+	var city = document.getElementById('sam-admincreditcity').value;
+	var state = document.getElementById('sam-admincreditstate').value;
+	var country = document.getElementById('sam-admincreditcountry').value;
+	var zip = document.getElementById('sam-admincreditzip').value;
+	
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/addCreditCardInfo/" + accountinfo[0].accusername + "/" + name + "/" + number + "/" + expmonth + "/" + expyear + "/" + csc + "/"+type+"/"+street+"/"+city+"/"+state+"/"+country+"/"+zip,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+
 $(document).on('pagebeforeshow', "#sam-shipping", function(event, ui) {
 	populatePanel("sam-shipping");
 	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
@@ -997,6 +1037,29 @@ $(document).on('pagebeforeshow', "#sam-shippingedit", function(event, ui) {
 		}
 	});
 });
+
+function addShippingAddress(){
+	var street = document.getElementById('sam-adminshippingstreet').value;
+	var city = document.getElementById('sam-adminshippingcity').value;
+	var state = document.getElementById('sam-adminshippingstate').value;
+	var country = document.getElementById('sam-adminshippingcountry').value;
+	var zip = document.getElementById('sam-adminshippingzip').value;
+	
+	var accountinfo = JSON.parse(sessionStorage.adminaccountinfo);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/addAdminShippingAddress/" + accountinfo[0].accusername+ "/" + street + "/" + city + "/" + state + "/" + country + "/" + zip,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-shipping');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 function changeShippingAddressInfo() {
 	var street = document.getElementById('sam-shippingstreet').value;
