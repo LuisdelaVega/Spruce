@@ -506,10 +506,69 @@ $(document).on('pagebeforeshow', "#rpa-usernameandpassword", function(event, ui)
 	populatePanel("rpa-usernameandpassword");
 });
 
+function changeUserUsername() {
+	var username = document.getElementById('rpa-username').value;
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeUserUsername/" + username,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-usernameandpassword');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+
+}
+
+
 $(document).on('pagebeforeshow', "#rpa-accphoto", function(event, ui) {
 	$("#rpa-accphotoimg").attr("src", $('#userMyAccountImage').attr('src'));
 	populatePanel("rpa-accphoto");
 });
+
+function changeUserPhoto() {
+	var photo = link + ".png";
+	photo = link.split("/");
+	console.log(photo);
+
+	var password = sessionStorage.acc;
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/editUserPhoto/" + photo[3],
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-accphoto');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+	$.mobile.loading("hide");
+}
+
 
 $(document).on('pagebeforeshow', "#lrd-buyers", function(event, ui) {
 	populatePanel("lrd-buyers");
@@ -547,6 +606,38 @@ $(document).on('pagebeforeshow', "#rpa-generalinfo", function(event, ui) {
 	populatePanel("lrd-generalinfo");
 });
 
+function changeUserGeneralInfo(){
+	var password = sessionStorage.acc;
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	
+	var fname = document.getElementById('rpa-firstname').value;
+	var lname = document.getElementById('rpa-lastname').value;
+	var email = document.getElementById('rpa-email').value;
+	var phone = document.getElementById('rpa-phone').value;
+	
+	
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/editGeneralInfo/"+fname+"/"+lname+"/"+email+"/"+phone,
+		method : 'put',
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-generalinfo');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+	$.mobile.loading("hide");
+}
+
 $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 	var list = $("#creditcardlist");
 	list.empty();
@@ -581,6 +672,86 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 	populatePanel("rpa-creditcard");
 });
 
+function changeUserBillingAddress(){
+	var street = document.getElementById('rpa-creditstreet').value;
+	var city = document.getElementById('rpa-creditcity').value;
+	var state = document.getElementById('rpa-creditstate').value;
+	var country = document.getElementById('rpa-creditcountry').value;
+	var zip = document.getElementById('rpa-creditzip').value;
+
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+	console.log(sessionStorage.editId);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeUserBillingAddress/"+street + "/" + city + "/" + state + "/" + country + "/" + zip + "/" + sessionStorage.editId,
+		contentType : "application/json",
+		method : 'put',
+		crossDomain : true,
+		data : jsonText,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+function addUserCreditCard() {
+	var name = document.getElementById('sam-usercreditCardholder').value;
+	var number = document.getElementById('sam-usercreditNumberCard').value;
+	var expmonth = document.getElementById('sam-usercreditExpMonth').value;
+	var expyear = document.getElementById('sam-usercreditExpYear').value;
+	var csc = document.getElementById('sam-usercreditCsc').value;
+	var type;
+	if ($('#sam-usercreditVisa').is(':checked')) {
+		type = document.all["sam-usercreditVisa"].value;
+	} else if ($('#sam-usercreditMasterCard').is(':checked')) {
+		type = document.all["sam-usercreditMasterCard"].value;
+	} else {
+		type = document.all["sam-usercreditAmericanExpress"].value;
+	}
+
+	var street = document.getElementById('sam-usercreditstreet').value;
+	var city = document.getElementById('sam-usercreditcity').value;
+	var state = document.getElementById('sam-usercreditstate').value;
+	var country = document.getElementById('sam-usercreditcountry').value;
+	var zip = document.getElementById('sam-usercreditzip').value;
+
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/addUserCreditCardInfo/"+name + "/" + number + "/" + expmonth + "/" + expyear + "/" + csc + "/" + type + "/" + street + "/" + city + "/" + state + "/" + country + "/" + zip,
+		contentType : "application/json",
+		method : 'put',
+		data : jsonText,
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+
 $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 	var list = $("#shippingList");
 	list.empty();
@@ -614,6 +785,71 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 	});
 	populatePanel("rpa-shipping");
 });
+
+function addUserShippingAddress(){
+	var street = document.getElementById('sam-usershippingstreet').value;
+	var city = document.getElementById('sam-usershippingcity').value;
+	var state = document.getElementById('sam-usershippingstate').value;
+	var country = document.getElementById('sam-usershippingcountry').value;
+	var zip = document.getElementById('sam-usershippingzip').value;
+
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/addUserShippingAddress/"+street + "/" + city + "/" + state + "/" + country + "/" + zip,
+		contentType : "application/json",
+		method : 'put',
+		crossDomain : true,
+		data : jsonText,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-shipping');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+function changeUserShippingAddress(){
+	var street = document.getElementById('rpa-shippingstreet').value;
+	var city = document.getElementById('rpa-shippingcity').value;
+	var state = document.getElementById('rpa-shippingstate').value;
+	var country = document.getElementById('rpa-shippingcountry').value;
+	var zip = document.getElementById('rpa-shippingzip').value;
+
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+
+	console.log(sessionStorage.editId);
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/changeUserShippingAddress/"+street + "/" + city + "/" + state + "/" + country + "/" + zip + "/" + sessionStorage.editId,
+		contentType : "application/json",
+		method : 'put',
+		crossDomain : true,
+		data : jsonText,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-shipping');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 $(document).on('pagebeforeshow', "#rpa-creditcardedit", function(event, ui) {
 	var password = sessionStorage.acc;
@@ -954,7 +1190,7 @@ function addCreditCard() {
 	var number = document.getElementById('sam-creditNumberCard').value;
 	var expmonth = document.getElementById('sam-creditExpMonth').value;
 	var expyear = document.getElementById('sam-creditExpYear').value;
-	var csc = document.getElementById('sam-creditExpYear').value;
+	var csc = document.getElementById('sam-creditCsc').value;
 	var type;
 	if ($('#sam-creditVisa').is(':checked')) {
 		type = document.all["sam-creditVisa"].value;
