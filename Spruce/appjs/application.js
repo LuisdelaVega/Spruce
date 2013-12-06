@@ -1698,7 +1698,7 @@ $(document).on('pagebeforeshow', "#rpa-chat", function(event, ui) {
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
 	var accid;
 	console.log(sessionStorage.chatid===null || sessionStorage.chatid=="");
-	if(typeof sessionStorage.user == 'undefined' || sessionStorage.chatid==""){
+	if(typeof sessionStorage.chatid == 'undefined' || sessionStorage.chatid==""){
 		var currentUser = JSON.parse(sessionStorage.accountinfo);
 		accid=currentUser.accid;
 	}
