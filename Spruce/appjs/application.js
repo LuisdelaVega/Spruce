@@ -1708,7 +1708,6 @@ $(document).on('pagebeforeshow', "#rpa-chat", function(event, ui) {
 		accid = currentUser.accid;
 	} else {
 		accid = sessionStorage.chatid;
-		sessionStorage.chatid = "";
 	}
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/chatUser/" + accid,
@@ -3095,9 +3094,15 @@ function reply() {
 	accountfilter[0] = "password";
 	accountfilter[1] = "reply";
 	var jsonText = JSON.stringify(account, accountfilter, "\t");
-	var currentUser = JSON.parse(sessionStorage.accountinfo);
+	var accid;
+	if ( typeof sessionStorage.chatid == 'undefined' || sessionStorage.chatid == "") {
+		var currentUser = JSON.parse(sessionStorage.accountinfo);
+		accid = currentUser.accid;
+	} else {
+		accid = sessionStorage.chatid;
+	}
 	$.ajax({
-		url : "http://sprucemarket.herokuapp.com/SpruceServer/replyUser/" + currentUser.accid,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/replyUser/" + accid,
 		method : 'put',
 		crossDomain : true,
 		withCredentials : true,
@@ -3117,6 +3122,11 @@ function reply() {
 
 function goToChat(id) {
 	sessionStorage.chatid = id;
+	GoToView('rpa-chat');
+}
+
+function sendMessage() {
+	sessionStorage.chatid = "";
 	GoToView('rpa-chat');
 }
 
