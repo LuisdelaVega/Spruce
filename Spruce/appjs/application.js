@@ -1411,12 +1411,17 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 				var object;
 				for (var i = 0; i < len; ++i) {
 					object = objectList[i];
-					list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src=" + object.photo + " style='resize:both; overflow:scroll; width:80px; height:80px'><div class='ui-grid-a'><div class='ui-block-a'><h1 style='margin: 0px'>" + object.itemname + "</h1><p style='font-size: 13px;margin-top:0px'><b>" + object.model + "</b></p><p>" + object.brand + "</p></div><div class='ui-block-b' align='right'><h1 style='font-size: 16px' >" + accounting.formatMoney(object.price) + "</h1><p>Amount:" + object.quantity + "</p></div></div><a onclick=GoToEditViewPopup(" + object.itemid + ",':no:','rpa-deleteItemCart')></a>");
+					list.append("<li data-icon='false'><a onclick=GetItem(" + object.itemid + ") ><img src=" + object.photo + " style='resize:both; overflow:scroll; width:80px; height:80px'><div class='ui-grid-a'><div class='ui-block-a'><h1 style='margin: 0px'>" + object.itemname + "</h1><p style='font-size: 13px;margin-top:0px'><b>" + object.model + "</b></p><p>" + object.brand + "</p></div><div class='ui-block-b' align='right'><h1 style='font-size: 16px' >" + accounting.formatMoney(object.price) + "</h1><p>Amount:" + object.quantity + "</p></div></div><a onclick=GoToEditViewPopup(" + object.itemid + ",'rpa-deleteItemCart')></a>");
 					total += object.price * object.quantity;
 				}
 				list.listview("refresh");
 				$("#checkoutButton .ui-btn-text").text("Checkout (" + accounting.formatMoney(total) + ")");
-				$("#checkoutButton").attr("onclick", "GoToView('lrd-checkout')");
+				if(sessionStorage.user=="guest"){
+					$("#checkoutButton").attr("onclick", "GoToView('lrd-login')");	
+				}
+				else{
+					$("#checkoutButton").attr("onclick", "GoToView('lrd-checkout')");
+				}
 			}
 			$.mobile.loading("hide");
 		},
@@ -2326,6 +2331,7 @@ function signup() {
 									account.expMonth = expMonth;
 									account.expYear = expYear;
 									account.csc = csc;
+									account.gid=localStorage.guestId;
 
 									var accountfilter = new Array();
 									accountfilter[0] = "username";
@@ -2353,6 +2359,7 @@ function signup() {
 									accountfilter[22] = "expMonth";
 									accountfilter[23] = "expYear";
 									accountfilter[24] = "csc";
+									accountfilter[25] = "gid"
 
 									var jsonText = JSON.stringify(account, accountfilter, "\t");
 
@@ -2675,9 +2682,8 @@ function GoToEditView(id, view) {
 	});
 }
 
-function GoToEditViewPopup(id, name, view) {
+function GoToEditViewPopup(id, view) {
 	sessionStorage.editId = id;
-	$('#deleteinfo').text('Delete ' + name + ' from cart?');
 	$.mobile.changePage("#" + view, {
 		transition : 'pop',
 		role : 'dialog'
