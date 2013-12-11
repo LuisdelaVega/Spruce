@@ -2697,7 +2697,7 @@
 			</div>
 			<div data-role="content">
 				<div data-role="fieldcontainer">
-					<a data-role="button" href="#rpa-adminaddcatdialog" data-rel="dialog">Add Category</a>
+					<a data-role="button" href="#rpa-adminaddsubcatdialog" data-rel="dialog">Add Category</a>
 					<ul id="rpa-adminsubcategoriespagelist" data-role="listview" data-inset="true" data-split-icon="delete"></ul>
 					<h2 id="rpa-nomorecats" align="middle"></h2>
 				</div>
@@ -2715,7 +2715,21 @@
 			<div data-role="content">
 				<label for="addCategory">Category Name:</label>
 				<input type="text" id="addCategory" name="addCategory">
-				<a data-role="button" data-theme="b"  href="#lrd-admincategoriespage">Sounds Good</a>
+				<label for="addSubCategory">Subcategory Name:</label>
+				<input type="text" id="addSubCategory" name="addCategory">
+				<a data-role="button" data-theme="b"  onclick="adminAddCategory()">Sounds Good</a>
+				<a data-role="button"  href="#lrd-admincategoriespage">Cancel</a>
+			</div>
+		</div>
+		
+		<div id="rpa-adminaddsubcatdialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Add category</h1>
+			</div>
+			<div data-role="content">
+				<label for="subaddSubCategory">Subcategory Name:</label>
+				<input type="text" id="subaddSubCategory" name="subaddSubCategory">
+				<a data-role="button" data-theme="b"  onclick="adminAddSubCategory()">Sounds Good</a>
 				<a data-role="button"  href="#lrd-admincategoriespage">Cancel</a>
 			</div>
 		</div>

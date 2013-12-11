@@ -2770,6 +2770,7 @@ function adminSubCategories(catid, catname) {
 	var i = 0;
 	$.mobile.loading("show");
 	var list = $("#rpa-adminsubcategoriespagelist");
+	sessionStorage.editId=catid;
 	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
@@ -3085,8 +3086,7 @@ function bidItem() {
 		GoToView('lrd-login');
 	} else if (parseFloat($('#bidAmount').val()) <= parseFloat(currentItem.currentbidprice)) {
 		$('#currentBidDialog').text("Bid must be greater than " + accounting.formatMoney(currentItem.currentbidprice));
-	}
-	else if (!result){
+	} else if (!result) {
 		$('#currentBidDialog').text("Invalid Bid");
 	} else {
 		$.mobile.loading("show");
@@ -3222,4 +3222,42 @@ function soldReciept(invoiceid, itemid, price) {
 	sessionStorage.item = itemid;
 	sessionStorage.price = price;
 	GoToView('rpa-soldreciept');
+}
+
+function adminAddCategory() {
+	if ($("#addCategory").val() != "" && $("#addSubCategory").val() != "") {
+		$.ajax({
+			url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/category/" + $("#addCategory").val() + "/" + $("#addSubCategory").val(),
+			crossDomain : true,
+			withCredentials : true,
+			method : 'get',
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				GoToView('lrd-admincategoriespage');
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+				GoToView('lrd-admincategoriespage');
+			}
+		});
+	}
+}
+
+function adminAddSubCategory() {
+	if ($("#subaddSubCategory").val() != "") {
+		$.ajax({
+			url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/subcategory/" + sessionStorage.editId + "/" + $("#subaddSubCategory").val(),
+			crossDomain : true,
+			withCredentials : true,
+			method : 'get',
+			contentType : "application/json",
+			success : function(data, textStatus, jqXHR) {
+				GoToView('lrd-admincategoriespage');
+			},
+			error : function(data, textStatus, jqXHR) {
+				console.log("textStatus: " + textStatus);
+				GoToView('lrd-admincategoriespage');
+			}
+		});
+	}
 }
