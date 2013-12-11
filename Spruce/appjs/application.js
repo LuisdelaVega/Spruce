@@ -446,9 +446,9 @@ $(document).on('pagebeforeshow', "#lrd-invoice", function(event, ui) {
 				total += object.price * object.quantity;
 			}
 			list.listview("refresh");
-			$("#checkoutSaddress").html("Shipped to: <span style='font-size:medium'>" + objectList[0].street + ", " + objectList[0].city + ", " + objectList[0].state + ", " + objectList[0].country + ", " + objectList[0].zip + "</span>");
-			$("#checkoutCard").html("Paid with credit card with number: " + objectList[0].number);
-			$("#checkoutTotal").html("Total price: " + accounting.formatMoney(total));
+			$("#checkoutSaddress").text(objectList[0].street + ", " + objectList[0].city + ", " + objectList[0].state + ", " + objectList[0].country + ", " + objectList[0].zip);
+			$("#checkoutCard").html(objectList[0].number);
+			$("#checkoutTotal").html(accounting.formatMoney(total));
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
@@ -1961,9 +1961,9 @@ function getInvoice(invoiceid) {
 				total += object.price * object.quantity;
 			}
 			// list.listview("refresh");
-			$("#pastcheckoutSaddress").html("Shipped to: <span style='font-size:medium'>" + objectList[0].street + ", " + objectList[0].city + ", " + objectList[0].state + ", " + objectList[0].country + ", " + objectList[0].zip + "</span>");
-			$("#pastcheckoutCard").html("Paid with credit card with number: " + objectList[0].number);
-			$("#pastcheckoutTotal").text("Total price: (" + accounting.formatMoney(total) + ")");
+			$("#pastcheckoutSaddress").text(objectList[0].street + ", " + objectList[0].city + ", " + objectList[0].state + ", " + objectList[0].country + ", " + objectList[0].zip);
+			$("#pastcheckoutCard").text(objectList[0].number);
+			$("#pastcheckoutTotal").text(accounting.formatMoney(total));
 			GoToView('lrd-pastinvoice');
 		},
 		error : function(data, textStatus, jqXHR) {
@@ -2963,12 +2963,41 @@ function checkSell() {
 	var amount = $('#lrd-sellitemAmount').val();
 	var description = $('#lrd-sellitemDescription').val();
 	var category = $("#rpa-selectedcategory").text();
+	var regexp = /^[0-9]{0,10}([\.][0-9]{0,2})?$/;
+	var result = regexp.test(price);
 	var photo = document.all["lrd-sellitemUploadPicture"].value;
 	if (name == "" || price == "" || model == "" || brand == "" || dimensions == "" || amount == "" || category == "" || photo == "") {
 		$('#rpa-sellwarning').html("<b>Please fill all</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
 	} else if (amount < 1) {
 		$('#rpa-sellwarning').html("<b>Amount must be greater than 0</b> *");
-	} else {
+		 $('html, body').stop().animate({ scrollTop : 0 }, 500);
+	}
+	else if(!result){
+		$('#rpa-sellwarning').html("<b>Incorrect buy it now price</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	}
+	else if(name.length>=50){
+		$('#rpa-sellwarning').html("<b>Item name must be less than 50 characters</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	}
+	else if(description.length>=400){
+		$('#rpa-sellwarning').html("<b>Description must be less than 400 characters</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	}
+	else if(model.length>=50){
+		$('#rpa-sellwarning').html("<b>Model must be less than 50 characters</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	}
+	else if(brand.length>=50){
+		$('#rpa-sellwarning').html("<b>Brand must be less than 50 characters</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	} 	  
+	else if(dimensions.length>=50){
+		$('#rpa-sellwarning').html("<b>Dimensions must be less than 50 characters</b> *");
+		$('html, body').stop().animate({ scrollTop : 0 }, 500);
+	} 
+	else {
 		$.mobile.loading("show");
 		$('#rpa-sellwarning').text("");
 		photo = link + ".png";
@@ -3012,7 +3041,9 @@ function checkSell() {
 					GoToView('rpa-myspruceselling');
 				} else {
 					GoToView('lrd-home');
+					$('#rpa-sellwarning').html("<b>An error occured during transaction</b> *");
 				}
+				$('#rpa-sellwarning').text("");
 			},
 			error : function(data, textStatus, jqXHR) {
 				console.log("textStatus: " + textStatus);
@@ -3048,10 +3079,15 @@ function restockItem() {
 
 function bidItem() {
 	var currentItem = JSON.parse(sessionStorage.currentItem);
+	var regexp = /^[0-9]{0,10}([\.][0-9]{0,2})?$/;
+	var result = regexp.test($('#bidAmount').val());
 	if (sessionStorage.user == "guest" || sessionStorage.user == "admin") {
 		GoToView('lrd-login');
 	} else if (parseFloat($('#bidAmount').val()) <= parseFloat(currentItem.currentbidprice)) {
 		$('#currentBidDialog').text("Bid must be greater than " + accounting.formatMoney(currentItem.currentbidprice));
+	}
+	else if (!result){
+		$('#currentBidDialog').text("Invalid Bid");
 	} else {
 		$.mobile.loading("show");
 		var password = sessionStorage.acc;
