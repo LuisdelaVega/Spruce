@@ -956,7 +956,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + object.catid + "','rpa-adminsubcategoriespage')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + object.catid + "','rpa-adminsubcategoriespage')>" + object.catname + "</a><a onclick=GoToEditViewPopup('" + object.catid + "','lrd-adminremovecatdialog') data-rel='dialog'></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -981,7 +981,7 @@ $(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, 
 			var object;
 			for ( i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a><a href='#lrd-adminremovecatdialog' data-rel='dialog'></a></li>");
+				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a></a><a onclick=GoToEditViewPopup('" + object.catid + "','lrd-adminremovecatdialog') data-rel='dialog'></a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -1416,10 +1416,9 @@ $(document).on('pagebeforeshow', "#lrd-cart", function(event, ui) {
 				}
 				list.listview("refresh");
 				$("#checkoutButton .ui-btn-text").text("Checkout (" + accounting.formatMoney(total) + ")");
-				if(sessionStorage.user=="guest"){
-					$("#checkoutButton").attr("onclick", "GoToView('lrd-login')");	
-				}
-				else{
+				if (sessionStorage.user == "guest") {
+					$("#checkoutButton").attr("onclick", "GoToView('lrd-login')");
+				} else {
 					$("#checkoutButton").attr("onclick", "GoToView('lrd-checkout')");
 				}
 			}
@@ -2094,6 +2093,7 @@ function signup() {
 					var email = document.all["lrd-signupEmail"].value;
 					var password = document.all["lrd-signupPassword"].value;
 					var rpassword = document.all["lrd-signupRetypepassword"].value;
+					var phone = document.all["lrd-signupPhone"].value;
 					if (password != rpassword) {
 						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
 						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:* <b style='color:#ED0000'>Did not match!</b>";
@@ -2118,13 +2118,47 @@ function signup() {
 						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
 						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:* <b style='color:#ED0000'>You gotta have a last name...</b>";
 						$.mobile.navigate("#lrd-signup");
+					} else if (fname.length > 100) {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:* Must be less than 100 characters";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+						$.mobile.navigate("#lrd-signup");
+					} else if (lname.length > 100) {
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:* Must be less than 100 characters";
+						$.mobile.navigate("#lrd-signup");
+					} else if (username.length > 50) {
+						document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:* Must be less than 50 characters";
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+						$.mobile.navigate("#lrd-signup");
+					} else if (phone.length > 50) {
+						document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:*";
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+						document.getElementById("rpa-phonenumberlabel").innerHTML = "Phone Number:* Must be less than 50 characters";
+						$.mobile.navigate("#lrd-signup");
+					} else if (email.length > 100) {
+						document.getElementById("lrd-signupUsernameLabel").innerHTML = "Username:*";
+						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
+						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:* Must be less than 100 characters";
+						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
+						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
+						document.getElementById("rpa-phonenumberlabel").innerHTML = "Phone Number:*";
+						$.mobile.navigate("#lrd-signup");
 					} else {
 						document.getElementById("lrd-signupRetypepasswordLabel").innerHTML = "Re-type Password:*";
 						document.getElementById("lrd-signupEmailLabel").innerHTML = "Email:*";
 						document.getElementById("lrd-signupNameLabel").innerHTML = "First Name:*";
 						document.getElementById("lrd-signupLastnameLabel").innerHTML = "Last Name:*";
 
-						var phone = document.all["lrd-signupPhone"].value;
 						var photo = document.all["lrd-signupUploadPicture1"].value;
 						if (photo == '') {
 							photo = "http://i.imgur.com/682NR9z.png";
@@ -2171,6 +2205,30 @@ function signup() {
 							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
 							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
 							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (saddresLine.length > 100) {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:* Must be less than 100 characters";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (sstate.length > 100) {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:* Must be less than 100 characters";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (scity.length > 100) {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:* Must be less than 100 characters";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:*";
+							$.mobile.navigate("#lrd-signupshipping");
+						} else if (szip.length > 20) {
+							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
+							document.getElementById("lrd-signupshippingCityLabel").innerHTML = "City:*";
+							document.getElementById("lrd-signupshippingStateLabel").innerHTML = "State/Province/Region:*";
+							document.getElementById("lrd-signupshippingZipLabel").innerHTML = "Zip Code:* Must be less than 20 characters";
 							$.mobile.navigate("#lrd-signupshipping");
 						} else {
 							document.getElementById("lrd-signupshippingAddressLabel").innerHTML = "Address Line:*";
@@ -2228,6 +2286,31 @@ function signup() {
 								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:* <b style='color:#ED0000'>Choose the country for which you cheer and stuff!</b>";
 								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
 								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							}
+							if (baddresLine.length > 100) {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:* Must be less than 100 characters";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bcity.length > 100) {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:* Must be less than 100 characters";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bzip.length > 20) {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:*";
+								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:* Must be less than 20 characters";
+								$.mobile.navigate("#lrd-signupbilling");
+							} else if (bstate.length > 100) {
+								document.getElementById("lrd-signupbillingAddressBillingLabel").innerHTML = "Address Line:*";
+								document.getElementById("lrd-signupbillingCityBillingLabel").innerHTML = "City:*";
+								document.getElementById("lrd-signupbillingStateBillingLabel").innerHTML = "State/Province/Region:* Must be less than 100 characters";
 								document.getElementById("lrd-signupbillingZipBillingLabel").innerHTML = "Zip Code:*";
 								$.mobile.navigate("#lrd-signupbilling");
 							} else {
@@ -2295,6 +2378,41 @@ function signup() {
 									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
 									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:* <b style='color:#ED0000'>༼ ) ◕_◕ ༽)Give CSC</b>";
 									$.mobile.navigate("#lrd-signupcredit");
+								} else if (cardholderName.length > 100) {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:* Must be less than 100 characters";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (cardNumber.length > 16) {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:* Must be less than 100 characters";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (expMonth.length > 2) {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:* Must be less than 2 numbers";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (expYear.length > 4) {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:* Must be less than 4 characters";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:*";
+									$.mobile.navigate("#lrd-signupcredit");
+								} else if (csc.length > 3) {
+									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
+									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
+									document.getElementById("lrd-signupcreditExpMonthLabel").innerHTML = "Expiration Month:*";
+									document.getElementById("lrd-signupcreditExpYearLabel").innerHTML = "Expiration Year:*";
+									document.getElementById("lrd-signupcreditCscLabel").innerHTML = "CSC:* Must be less than 3 numbers";
+									$.mobile.navigate("#lrd-signupcredit");
 								} else {//If everything whent according to plan
 									document.getElementById("lrd-signupcreditCardholderLabel").innerHTML = "Cardholder Name:*";
 									document.getElementById("lrd-signupcreditNumberCardLabel").innerHTML = "Number:*";
@@ -2331,7 +2449,7 @@ function signup() {
 									account.expMonth = expMonth;
 									account.expYear = expYear;
 									account.csc = csc;
-									account.gid=localStorage.guestId;
+									account.gid = localStorage.guestId;
 
 									var accountfilter = new Array();
 									accountfilter[0] = "username";
@@ -2776,7 +2894,7 @@ function adminSubCategories(catid, catname) {
 	var i = 0;
 	$.mobile.loading("show");
 	var list = $("#rpa-adminsubcategoriespagelist");
-	sessionStorage.editId=catid;
+	sessionStorage.editId = catid;
 	list.empty();
 	$.ajax({
 		url : "http://sprucemarket.herokuapp.com/SpruceServer/getSubCategoryListPopup/" + catid + "/child",
@@ -3266,4 +3384,21 @@ function adminAddSubCategory() {
 			}
 		});
 	}
+}
+
+function removeCat() {
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/myadmintools/removecategory/" + sessionStorage.editId,
+		crossDomain : true,
+		withCredentials : true,
+		method : 'get',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			GoToView('lrd-admincategoriespage');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+			GoToView('lrd-admincategoriespage');
+		}
+	});
 }
