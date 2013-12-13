@@ -780,7 +780,7 @@ $(document).on('pagebeforeshow', "#rpa-shipping", function(event, ui) {
 			var len = addressList.length;
 			for (var i = 0; i < len; ++i) {
 				var address = addressList[i];
-				if(address.defaultsaddress)
+				if(address.defaultaddress)
 					list.append("<li data-icon='false'><a onclick=GoToEditView(" + address.sid + ",'rpa-shippingedit')> <h1>Street: " + address.street + " Default</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a></li>");
 				else
 					list.append("<li data-icon='delete'><a onclick=GoToEditView(" + address.sid + ",'rpa-shippingedit')> <h1>Street: " + address.street + "</h1><p>City: " + address.city + "</br>State: " + address.state + "</br>Country: " + address.country + "</br>Zip: " + address.zip + "</p> </a><a onclick=GoToEditViewPopup('"+address.sid+"','sam-deletesaddressdialog')></a></li>");
