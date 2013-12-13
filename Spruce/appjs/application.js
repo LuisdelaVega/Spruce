@@ -627,7 +627,7 @@ function changeUserGeneralInfo() {
 		data : jsonText,
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			GoToView('rpa-generalinfo');
+			GoToView('lrd-myaccountinfo');
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
@@ -660,7 +660,12 @@ $(document).on('pagebeforeshow', "#rpa-creditcard", function(event, ui) {
 			var len = creditList.length;
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+				if(card.defaultcard){
+					list.append("<li data-icon='false'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','rpa-creditcardedit')> <h1>Number: " + card.number + " Default</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a></li>");	
+				}
+				else{
+					list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','rpa-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a onclick=GoToEditViewPopup('" + card.cid + "','rpa-removecreditcarddialog')></a></li>");
+				}
 			}
 			list.listview("refresh");
 		},
@@ -3399,6 +3404,47 @@ function removeCat() {
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
 			GoToView('lrd-admincategoriespage');
+		}
+	});
+}
+
+function defaultCreditCard(){
+	var password = sessionStorage.acc;
+	console.log(password);
+	var account = new Object();
+	account.password = password;
+	var accountfilter = new Array();
+	accountfilter[0] = "password";
+	var jsonText = JSON.stringify(account, accountfilter, "\t");
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/defaultcreditcard/" + sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		data : jsonText,
+		method : 'put',
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+function deleteCreditCard(){
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/removecreditcard/" + sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('rpa-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
 		}
 	});
 }
