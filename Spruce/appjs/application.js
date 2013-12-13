@@ -5,6 +5,7 @@ var total;
 var change = false;
 var link = '';
 var how = '';
+var utd = '';
 
 $(document).ready(function() {
 	$('#lrd-homeSearch-basic').bind("enterKey", function(e) {
@@ -1052,7 +1053,7 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append('<li data-icon="false"><a onclick=goToAccountEditPage("' + object.accusername + '")>' + object.accusername + '</a><a href="#lrd-adminremoveuserdialog" data-rel="dialog"></a></li>');
+				list.append('<li data-icon="false"><a onclick=goToAccountEditPage("' + object.accusername + '")>' + object.accusername + '</a><a onclick=setUTD("'+ object.accusername +'") href="#lrd-adminremoveuserdialog" data-rel="dialog"></a></li>');
 			}
 			list.listview("refresh");
 		},
@@ -1062,6 +1063,27 @@ $(document).on('pagebeforeshow', "#lrd-adminuserspage", function(event, ui) {
 		}
 	});
 });
+
+function setUTD(usernameToDelete){
+	utd = usernameToDelete;
+}
+
+function deleteUser(){
+	$.ajax({
+		url : "http://localhost:5000/SpruceServer/deleteuser/" + utd,
+		crossDomain : true,
+		withCredentials : true,
+		method : 'put',
+		contentType : "application/json",
+		success : function(data, textStatus, jqXHR) {
+			GoToView('lrd-adminuserspage');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
 
 function goToAccountEditPage(username) {
 	console.log(username);
@@ -1663,7 +1685,11 @@ function goToSellerProfile(username) {
 		method : 'get',
 		contentType : "application/json",
 		success : function(data, textStatus, jqXHR) {
-			if (data.sellerprofile[0].accpassword == sessionStorage.acc) {
+			if(data.success){
+				alert("This accoun is no longer active");
+				GoToView('lrd-home');
+			}
+			else if (data.sellerprofile[0].accpassword == sessionStorage.acc) {
 				GoToView('lrd-myaccountinfo');
 			} else {
 				sessionStorage.accountinfo = JSON.stringify(data.sellerprofile[0]);
