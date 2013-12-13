@@ -3536,3 +3536,78 @@ function admindeleteCreditCard(){
 		}
 	});
 }
+
+function changePassword() {
+	if ($('#rpa-oldpassword').val() != "" || $('#rpa-password').val() != "" || $('#rpa-oldpassword').val() != "") {
+		if ($('#rpa-password').val() == $('#rpa-confirmpassword').val()) {
+			$.mobile.loading("show");
+			var password = sessionStorage.acc;
+			console.log(password);
+			var account = new Object();
+			account.password = password;
+			var accountfilter = new Array();
+			accountfilter[0] = "password";
+			var jsonText = JSON.stringify(account, accountfilter, "\t");
+			$.ajax({
+				url : "http://sprucemarket.herokuapp.com/SpruceServer/checkpassword",
+				contentType : "application/json",
+				crossDomain : true,
+				withCredentials : true,
+				data : jsonText,
+				method : 'put',
+				success : function(data, textStatus, jqXHR) {
+					//Creating new password
+					var slt = Math.random();
+					var shaObj = new jsSHA(slt + $('#rpa-password').val(), "TEXT");
+					var hash = shaObj.getHash("SHA-512", "HEX");
+					var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
+					//Creting hash for old hash
+					var shaObj = new jsSHA(data.salt[0].accslt + $('#rpa-oldpassword').val(), "TEXT");
+					var oldhash = shaObj.getHash("SHA-512", "HEX");
+					var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
+					var account = new Object();
+					account.newsalt = slt;
+					account.newhash = hash;
+					account.oldhash = oldhash;
+					account.password = password;
+					var accountfilter = new Array();
+					accountfilter[0] = "newsalt";
+					accountfilter[1] = "newhash";
+					accountfilter[2] = "oldhash";
+					accountfilter[3] = "password";
+					var jsonText = JSON.stringify(account, accountfilter, "\t");
+					$.ajax({
+						url : "http://sprucemarket.herokuapp.com/SpruceServer/changepassword",
+						contentType : "application/json",
+						crossDomain : true,
+						withCredentials : true,
+						data : jsonText,
+						method : 'put',
+						success : function(data, textStatus, jqXHR) {
+							$.mobile.loading("hide");
+							if(data.success){
+								alert("Change Password Succesfull");
+								$('#rpa-oldpassword').val("");
+								$('#rpa-password').val("");
+								$('#rpa-confirmpassword').val("");
+							}else{
+								alert("Old Password Incorrect");
+							}
+						},
+						error : function(data, textStatus, jqXHR) {
+							console.log("textStatus: " + textStatus);
+						}
+					});
+				},
+				error : function(data, textStatus, jqXHR) {
+					console.log("textStatus: " + textStatus);
+				}
+			});
+			$.mobile.loading("hide");
+		} else {
+			alert("New Password does not match");
+		}
+	} else {
+		alert("Please fill out password input");
+	}
+}
