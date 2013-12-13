@@ -1003,7 +1003,7 @@ $(document).on('pagebeforeshow', "#lrd-admincategoriespage", function(event, ui)
 			var object;
 			for (var i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + object.catid + "','rpa-adminsubcategoriespage')>" + object.catname + "</a><a onclick=GoToEditViewPopup('" + object.catid + "','lrd-adminremovecatdialog') data-rel='dialog'></a></li>");
+				list.append("<li><a onclick=GoToEditView('" + object.catid + "','rpa-adminsubcategoriespage')>" + object.catname + "</a></li>");
 			}
 			list.listview("refresh");
 		},
@@ -1028,7 +1028,7 @@ $(document).on('pagebeforeshow', "#rpa-adminsubcategoriespage", function(event, 
 			var object;
 			for ( i = 0; i < len; ++i) {
 				object = objectList[i];
-				list.append("<li data-icon='delete'><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a></a><a onclick=GoToEditViewPopup('" + object.catid + "','lrd-adminremovecatdialog') data-rel='dialog'></a></li>");
+				list.append("<li><a onclick=adminSubCategories('" + object.catid + "','" + object.catname + "')>" + object.catname + "</a></li>");
 			}
 			list.listview("refresh");
 		},
