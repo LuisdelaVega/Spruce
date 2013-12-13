@@ -1157,7 +1157,12 @@ $(document).on('pagebeforeshow', "#sam-creditcard", function(event, ui) {
 			var len = creditList.length;
 			for (var i = 0; i < len; ++i) {
 				var card = creditList[i];
-				list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','sam-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a></a></li>");
+				if(card.defaultcard){
+					list.append("<li data-icon='false'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','sam-creditcardedit')> <h1>Number: " + card.number + " Default</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a></li>");	
+				}
+				else{
+					list.append("<li data-icon='delete'><a onclick=GoToEditView('" + card.cid + "-" + card.bid + "','sam-creditcardedit')> <h1>Number: " + card.number + "</h1><p>Holder Name: " + card.name + "</br>Type: " + card.type + "</br>Expiration Date: " + card.month + "/" + card.year + "</br>CSC: " + card.csc + "</br>Bills To: " + card.street + "</p> </a><a onclick=GoToEditViewPopup('" + card.cid + "','rpa-adminremovecreditcarddialog')></a></li>");
+				}
 			}
 			list.listview("refresh");
 		},
@@ -3441,6 +3446,22 @@ function deleteCreditCard(){
 		withCredentials : true,
 		success : function(data, textStatus, jqXHR) {
 			GoToView('rpa-creditcard');
+		},
+		error : function(data, textStatus, jqXHR) {
+			console.log("textStatus: " + textStatus);
+
+		}
+	});
+}
+
+function admindeleteCreditCard(){
+	$.ajax({
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/removecreditcard/" + sessionStorage.editId,
+		contentType : "application/json",
+		crossDomain : true,
+		withCredentials : true,
+		success : function(data, textStatus, jqXHR) {
+			GoToView('sam-creditcard');
 		},
 		error : function(data, textStatus, jqXHR) {
 			console.log("textStatus: " + textStatus);
