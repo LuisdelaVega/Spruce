@@ -1070,7 +1070,7 @@ function setUTD(usernameToDelete){
 
 function deleteUser(){
 	$.ajax({
-		url : "http://localhost:5000/SpruceServer/deleteuser/" + utd,
+		url : "http://sprucemarket.herokuapp.com/SpruceServer/deleteuser/" + utd,
 		crossDomain : true,
 		withCredentials : true,
 		method : 'put',
