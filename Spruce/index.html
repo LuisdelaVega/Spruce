@@ -987,6 +987,16 @@
 				<a data-role="button" data-theme="b" onclick="GoToView('sam-useraddshipping')">Add</a>
 			</div>
 		</div>
+		<div id="sam-deletesaddressdialog" data-role="page">
+			<div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>Rate User</h1>
+			</div>
+			<div data-role="content">
+				<h2 align="center">Delete shipping address?</h2>
+				<a data-role="button" onclick="deleteUserShippingAddress()" data-theme="b">Yes</a>
+				<a data-role="button"  href="#rpa-shipping">No</a>
+			</div>
+		</div>
 		<div id="sam-useraddshipping" data-role="page">
 			<div data-role="header"  data-position="fixed" data-tap-toggle="false">
 				<a href="#mypanel" data-icon="bars"  data-iconpos="notext" ></a>
@@ -1064,7 +1074,8 @@
 						</div>
 					</li>
 				</ul>
-				<a data-role="button" data-theme="b" onclick="changeUserShippingAddress()">Change</a>
+				<a data-role="button" data-theme="b" onclick="makeDefaultShippingAddress()">Make Default</a>
+				<a data-role="button" data-theme="b" onclick="changeUserShippingAddress()">Add</a>
 			</div>
 		</div>
 
