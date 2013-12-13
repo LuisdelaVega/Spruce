@@ -757,11 +757,13 @@
 							<a data-role="button"  onclick="changeUserUsername()">Change</a>
 						</div>
 						<div data-role="fieldcontain" class="ui-hide-label">
-							<h1>Password</h1>
-							<input type="text" id="rpa-password"/>
+							<h1>Old Password</h1>
+							<input type="password" id="rpa-oldpassword"/>
+							<h1>New Password</h1>
+							<input type="password" id="rpa-password"/>
 							<h1>Confirm Password</h1>
-							<input type="text" id="rpa-confirmpassword"/>
-							<a data-role="button" data-theme"b">Change</a>
+							<input type="password" id="rpa-confirmpassword"/>
+							<a data-role="button" data-theme"b" onclick="changePassword()">Change</a>
 						</div>
 					</li>
 				</ul>
@@ -1100,7 +1102,7 @@
 						User Info
 					</li>
 					<li>
-						<a onclick="GoToView('sam-usernameandpassword')">Username & Password</a>
+						<a onclick="GoToView('sam-usernameandpassword')">Username</a>
 					</li>
 					<li>
 						<a onclick="GoToView('sam-accphoto')">Photo</a>
@@ -1138,13 +1140,6 @@
 							<h1>Username</h1>
 							<input type="text" id="sam-username" value="Rapol"  />
 							<a data-role="button" onclick="changeUsername()">Change</a>
-						</div>
-						<div data-role="fieldcontain" class="ui-hide-label">
-							<h1>Password</h1>
-							<input type="text" id="sam-password"/>
-							<h1>Confirm Password</h1>
-							<input type="text" id="sam-confirmpassword"/>
-							<a data-role="button" data-theme"b">Change</a>
 						</div>
 					</li>
 				</ul>
